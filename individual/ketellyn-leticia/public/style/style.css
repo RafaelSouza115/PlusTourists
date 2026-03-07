@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Kalnia:wght@100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: bisque;
+    background-image: url(pexels-fox-58267-1172675.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/*
+
+
+button i {
+    font-size: 18px;
+    padding-top: 150px;
+}
+seta:hover {
+    transition: setinha all .3s;
+}
+
+text-decoration: none;
+button:hover i {
+    margin-right: 55px;
+    margin-left: -55px;
+}
+*/
+
+.container {
+    margin: 9%;
+}
+
+.card-cadastro {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 500px;
+    width: 90%;
+    margin: 1px auto;
+    max-width: 1000px;
+    overflow: hidden;
+
+}
+
+/*Card de textinho - Boas-vindas*/
+.apresenta {
+    width: 45%;
+    background-color: rgba(17, 48, 7, 0.363);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 16px 0px 0px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.apresenta h1 {
+    color: white;
+    font-size: 40px;
+    text-transform: uppercase;
+}
+
+.apresenta p {
+    color: rgba(212, 208, 208, 0.836);
+}
+
+/*Div de cadastro*/
+.forms h1 {
+    text-transform: uppercase;
+    color: white;
+}
+
+.forms {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 60px 50px;
+    background-color: rgba(0, 0, 0, 0.747);
+    backdrop-filter: blur(10px);
+    border-radius: 0px 16px 16px 0px;
+}
+
+.forms p {
+    color: rgba(240, 248, 255, 0.685);
+    font-size: 16px;
+}
+
+input {
+    width: 100%;
+    border: none;
+    color: white;
+    padding: 10px 0;
+    border-radius: 12px 0px 12px 0px;
+    background-color: transparent;
+    border-bottom: 2px solid #666;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-bottom: 1px solid #4BAF27;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.692);
+    padding: 12px;
+}
+
+input:hover {
+    background-color: #4BAF27;
+    color: rgba(0, 0, 0, 0.719);
+    border: none;
+}
+
+.btn-login {
+   background: linear-gradient(127deg, #48a029, #204b0e, #15310a);
+    border: none;
+    padding: 6px 12px;
+    color: rgba(255, 255, 255, 0.699);
+    border-radius: 5px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+/*Tela de Login*/
+
+.boasvindas{
+    background-color: aliceblue;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    width: 30%;
+}
+
+.link-senha {
+    text-decoration: none;
+    color: rgba(240, 248, 255, 0.658);
+}
+
+/*Animação*/
+
+@keyframes setinha {    
+    to {
+        transform: translateX(25px);
+    }
+}
+
+/*Responsividade*/
+@media (max-width: 768px) {
+    .card-cadastro {
+        flex-direction: column; /* Aqui sim ele empilha */
+        width: 95%;
+        margin: 25px auto;
+
+    }
+
+    .apresenta, .forms {
+        width: 100%; /* Ocupam a largura toda no celular */
+        padding: 30px 20px;
+    }
+
+    .apresenta {
+        border-radius: 16px 16px 0 0; /* Arredonda só em cima */
+    }
+
+    .forms {
+        border-radius: 0 0 16px 16px; /* Arredonda só embaixo */
+    }
+}
+
+/*Responsividade
+
+@media (min-width: 768px) {
+
+    .card-cadastro {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .apresenta, .forms {
+        width: 100%;
+        border-radius: 16px;
+        padding: 20px;
+    }
+    .apresenta {
+        border-radius: 16px 16px 0 0;
+    }
+
+    .forms {
+        border-radius: 0 0 16px 16px;
+    }
+}
+
+@media (max-width: 850px) {
+    .card-cadastro {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .apresenta, .forms {
+        width: 100%;
+        padding: 40px 20px;
+    }
+}
+    */

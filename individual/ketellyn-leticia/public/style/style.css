@@ -7,8 +7,10 @@
     font-family: "Poppins", sans-serif;
 }
 
+/*#c2bfbf*/
+
 body {
-    background-color: bisque;
+    background-color: #154d07;
     background-image: url(pexels-fox-58267-1172675.jpg);
     background-repeat: no-repeat;
     background-size: cover;

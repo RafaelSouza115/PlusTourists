@@ -5,7 +5,8 @@
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    background-color: rgba(17, 48, 7, 0.219);
+    background-color: #dedede;
+   /* background-color: rgba(17, 48, 7, 0.219); */
     backdrop-filter: blur(1px);
     padding: 12px;
     position: fixed; /* Ele fica preso no topo */
@@ -19,7 +20,7 @@
 
 a {
     text-decoration: none;
-    color: white;
+    color: rgb(24, 23, 23);
 }
 
 ul {

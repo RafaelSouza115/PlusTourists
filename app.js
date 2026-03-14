@@ -13,19 +13,14 @@ const chatIA = new GoogleGenAI({ apiKey: process.env.MINHA_CHAVE });
 
 var app = express();
 
-var indexRouter = require("./src/routes/index");
-var usuarioRouter = require("./src/routes/usuarios");
-
-// var leituraRouter = require("./src/routes/leituras");
-// var alertaRouter = require("./src/routes/alertas");
+var funcionarioRouter = require("./src/routes/funcionario");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
-app.use("/", indexRouter);
-app.use("/usuarios", usuarioRouter);
+app.use("/funcionarios", funcionarioRouter);
 
 app.post("/perguntar", async (req, res) => {
     const pergunta = req.body.pergunta;

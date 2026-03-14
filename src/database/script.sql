@@ -15,7 +15,7 @@ CREATE TABLE funcionario (
     email VARCHAR(200),
     senha VARCHAR(45),
     empresa_ligada INT,
-    CONSTRAINT fkempresaLigada
+    CONSTRAINT fk_empresa_ligada
     FOREIGN KEY (empresa_ligada) REFERENCES empresa(id_empresa)
 );
 
@@ -36,3 +36,6 @@ CREATE TABLE viagem (
     CONSTRAINT fkFuncionarioAcesso 
         FOREIGN KEY (fk_funcionario) REFERENCES funcionario(id_funcionario)
 ); */
+
+INSERT INTO empresa (nome_fantasia, CNPJ) VALUES
+('Empresa Teste Ltda', '12345678000199');

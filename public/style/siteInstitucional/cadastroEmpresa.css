@@ -1,0 +1,174 @@
+body {
+  margin: 0;
+  color: #fff;
+  background: url("../../assets/landinpageBg_upscayl_2x_digital-art-4x.png") center/cover no-repeat;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.card-container {
+  display: flex;
+  max-width: 960px;
+  width: 100%;
+  background: rgba(0, 80, 40, 0.8);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-left,
+.card-right {
+  flex: 1;
+  padding: 24px;
+}
+
+.card-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-primary);
+  background: rgba(0, 100, 50, 0.9);
+
+}
+
+.card-subtitle {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.card-title {
+  margin: 0 0 12px;
+  font-size: 32px;
+
+}
+
+.plus {
+    color: #4ade80;;
+}
+
+.card-description {
+   font-size: 18px;
+  max-width: 320px;
+}
+
+.form-title {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 16px;
+  font-size: 22px;
+}
+
+.empresa-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+label {
+  font-size: 16px;
+}
+
+input {
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: none;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+input::placeholder { color: rgba(255, 255, 255, 0.45); }
+
+.form-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+   font-size: 18px;
+}
+
+.btn-secondary {
+ background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary {
+  background: #2bb11c;
+  color: #fff;
+}
+
+.form-footer-text {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  font-size: 18px;
+  
+}
+
+.link-funcionario {
+  color: #9bff6a;
+  text-decoration:none;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay.aberto {
+  display: flex;
+}
+
+.modal-content {
+  background: #ffffff;
+  color: #111827;
+  padding: 24px 32px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 8px;
+}
+
+.modal-content p {
+  margin-bottom: 8px;
+}
+
+.codigo-empresa {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin: 12px 0 20px;
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    flex-direction: column;
+  }
+}

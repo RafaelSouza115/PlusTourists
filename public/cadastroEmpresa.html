@@ -1,12 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/site-institucional/cadastro-empresa.css">
-    <script src="js/site-institucional/cadastrar-empresa.js"></script>
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro da Empresa - +Tourists</title>
+    <link rel="stylesheet" href="style/siteInstitucional/cadastroEmpresa.css" />
+    <script src="js/site-institucional/cadastrar-empresa.js" defer></script>
 </head>
+
 <body>
+    <main class="page-wrapper">
+        <section class="card-container">
+            <div class="card-left">
+                <p class="card-subtitle">Bem-vindo à plataforma</p>
+                <h1 class="card-title"><span class="plus">+</span>Tourists</h1>
+                <p class="card-description">
+                    Nossa plataforma transforma dados do turismo em insights
+                    estratégicos para ajudar sua agência a identificar oportunidades,
+                    planejar campanhas e atrair mais clientes.
+                </p>
+            </div>
+
+            <div class="card-right">
+                <h2 class="form-title">Crie sua conta</h2>
+
+                <form class="empresa-form" id="formCadastroEmpresa">
+                    <div class="form-group">
+                        <label for="nomeFantasia">Nome Fantasia</label>
+                        <input id="nomeFantasia" name="nomeFantasia" type="text" placeholder="PlusTurists" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cnpj">CNPJ</label>
+                        <input id="cnpj" name="cnpj" type="text" placeholder="12.345.678/0001-90" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cep">CEP</label>
+                        <input id="cep" name="cep" type="text" placeholder="00000-000" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numero">Número</label>
+                        <input id="numero" name="numero" type="text" placeholder="1627389" />
+                    </div>
+                    <div class="form-group">
+                        <label for="complemento">Complemento</label>
+                        <input id="complemento" name="complemento" type="text" placeholder="Sala 01" />
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Criar conta</button>
+                    </div>
+
+                    <p class="form-footer-text">
+                        Já criou o seu cadastro?  
+                        <a href="cadastroFuncionario.html" class="link-funcionario"> Cadastre seu funcionário</a>
+                    </p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal código da empresa -->
+    <div class="modal-overlay" id="modalEmpresa">
+        <div class="modal-content">
+            <h2>Código da sua empresa</h2>
+            <p>Anote este código. Você vai precisar dele para cadastrar os funcionários da empresa.</p>
+            <p class="codigo-empresa" id="codigoEmpresa"></p>
+            <button type="button" class="btn btn-primary" id="fecharModalEmpresa">Entendi</button>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('formCadastroEmpresa');
+        const modal = document.getElementById('modalEmpresa');
+        const campoCodigo = document.getElementById('codigoEmpresa');
+        const botaoFechar = document.getElementById('fecharModalEmpresa');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const codigo = Math.floor(100000 + Math.random() * 900000);
+            campoCodigo.textContent = codigo;
+            modal.classList.add('aberto');
+        });
+
+        botaoFechar.addEventListener('click', function () {
+            modal.classList.remove('aberto');
+        });
+    </script>
 </body>
+
 </html>

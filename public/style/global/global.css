@@ -1,0 +1,25 @@
+@import url("./variaveis.css");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  color: var(--color-text, #111827);
+  background-color: var(--color-bg, #f5f7fb);
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}

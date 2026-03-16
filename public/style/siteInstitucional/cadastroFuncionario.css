@@ -1,7 +1,11 @@
+@import url("../global/variaveis.css");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+ 
 body {
   margin: 0;
   color: #fff;
-  background: url("../../assets/landinpageBg_upscayl_2x_digital-art-4x.png") center/cover no-repeat;
+  background: url("../../assets/landinpageBg.png") center/cover no-repeat;
   overflow-x: hidden;
 }
 
@@ -32,7 +36,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: var(--font-primary);
+  font-family: var(--Montserrat);
   background: rgba(0, 100, 50, 0.9);
 
 }
@@ -63,11 +67,14 @@ body {
   justify-content: center;
   margin: 0 0 16px;
   font-size: 38px;
+  font-family: 'Montserrat';
 }
 
 .empresa-form {
   display: flex;
   flex-direction: column;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
   gap: 10px;
 }
 
@@ -148,7 +155,8 @@ input::placeholder { color: rgba(255, 255, 255, 0.45); }
   }
 
   .card-subtitle {
-    font-size: 26px;
+    margin-bottom: 8px;
+  font-size: 38px;
   }
 
   .card-title {

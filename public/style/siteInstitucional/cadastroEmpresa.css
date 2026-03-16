@@ -1,7 +1,11 @@
+@import url("../global/variaveis.css");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+ 
 body {
   margin: 0;
   color: #fff;
-  background: url("../../assets/landinpageBg_upscayl_2x_digital-art-4x.png") center/cover no-repeat;
+  background: url("../../assets/landinpageBg.png") center/cover no-repeat;
 }
 
 .page-wrapper {
@@ -31,41 +35,47 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: var(--font-primary);
+  font-family: 'Montserrat';
   background: rgba(0, 100, 50, 0.9);
 
 }
 
 .card-subtitle {
   margin-bottom: 8px;
-  font-size: 18px;
+  font-size: 38px;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-title {
   margin: 0 0 12px;
-  font-size: 32px;
+  font-size: 38px;
 
+}
+
+.card-description {
+  font-size: 18px;
+  max-width: 320px;
 }
 
 .plus {
     color: #4ade80;;
 }
 
-.card-description {
-   font-size: 18px;
-  max-width: 320px;
-}
-
 .form-title {
   display: flex;
   justify-content: center;
+  text-align: center;
   margin: 0 0 16px;
-  font-size: 22px;
+  font-size: 38px;
+  font-family: 'Montserrat';
 }
 
 .empresa-form {
   display: flex;
   flex-direction: column;
+  font-family: "Roboto", sans-serif;
+    font-size: 18px;
   gap: 10px;
 }
 
@@ -76,7 +86,7 @@ body {
 }
 
 label {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 input {
@@ -85,6 +95,11 @@ input {
   border: none;
   background: rgba(0, 0, 0, 0.2);
   color: #fff;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid #4ade80;
 }
 
 input::placeholder { color: rgba(255, 255, 255, 0.45); }

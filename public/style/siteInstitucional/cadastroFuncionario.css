@@ -1,0 +1,181 @@
+body {
+  margin: 0;
+  color: #fff;
+  background: url("../../assets/landinpageBg_upscayl_2x_digital-art-4x.png") center/cover no-repeat;
+  overflow-x: hidden;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.card-container {
+  display: flex;
+  max-width: 960px;
+  width: 100%;
+  background: rgba(0, 80, 40, 0.8);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-left,
+.card-right {
+  flex: 1;
+  padding: 24px;
+}
+
+.card-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-primary);
+  background: rgba(0, 100, 50, 0.9);
+
+}
+
+.card-subtitle {
+  margin-bottom: 8px;
+  font-size: 38px;
+}
+
+.card-title {
+  margin: 0 0 12px;
+  font-size: 38px;
+
+}
+
+.plus {
+    color: #4ade80;;
+}
+
+.card-description {
+   font-size: 19px;
+  max-width: 367px;
+  margin-bottom: 80px;
+}
+
+.form-title {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 16px;
+  font-size: 38px;
+}
+
+.empresa-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: none;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid #4ade80;
+}
+
+input::placeholder { color: rgba(255, 255, 255, 0.45); }
+
+.form-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+   font-size: 18px;
+}
+
+.btn-secondary {
+ background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary {
+  background: #2bb11c;
+  color: #fff;
+}
+
+.form-footer-text {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.link-funcionario {
+  color: #9bff6a;
+  text-decoration:none;
+}
+
+@media (max-width: 768px) {
+
+  .card-container {
+    flex-direction: column;
+  }
+
+  .card-left,
+  .card-right {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .card-subtitle {
+    font-size: 26px;
+  }
+
+  .card-title {
+    font-size: 28px;
+  }
+
+  .card-description {
+    font-size: 16px;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .form-title {
+    font-size: 26px;
+  }
+
+  label {
+    font-size: 16px;
+  }
+
+  input {
+    padding: 10px;
+  }
+
+  .btn {
+    font-size: 16px;
+    padding: 10px 14px;
+  }
+
+}

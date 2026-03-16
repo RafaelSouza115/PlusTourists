@@ -1,12 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/site-institucional/cadastro-funcionario.css">
+    <link rel="stylesheet" href="style/siteInstitucional/cadastroFuncionario.css">
+    <link rel="icon" href="assets/logoIcon.png">
     <script src="js/site-institucional/cadastrar-funcionario.js"></script>
-    <title>Document</title>
+    <title>Cadastro Funcionário | +Tourists</title>
 </head>
 <body>
+
+    <main class="page-wrapper">
+        <section class="card-container">
+            <div class="card-left">
+                <h3 class="card-subtitle">Bem-vindo à plataforma</h3>
+                <h1 class="card-title"><span class="plus">+</span>Tourists</h1>
+                <p class="card-description">
+                    Nossa plataforma transforma dados do turismo em insights
+                    estratégicos para ajudar sua agência a identificar oportunidades,
+                    planejar campanhas e atrair mais clientes.
+                </p>
+            </div>
+
+            <div class="card-right">
+                <h2 class="form-title">Crie sua conta</h2>
+
+                <form class="empresa-form" id="formCadastroEmpresa">
+                    <div class="form-group">
+                        <label for="nomeCompleto">Nome Completo</label>
+                        <input id="nomeCompleto" name="nomeCompleto" type="text" placeholder="Digite seu nome completo"" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cpf">CPF</label>
+                        <input id="cpf" name="cpf" type="text" placeholder="000.000.000-00" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="text" placeholder="seuemail@exemplo.com.br" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codigoEmpresa">Código da Empresa</label>
+                        <input id="codigoEmpresa" name="codigoEmpresa" type="text" placeholder="Código da sua empresa" />
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input id="senha" name="senha" type="password" placeholder="Mín. 8 caracteres (Aa, @, 123)" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cofirmarSenha">Confirmar Senha</label>
+                        <input id="cofirmarSenha" name="cofirmarSenha" type="password" placeholder="Repita a senha anterior" />
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Criar conta</button>
+                    </div>
+
+                    <p class="form-footer-text">
+                        <span>Já possui uma conta?</span>
+                        <a href="cadastroFuncionario.html" class="link-funcionario">Entrar</a>
+                    </p>
+                </form>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

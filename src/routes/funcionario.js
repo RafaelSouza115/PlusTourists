@@ -9,6 +9,10 @@ router.post("/cadastrar", validarCadastro.validarCadastroFuncionario, function(r
     funcionarioController.cadastrar(req, res);
 });
 
+router.post("/cadastrarFuncionario", function(req, res){
+    funcionarioController.cadastrar(req, res);
+});
+
 router.post("/autenticar", validarLogin.validarLogin, function(req, res) {
     funcionarioController.autenticar(req, res);
 });

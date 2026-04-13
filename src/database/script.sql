@@ -1,106 +1,130 @@
 CREATE DATABASE plusTourists;
 USE plusTourists;
 
--- EMPRESA
 CREATE TABLE empresa (
-    id_empresa INT AUTO_INCREMENT PRIMARY KEY,
-    nome_fantasia VARCHAR(45) NOT NULL,
-    CNPJ CHAR(14) NOT NULL UNIQUE,
-    dt_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
+    id_empresa INT PRIMARY KEY AUTO_INCREMENT,
+    nome_fantasia VARCHAR(200), 
+    razao_social VARCHAR(200) NOT NULL,
+    cnpj CHAR(14) UNIQUE NOT NULL,
+    dt_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    cep CHAR(9) NOT NULL,
+    complemento VARCHAR(50),
+    numero CHAR(6) NOT NULL,
+    email_contato VARCHAR(150) NOT NULL
 );
 
--- FUNCIONARIO
 CREATE TABLE funcionario (
-    id_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+    id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
-    CPF CHAR(11) UNIQUE,
+    cpf CHAR(11) UNIQUE NOT NULL,
     email VARCHAR(200) NOT NULL,
     senha VARCHAR(20) NOT NULL,
+    nivel_acesso INT NOT NULL,
     id_empresa INT NOT NULL,
-
-    CONSTRAINT fk_funcionario_empresa
-        FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
+    FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
 );
 
--- PAIS DE ORIGEM DOS TURISTAS
-CREATE TABLE pais_origem (
-    id_pais INT AUTO_INCREMENT PRIMARY KEY,
-    nome_pais VARCHAR(100) NOT NULL
+CREATE TABLE status_plano (
+    id_status_plano INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(20) NOT NULL
+    -- CONSTRAINT (APROVADO, PENDENTE E REPROVADO)
 );
 
--- ESTADOS DO BRASIL
+CREATE TABLE plano_turistico (
+    id_plano INT PRIMARY KEY AUTO_INCREMENT,
+    id_empresa INT NOT NULL,
+    orcamento_medio DECIMAL(10,2),
+    id_status_plano INT NOT NULL,
+    FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa),
+    FOREIGN KEY (id_status_plano) REFERENCES status_plano(id_status_plano)
+);
+
 CREATE TABLE estado (
-    id_estado INT AUTO_INCREMENT PRIMARY KEY,
+    id_estado INT PRIMARY KEY AUTO_INCREMENT,
     nome_estado VARCHAR(100) NOT NULL,
-    sigla CHAR(2)
+    UF CHAR(2) NOT NULL UNIQUE
 );
 
--- CIDADE DESTINO
-CREATE TABLE cidade (
-    id_cidade INT AUTO_INCREMENT PRIMARY KEY,
-    nome_cidade VARCHAR(100) NOT NULL,
-    id_estado INT,
-
-    CONSTRAINT fk_cidade_estado
-        FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
+CREATE TABLE pais_origem (
+    id_pais INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL
 );
 
--- TIPO DE TRANSPORTE
+CREATE TABLE locall (
+    id_local INT PRIMARY KEY AUTO_INCREMENT,
+    municipio VARCHAR(100) NOT NULL,
+    regiao_turistica VARCHAR(100),
+    id_estado INT NOT NULL,
+    FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
+);
+
+CREATE TABLE evento (
+    id_evento INT PRIMARY KEY AUTO_INCREMENT,
+    nome_evento VARCHAR(150) NOT NULL,
+    descricao_evento TEXT,
+    classificacao_etaria VARCHAR(40),
+    tipo_evento VARCHAR(100),
+    tipo_publico VARCHAR(45),
+    id_local INT NOT NULL,
+    id_plano INT NOT NULL,
+    FOREIGN KEY (id_local) REFERENCES local(id_local),
+    FOREIGN KEY (id_plano) REFERENCES plano_turistico(id_plano)
+);
+
+CREATE TABLE edicao (
+    id_edicao INT PRIMARY KEY AUTO_INCREMENT,
+    data_inicio DATE,
+    data_fim DATE,
+    horario_inicio TIME,
+    horario_final TIME,
+    publico_realizado INT,
+    ano_referencia INT,
+    publico_esperado INT,
+    id_evento INT NOT NULL,
+    id_organizador INT NOT NULL,
+    FOREIGN KEY (id_evento) REFERENCES evento(id_evento)
+);
+
+CREATE TABLE atividade (
+    id_atividade INT PRIMARY KEY AUTO_INCREMENT,
+    ordem_no_roteiro INT,
+    id_edicao INT NOT NULL,
+    id_plano INT NOT NULL,
+    FOREIGN KEY (id_edicao) REFERENCES edicao(id_edicao),
+    FOREIGN KEY (id_plano) REFERENCES plano_turistico(id_plano)
+);
+
 CREATE TABLE tipo_transporte (
-    id_transporte INT AUTO_INCREMENT PRIMARY KEY,
+    id_transporte INT PRIMARY KEY AUTO_INCREMENT,
     nome_transporte VARCHAR(50) NOT NULL
 );
 
--- REGISTRO DE TURISMO (dados históricos)
 CREATE TABLE registro_turismo (
-    id_registro INT AUTO_INCREMENT PRIMARY KEY,
+    id_registro INT PRIMARY KEY AUTO_INCREMENT,
     data_registro DATE NOT NULL,
     quantidade_turistas INT NOT NULL,
     id_pais INT NOT NULL,
-    id_cidade INT NOT NULL,
     id_transporte INT NOT NULL,
+    id_estado INT NOT NULL,
     id_empresa INT NOT NULL,
-
-    CONSTRAINT fk_registro_pais
-        FOREIGN KEY (id_pais) REFERENCES pais_origem(id_pais),
-
-    CONSTRAINT fk_registro_cidade
-        FOREIGN KEY (id_cidade) REFERENCES cidade(id_cidade),
-
-    CONSTRAINT fk_registro_transporte
-        FOREIGN KEY (id_transporte) REFERENCES tipo_transporte(id_transporte),
-
-    CONSTRAINT fk_registro_empresa
-        FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
+    FOREIGN KEY (id_pais) REFERENCES pais_origem(id_pais),
+    FOREIGN KEY (id_transporte) REFERENCES tipo_transporte(id_transporte),
+    FOREIGN KEY (id_estado) REFERENCES estado(id_estado),
+    FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
 );
 
--- PLANO TURISTICO (baseado no wireframe)
-CREATE TABLE plano_turistico (
-    id_plano INT AUTO_INCREMENT PRIMARY KEY,
-    id_empresa INT NOT NULL,
-    id_pais INT NOT NULL,
-    id_cidade INT NOT NULL,
-    plano_sugerido VARCHAR(150),
-    duracao_recomendada VARCHAR(50),
-    orcamento_medio DECIMAL(10,2),
-    estrategia_marketing TEXT,
-
-    CONSTRAINT fk_plano_empresa
-        FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa),
-
-    CONSTRAINT fk_plano_pais
-        FOREIGN KEY (id_pais) REFERENCES pais_origem(id_pais),
-
-    CONSTRAINT fk_plano_cidade
-        FOREIGN KEY (id_cidade) REFERENCES cidade(id_cidade)
+CREATE TABLE organizador (
+    id_organizador INT PRIMARY KEY AUTO_INCREMENT,
+    nome_organizador VARCHAR(150) NOT NULL,
+    site_compra_ingresso TEXT
 );
 
--- EXPERIENCIAS DO PLANO
-CREATE TABLE experiencia (
-    id_experiencia INT AUTO_INCREMENT PRIMARY KEY,
-    descricao VARCHAR(200) NOT NULL,
-    id_plano INT NOT NULL,
-
-    CONSTRAINT fk_experiencia_plano
-        FOREIGN KEY (id_plano) REFERENCES plano_turistico(id_plano)
+CREATE TABLE log (
+    id_log INT PRIMARY KEY AUTO_INCREMENT,
+    data_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    statuss VARCHAR(30),
+    nivel VARCHAR(45),
+    acao_efetuada VARCHAR(100),
+    tabela_afetada VARCHAR(50),
+    descricao TEXT
 );

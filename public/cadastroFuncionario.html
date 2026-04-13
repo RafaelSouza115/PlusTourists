@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/siteInstitucional/cadastroFuncionario.css">
     <link rel="icon" href="assets/logoIcon.png">
-    <script src="js/site-institucional/cadastrar-funcionario.js"></script>
+    <script src="js/site-institucional/cadastrarFuncionario.js"></script>
     <title>Cadastro Funcionário | +Tourists</title>
 </head>
-<body>
+
+<body onload="listar()">
 
     <main class="page-wrapper">
         <section class="card-container">
@@ -28,7 +30,8 @@
                 <form class="empresa-form" id="formCadastroEmpresa">
                     <div class="form-group">
                         <label for="nomeCompleto">Nome Completo</label>
-                        <input id="nomeCompleto" name="nomeCompleto" type="text" placeholder="Digite seu nome completo"/>
+                        <input id="nomeCompleto" name="nomeCompleto" type="text"
+                            placeholder="Digite seu nome completo" />
                     </div>
 
                     <div class="form-group">
@@ -43,7 +46,8 @@
 
                     <div class="form-group">
                         <label for="codigoEmpresa">Código da Empresa</label>
-                        <input id="codigoEmpresa" name="codigoEmpresa" type="text" placeholder="Código da sua empresa" />
+                        <input id="codigoEmpresa" name="codigoEmpresa" type="text"
+                            placeholder="Código da sua empresa" />
                     </div>
                     <div class="form-group">
                         <label for="senha">Senha</label>
@@ -51,14 +55,15 @@
                     </div>
                     <div class="form-group">
                         <label for="confirmarSenha">Confirmar Senha</label>
-                        <input id="confirmarSenha" name="cofirmarSenha" type="password" placeholder="Repita a senha anterior" />
+                        <input id="confirmarSenha" name="cofirmarSenha" type="password"
+                            placeholder="Repita a senha anterior" />
                     </div>
 
                     <div class="form-actions">
-                      <a href="index.html">
-                          <button type="button" class="btn btn-secondary">Voltar ao Ínicio</button>
-                      </a>
-                        <button type="submit" class="btn btn-primary">Criar conta</button>
+                        <a href="index.html">
+                            <button type="button" class="btn btn-secondary">Voltar ao Ínicio</button>
+                        </a>
+                        <button type="button" onclick="cadastrar()" class="btn btn-primary">Criar conta</button>
                     </div>
 
                     <p class="form-footer-text">

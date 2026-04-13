@@ -14,6 +14,7 @@ const chatIA = new GoogleGenAI({ apiKey: process.env.MINHA_CHAVE });
 var app = express();
 
 var funcionarioRouter = require("./src/routes/funcionario");
+var empresaRouter = require("./src/routes/empresa");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -21,6 +22,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/funcionarios", funcionarioRouter);
+app.use("/empresas", empresaRouter);
+
 
 app.post("/perguntar", async (req, res) => {
     const pergunta = req.body.pergunta;

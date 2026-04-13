@@ -7,4 +7,12 @@ router.get("/listar", function (req, res) {
   empresaController.listar(req, res);
 });
 
+router.post("/cadastrar", function (req, res) {
+    empresaController.cadastrar(req, res);
+});
+
+router.get("/buscar", function (req, res) {
+    empresaController.buscarPorCnpj(req, res);
+});
+
 module.exports = router;

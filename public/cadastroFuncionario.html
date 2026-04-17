@@ -32,31 +32,37 @@
                         <label for="nomeCompleto">Nome Completo</label>
                         <input id="nomeCompleto" name="nomeCompleto" type="text"
                             placeholder="Digite seu nome completo" />
+                        <p class="invalid-field" id="nomeInvalido">Preencha seu nome completo</p>
                     </div>
 
                     <div class="form-group">
                         <label for="cpf">CPF</label>
-                        <input id="cpf" name="cpf" type="text" placeholder="000.000.000-00" />
+                        <input id="cpf" name="cpf" type="text" placeholder="000.000.000-00" maxlength="11" />
+                        <p class="invalid-field" id="cpfInvalido">Preencha com seu CPF</p>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input id="email" name="email" type="email" placeholder="seuemail@exemplo.com.br" />
+                        <p class="invalid-field" id="emailInvalido">Preencha com seu email</p>
                     </div>
 
                     <div class="form-group">
-                        <label for="codigoEmpresa">Código da Empresa</label>
-                        <input id="codigoEmpresa" name="codigoEmpresa" type="text"
+                        <label for="codigoAtivacao">Código da Empresa</label>
+                        <input id="codigoAtivacao" name="codigoAtivacao" type="text"
                             placeholder="Código da sua empresa" />
+                        <p class="invalid-field" id="codigoInvalido">Preencha com o seu email</p>
                     </div>
                     <div class="form-group">
                         <label for="senha">Senha</label>
-                        <input id="senha" name="senha" type="password" placeholder="Mín. 8 caracteres (Aa, @, 123)" />
+                        <input id="senha" name="senha" type="password" placeholder="Mín. 8 caracteres (Aa, @, 123)" onkeyup="validar()" />
+                        <p class="invalid-field" id="senhaInvalida">Preencha com a sua senha</p>
                     </div>
                     <div class="form-group">
                         <label for="confirmarSenha">Confirmar Senha</label>
                         <input id="confirmarSenha" name="cofirmarSenha" type="password"
                             placeholder="Repita a senha anterior" />
+                        <p class="invalid-field" id="repetirSenhaInvalida">Digite novamente sua senha</p>
                     </div>
 
                     <div class="form-actions">
@@ -72,7 +78,15 @@
                     </p>
                 </form>
             </div>
+            <!-- Modal código da empresa -->
+            <div class="modal-overlay" id="modalEmpresa">
+                <div class="modal-content">
+                    <p class="codigo-empresa" id="codigoEmpresa"></p>
+                    <button type="button" class="btn btn-primary" id="fecharModalEmpresa">Entendi</button>
+                </div>
+            </div>
         </section>
     </main>
 </body>
+
 </html>

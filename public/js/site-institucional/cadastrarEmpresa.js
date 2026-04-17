@@ -2,6 +2,7 @@ function cadastrar() {
   var razaoSocialVar = razaoSocial.value;
   var nomeFantasiaVar = nomeFantasia.value;
   var cnpjVar = cnpj.value;
+  var emailVar = email.value;
   var cepVar = cep.value;
   var numeroVar = numero.value;
   var complementoVar = complemento.value;
@@ -31,6 +32,10 @@ function cadastrar() {
     numeroInvalido.style.display = "block";
   }
 
+  if (emailVar.trim() == "") {
+    emailInvalido.style.display = "block";
+  }
+
   if (nomeFantasiaVar.trim() == "") {
     nomeFantasiaVar = null;
   }
@@ -52,6 +57,7 @@ function cadastrar() {
       razaoSocialServer: razaoSocialVar,
       nomeFantasiaServer: nomeFantasiaVar,
       cnpjServer: cnpjVar,
+      emailServer: emailVar,
       cepServer: cepVar,
       numeroServer: numeroVar,
       complementoServer: complementoVar,
@@ -65,7 +71,7 @@ function cadastrar() {
       if (resposta.ok) {
         campoCodigo.textContent = "Cadastro realizado com sucesso! Em breve disponibilizaremos o código para a criação do primeiro usuário.";
         modal.classList.add('aberto');
-        
+
       } else {
         throw data.mensagem;
       }

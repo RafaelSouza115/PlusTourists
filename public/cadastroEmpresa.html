@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label for="razaoSocial">Razão Sozial</label>
                         <input id="razaoSocial" name="razaoSocial" type="text" placeholder="PlusTurists" />
-                        <p class="invalid-field" id="razaoSocialInvalida">Preencha corretamente a razão social de sua empresa</p>
+                        <p class="invalid-field" id="razaoSocialInvalida">Preencha com a razão social de sua empresa</p>
                     </div>
 
                     <div class="form-group">
@@ -39,20 +39,27 @@
 
                     <div class="form-group">
                         <label for="cnpj">CNPJ</label>
-                        <input id="cnpj" name="cnpj" type="text" placeholder="12.345.678/0001-90" />
-                        <p class="invalid-field" id="cnpjInvalido">Preencha corretamente o CNPJ de sua empresa</p>
+                        <input id="cnpj" name="cnpj" type="text" placeholder="12.345.678/0001-90" maxlength="14"/>
+                        <p class="invalid-field" id="cnpjInvalido">Preencha com o CNPJ de sua empresa</p>
                     </div>
 
                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="text" placeholder="seuemail@exemplo.com.br" />
+                        <p class="invalid-field" id="emailInvalido">Preencha com o email de sua empresa</p>
+                    </div>
+
+
+                    <div class="form-group">
                         <label for="cep">CEP</label>
-                        <input id="cep" name="cep" type="text" placeholder="00000-000" />
-                        <p class="invalid-field" id="cepInvalido">Preencha corretamente o CEP de sua empresa</p>
+                        <input id="cep" name="cep" type="text" placeholder="00000-000" maxlength="8" />
+                        <p class="invalid-field" id="cepInvalido">Preencha com o CEP de sua empresa</p>
                     </div>
 
                     <div class="form-group">
                         <label for="numero">Número</label>
-                        <input id="numero" name="numero" type="text" placeholder="1627389" />
-                        <p class="invalid-field" id="numeroInvalido">Preencha corretamente o número do endereço da sua empresa</p>
+                        <input id="numero" name="numero" type="text" placeholder="1627389" maxlength="6" />
+                        <p class="invalid-field" id="numeroInvalido">Preencha com o número do endereço da sua empresa</p>
                     </div>
                     <div class="form-group">
                         <label for="complemento">Complemento</label>

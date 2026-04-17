@@ -6,14 +6,14 @@ function listar() {
   return database.execute(instrucaoSql);
 }
 
-function cadastrar(razaoSocial, nomeFantasia, cnpj, cep, numero, complemento, codigoAtivacao) {
+function cadastrar(razaoSocial, nomeFantasia, cnpj, email, cep, numero, complemento, codigoAtivacao) {
   var instrucaoSql = `
-  INSERT INTO empresa (razao_social, nome_fantasia, CNPJ, cep, numero, complemento, codigo_ativacao)
-  VALUES (?, ?, ?, ?, ?, ?, ?);
+  INSERT INTO empresa (razao_social, nome_fantasia, CNPJ, email_contato, cep, numero, complemento, codigo_ativacao)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?);
   `;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
-  return database.execute(instrucaoSql, [razaoSocial, nomeFantasia, cnpj, cep, numero, complemento, codigoAtivacao]);
+  return database.execute(instrucaoSql, [razaoSocial, nomeFantasia, cnpj, email, cep, numero, complemento, codigoAtivacao]);
 }
 
 function buscarPorCnpj(cnpj) {

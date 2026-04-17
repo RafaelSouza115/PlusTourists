@@ -95,7 +95,7 @@ function cadastrar(req, res) {
 
     if (fkEmpresa === undefined || fkEmpresa === null || fkEmpresa === "") {
         return res.status(400).json({
-            mensagem: "Campo empresa_ligada é obrigatório."
+            mensagem: "Código de ativação inválido"
         });
     }
     var idEmpresa = parseInt(fkEmpresa, 10);
@@ -108,7 +108,7 @@ function cadastrar(req, res) {
     funcionarioModel.cadastrar(nome, cpf, email, senha, fkEmpresa)
         .then(function (resultado) {
             res.status(201).json({
-                mensagem: "Funcionário cadastrado com sucesso.",
+                mensagem: "Cadastro realizado com sucesso.",
                 id_funcionario: resultado.insertId
             });
         })

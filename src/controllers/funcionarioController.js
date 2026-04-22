@@ -132,7 +132,7 @@ function autenticar(req, res) {
                 res.status(200).json({
                     id_funcionario: funcionario.id_funcionario,
                     nome: funcionario.nome,
-                    cpf: funcionario.CPF,
+                    cpf: funcionario.cpf,
                     email: funcionario.email,
                     empresa_ligada: funcionario.empresa_ligada
                 });

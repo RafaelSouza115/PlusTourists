@@ -23,6 +23,7 @@ CREATE TABLE funcionario (
     id_empresa INT NOT NULL,
     FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
 );
+insert into funcionario (nome, cpf, email, senha, nivel_acesso, id_empresa) values ('Funcionario Padrão', '00000000000', 'funcionario@email.com', 'senha123', 1, 1);
 
 CREATE TABLE status_plano (
     id_status_plano INT PRIMARY KEY AUTO_INCREMENT,

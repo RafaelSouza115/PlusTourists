@@ -22,9 +22,9 @@ function autenticar(email, senha) {
     var instrucao = `
         SELECT id_funcionario,
                nome,
-               CPF,
+               cpf,
                email,
-               empresa_ligada
+               id_empresa AS empresa_ligada
         FROM funcionario
         WHERE email = ? AND senha = ?;
     `;

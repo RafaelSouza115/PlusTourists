@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.janela {
+    background-color: #F7F7FF;
+    min-height: 100vh; 
+    display: flex;
+}
+
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px grey;
+    width: 250px; 
+    height: 100vh; 
+    padding-top: 3.7rem;
+    background-color: #F2F0EF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; 
+}
+
+
+#img-header {
+    width: 80%;
+    margin: 0 1rem 4.5rem 1.5rem;
+}
+
+.header ul {
+    list-style: none;
+    display: flex;
+}
+
+a {
+    color: #121212;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+
+.btn-nav-white {
+    width: 85%;
+    margin: 0.5rem auto;
+    color: #121212;
+    padding: 10px 15px;
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.btn-nav-white:hover {
+    background-color: #E8E6E4;
+    transform: translateX(5px);
+}
+
+.btn-nav-white a h3 {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.icon-nav{
+    width: 22px;
+    margin-right: 1.4rem;
+    
+}
+
+.sidebar-footer {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 1.2rem 1rem;
+    margin-top: auto; 
+    background-color: #E8E6E4; 
+    border-top: 1px solid #e2e8f0; 
+    width: 100%;
+}
+
+.user-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.user-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-size: 0.85rem;
+    font-weight: 600; 
+    color: #121212; 
+}
+
+.user-email {
+    font-size: 0.75rem;
+    color: #64748b; 
+}
+
+#btn-logout.icon-logout {
+    border: none;
+    background: none; 
+    cursor: pointer;
+    opacity: 0.7; 
+}
+
+#img-page{
+   fill: aqua;
+}
+
+#btn-logout.icon-logout:hover { opacity: 1; }
+
+
+
+
+@media (max-width: 1024px) {
+    .header-left {
+        width: 80px; 
+    }
+}

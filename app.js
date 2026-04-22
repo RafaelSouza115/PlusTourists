@@ -1,5 +1,4 @@
 var ambiente_processo = 'desenvolvimento';
-const { GoogleGenAI } = require("@google/genai");
 
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 require("dotenv").config({ path: caminho_env });
@@ -9,7 +8,6 @@ var cors = require("cors");
 var path = require("path");
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
-const chatIA = new GoogleGenAI({ apiKey: process.env.MINHA_CHAVE });
 
 var app = express();
 

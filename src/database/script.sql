@@ -23,6 +23,7 @@ CREATE TABLE funcionario (
     id_empresa INT NOT NULL,
     FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
 );
+insert into funcionario (nome, cpf, email, senha, nivel_acesso, id_empresa) values ('Funcionario Padrão', '00000000000', 'funcionario@email.com', 'senha123', 1, 1);
 
 CREATE TABLE status_plano (
     id_status_plano INT PRIMARY KEY AUTO_INCREMENT,
@@ -41,13 +42,13 @@ CREATE TABLE plano_turistico (
 
 CREATE TABLE estado (
     id_estado INT PRIMARY KEY AUTO_INCREMENT,
-    nome_estado VARCHAR(100) NOT NULL,
+    nome_estado VARCHAR(100) NOT NULL DEFAULT 'SEM NOME',
     UF CHAR(2) NOT NULL UNIQUE
 );
 
 CREATE TABLE pais_origem (
     id_pais INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL
+    nome VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE locall (
@@ -96,7 +97,7 @@ CREATE TABLE atividade (
 
 CREATE TABLE tipo_transporte (
     id_transporte INT PRIMARY KEY AUTO_INCREMENT,
-    nome_transporte VARCHAR(50) NOT NULL
+    nome_transporte VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE registro_turismo (
@@ -128,3 +129,6 @@ CREATE TABLE log (
     tabela_afetada VARCHAR(50),
     descricao TEXT
 );
+
+INSERT IGNORE INTO empresa (id_empresa, razao_social, cnpj, cep, numero, email_contato) 
+VALUES (1, 'Empresa Padrao', '00000000000000', '00000-000', 'S/N', 'contato@email.com');

@@ -15,9 +15,9 @@ public class ConexaoBancoDeDados {
         BasicDataSource conexao = new BasicDataSource();
 
         conexao.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        conexao.setUrl("jdbc:mysql://127.0.0.1:3306/plusTourists");
-        conexao.setUsername("cesar");
-        conexao.setPassword("urubu100");
+        conexao.setUrl("jdbc:mysql://localhost:3306/plusTourists");
+        conexao.setUsername("root");
+        conexao.setPassword("La@134dias");
 
         this.conexao= conexao;
         this.jdbcTemplate = new JdbcTemplate(conexao);

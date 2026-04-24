@@ -1,5 +1,6 @@
 package school.sptech;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -10,9 +11,28 @@ public class Main {
         ConexaoBancoDeDados conexao = new ConexaoBancoDeDados();
         LeituraExcelEventos leituraEventos = new LeituraExcelEventos();
         LeituraExcelTuristas leituraTuristas = new LeituraExcelTuristas();
+        LogsConexaoBancoDeDados log = new LogsConexaoBancoDeDados(conexao.getJdbcTemplate());
+
+        log.inserirLogs(
+                LocalDateTime.now(),
+                "INICIADO",
+                "INFO",
+                "INICIO_CARGA",
+                "main",
+                "Processo geral de leitura e carga iniciado"
+        );
 
         List<ListaDeDados> eventos  = leituraEventos.extrairRegistroEvento("Excel-unificacao.xlsx");
         List<ListaDeDados> turistas = leituraTuristas.extrairRegistroTuristas("chegadas-2025.xlsx");
+
+        log.inserirLogs(
+                LocalDateTime.now(),
+                "SUCESSO",
+                "INFO",
+                "PLANILHAS_PROCESSADAS",
+                "main",
+                "Leitura concluída. Registros carregados - Eventos: " + eventos.size() + " | Turistas: " + turistas.size()
+        );
 
         // ══════════════════════════════════════════════════════════
         // PRÉ-REQUISITO: popula status_plano (PENDENTE, APROVADO, REPROVADO)
@@ -34,9 +54,21 @@ public class Main {
         // NOME COMPLETO do estado (ex: "Rio de Janeiro"), não a sigla.
         // Usamos o mapa abaixo para converter nome → sigla (CHAR 2).
         // ══════════════════════════════════════════════════════════
-        System.out.println("\n===== Inserindo dados de turistas =====");
+        log.inserirLogs(
+                LocalDateTime.now(),
+                "PROCESSANDO",
+                "INFO",
+                "INICIO_CARGA_TURISTAS",
+                "registro_turismo",
+                "Iniciando inserção de turistas"
+        );
 
+        System.out.println("\n===== Inserindo dados de turistas =====");
+        int i = 1;
         for (ListaDeDados dado : turistas) {
+            System.out.println("Processando " + i + " de " + turistas.size());
+            i++;
+            System.out.println("Processando: " + dado.getUF() + " - " + dado.getPais());
             try {
                 String nomeEstado = dado.getUF();
                 String siglaUF    = converterNomeParaSigla(nomeEstado);
@@ -89,17 +121,46 @@ public class Main {
                 );
 
             } catch (Exception e) {
+
+                log.inserirLogs(
+                        LocalDateTime.now(),
+                        "ERRO",
+                        "ERROR",
+                        "ERRO_TURISTA",
+                        "registro_turismo",
+                        "UF: " + dado.getUF() + " | País: " + dado.getPais() +
+                                " | " + e.getMessage()
+                );
+
                 System.err.println("Erro turista [" + dado.getUF() + " / " + dado.getPais() + "]: " + e.getMessage());
             }
         }
 
         System.out.println("Turistas concluidos. Total processado: " + turistas.size());
 
+        log.inserirLogs(
+                LocalDateTime.now(),
+                "SUCESSO",
+                "INFO",
+                "FIM_CARGA_TURISTAS",
+                "registro_turismo",
+                "Total processado: " + turistas.size()
+        );
+
         // ══════════════════════════════════════════════════════════
         // BLOCO 2 — EVENTOS
         // Ordem de inserção respeita as FKs do banco:
         //   organizador → locall → plano_turistico → evento → edicao
         // ══════════════════════════════════════════════════════════
+
+        log.inserirLogs(
+                LocalDateTime.now(),
+                "PROCESSANDO",
+                "INFO",
+                "INICIO_CARGA_EVENTOS",
+                "evento",
+                "Iniciando inserção de eventos"
+        );
         System.out.println("\n===== Inserindo dados de eventos =====");
 
         for (ListaDeDados dado : eventos) {
@@ -194,10 +255,30 @@ public class Main {
                 );
 
             } catch (Exception e) {
+
+                log.inserirLogs(
+                        LocalDateTime.now(),
+                        "ERRO",
+                        "ERROR",
+                        "ERRO_EVENTO",
+                        "evento",
+                        "Evento: " + dado.getNomeDoEvento() +
+                                " | " + e.getMessage()
+                );
+
                 System.err.println("Erro evento [" + dado.getNomeDoEvento() + "]: " + e.getMessage());
                 e.printStackTrace();
             }
         }
+
+        log.inserirLogs(
+                LocalDateTime.now(),
+                "FINALIZADO",
+                "INFO",
+                "PROCESSO_CONCLUIDO",
+                "main",
+                "Carga completa finalizada com sucesso"
+        );
 
         System.out.println("Eventos concluidos. Total processado: " + eventos.size());
     }

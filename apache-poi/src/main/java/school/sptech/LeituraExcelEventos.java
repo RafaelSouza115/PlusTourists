@@ -19,6 +19,16 @@ public class LeituraExcelEventos {
         List<ListaDeDados> eventosExtraidos = new ArrayList<>();
         DataFormatter df = new DataFormatter();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        ConexaoBancoDeDados conexao = new ConexaoBancoDeDados();
+        LogsConexaoBancoDeDados log = new LogsConexaoBancoDeDados(conexao.getJdbcTemplate());
+
+        log.inserirLogs(
+                LocalDateTime.now(),
+                "INICIADO",
+                "INFO",
+                "ABRIR_ARQUIVO",
+                "evento",
+                "Iniciando leitura do arquivo " + nomeArquivo);
 
         try (
                 InputStream arquivo = new FileInputStream(nomeArquivo);
@@ -29,7 +39,8 @@ public class LeituraExcelEventos {
 
             Sheet sheet = workbook.getSheetAt(0);
             for (Row row : sheet) {
-                if (row.getRowNum() == 0) {
+                try {
+                    if (row.getRowNum() == 0) {
                     printarCabecalho(row);
                     continue;
                 }
@@ -78,17 +89,55 @@ public class LeituraExcelEventos {
                 );
 
                 eventosExtraidos.add(evento);
+
+            } catch (Exception e) {
+
+                    log.inserirLogs(
+                            LocalDateTime.now(),
+                            "ERRO",
+                            "ERRO",
+                            "ERRO_LINHA",
+                            "evento",
+                            "Erro na linha " + row.getRowNum() + ": " + e.getMessage()
+                    );
+                }
             }
 
             System.out.println("-".repeat(20));
             System.out.println("Leitura finalizada! Total de registros: " + eventosExtraidos.size());
             System.out.println("-".repeat(20));
 
+            log.inserirLogs(
+                    LocalDateTime.now(),
+                    "SUCESSO",
+                    "INFO",
+                    "LEITURA_FINALIZADA",
+                    "evento",
+                    "Total de registros lidos: " + eventosExtraidos.size()
+            );
         } catch (IOException e) {
             System.err.println("Erro ao abrir o arquivo: " + e.getMessage());
+
+            log.inserirLogs(
+                    LocalDateTime.now(),
+                    "ERRO",
+                    "ERRO",
+                    "FALHA_LEITURA",
+                    "evento",
+                    e.getMessage()
+            );
         } catch (Exception e) {
             System.err.println("Erro inesperado: " + e.getMessage());
             e.printStackTrace();
+
+            log.inserirLogs(
+                    LocalDateTime.now(),
+                    "ERRO",
+                    "ERRO",
+                    "ERRO_GERAL",
+                    "evento",
+                    e.getMessage()
+            );
         }
 
         return eventosExtraidos;

@@ -1,62 +1,92 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../style/dashboard/index.css" />
-    <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
-    <link rel="icon" href="../assets/logoIcon.png" />
-    <script src="../js/dashboard/index.js"></script>
-    <title>Empresa</title>
-  </head>
 
-  <body>
-    <div class="janela">
-      <div class="header-left">
-        <div>
-          <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
+  <link rel="stylesheet" href="../style/dashboard/empresa.css" />
+  <link rel="icon" href="../assets/logoIcon.png" />
+  <script src="../js/dashboard/empresa.js"></script>
+  <title>Empresa</title>
+</head>
 
-        <div class="btn-nav-white">
-          <img src="../assets/iconCasa.svg" alt="Dashboard" class="icon-nav" />
-          <a href="index.html">
-            <h3>Dashboard</h3>
-          </a>
-        </div>
+<body>
+  <div class="janela">
+    <div class="header-left">
+      <div>
+        <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
+      </div>
 
-        <div class="btn-nav-white">
-          <img src="../assets/iconPlanejamento.svg" alt="Dashboard" class="icon-nav" />
-          <a href="planos.html">
-            <h3>Planos</h3>
-          </a>
-        </div>
+      <div class="btn-nav-white">
+        <img src="../assets/iconCasa.svg" alt="Dashboard" class="icon-nav" />
+        <a href="index.html">
+          <h3>Dashboard</h3>
+        </a>
+      </div>
 
-        <div class="btn-nav-white">
-          <img src="../assets/iconEmpresav.png" alt="Dashboard" class="icon-nav" />
-          <a href="empresa.html">
-            <h3 style="color: #008000">Empresa</h3>
-          </a>
-        </div>
+      <div class="btn-nav-white">
+        <img src="../assets/iconPlanejamento.svg" alt="Dashboard" class="icon-nav" />
+        <a href="planos.html">
+          <h3>Planos</h3>
+        </a>
+      </div>
 
-        <div class="btn-nav-white">
-          <img src="../assets/iconPerfil.svg" alt="Dashboard" class="icon-nav" />
-          <a href="perfil.html">
-            <h3>Perfil</h3>
-          </a>
-        </div>
+      <div class="btn-nav-white">
+        <img src="../assets/iconEmpresav.png" alt="Dashboard" class="icon-nav" />
+        <a href="empresa.html">
+          <h3 style="color: #008000">Empresa</h3>
+        </a>
+      </div>
 
-        <div class="sidebar-footer">
-          <div class="user-container">
-            <div class="user-text">
-              <span class="user-name">Usuário</span>
-              <span class="user-email">usuario@gmail.com</span>
-            </div>
+      <div class="btn-nav-white">
+        <img src="../assets/iconPerfil.svg" alt="Dashboard" class="icon-nav" />
+        <a href="perfil.html">
+          <h3>Perfil</h3>
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-container">
+          <div class="user-text">
+            <span class="user-name">Usuário</span>
+            <span class="user-email">usuario@gmail.com</span>
           </div>
-          <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
-            <img src="../assets/iconSair.png" alt="Ícone de Sair" />
-          </button>
         </div>
+        <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
+          <img src="../assets/iconSair.png" alt="Ícone de Sair" />
+        </button>
       </div>
     </div>
-  </body>
+    <div class="content">
+      <div class="options" id="buttons">
+        <button class="destaque" id="btnEmpresa" onclick="empresa()"><p>Dados da Empresa</p></button>
+        <button id="btnEndereco" onclick="endereco()"><p>Endereço</p></button>
+      </div>
+      <div class="edit">
+        <h2 id="title">Dados da Empresa</h2>
+        <div class="inp" id="inp">
+          <div class="iptOpt">
+            <p>Razão Social</p>
+            <input type="text" id="iptRazaoSocial" placeholder="Ex: PlusTourists LTDA">
+          </div>
+          <div class="iptOpt">
+            <p>Nome Fantasia</p>
+            <input type="text" id="iptNomeFantasia" placeholder="Ex: PlusTourists">
+          </div>
+          <div class="iptOpt">
+            <p>CNPJ</p>
+            <input type="text" id="iptCnpj" placeholder="00.000.000/0000-000" maxlength="14">
+          </div>
+         <div class="iptOpt">
+            <p>E-mail responsável</p>
+            <input type="text" id="iptEmail" placeholder="contato@empresa.com.br">
+          </div>
+        </div>
+        <button>Atualizar</button>
+        <p id="ultimaAtualizacao">Data da última atualização: 01/01/2026 às 14h 30min</p>
+      </div>
+    </div>
+  </div>
+</body>
 </html>

@@ -1,63 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/dashboard/index.js"></script>
+    <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
+    <link rel="stylesheet" href="../style/output.css" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="../js/dashboard/index.js"> </script>
-  <link rel="stylesheet" href="style/output.css">
-  <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
-  <title>Document</title>
-</head>
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<body>
-  <div class="janela">
-    <div class="header-left">
-      <div>
-        <a href="index.html"><img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" /></a>
-      </div>
+    <title>Document</title>
+  </head>
 
-      <div class="btn-nav-white">
-        <img src="../assets/iconHomev.png" alt="Dashboard" class="icon-nav" />
-        <a href="index.html">
-          <h3 style="color: #008000">Dashboard</h3>
-        </a>
-      </div>
-
-      <div class="btn-nav-white">
-        <img src="../assets/iconPlanejamento.svg" alt="Dashboard" class="icon-nav" />
-        <a href="planos.html">
-          <h3>Planos</h3>
-        </a>
-      </div>
-
-      <div class="btn-nav-white">
-        <img src="../assets/iconEmpresa.svg" alt="Dashboard" class="icon-nav">
-        <a href="empresa.html">
-          <h3>Empresa</h3>
-        </a>
-      </div>
-
-      <div class="btn-nav-white">
-        <img src="../assets/iconPerfil.svg" alt="Dashboard" class="icon-nav" />
-        <a href="perfil.html">
-          <h3>Perfil</h3>
-        </a>
-      </div>
-
-      <div class="sidebar-footer">
-        <div class="user-container">
-          <div class="user-text">
-            <span class="user-name">Usuário</span>
-            <span class="user-email">usuario@gmail.com</span>
-          </div>
+  <body class="flex flex-row h-screen bg-[#f5f5f5]">
+    <div class="janela">
+      <div class="header-left">
+        <div>
+          <a href="index.html"
+            ><img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site"
+          /></a>
         </div>
-        <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
-          <img src="../assets/iconSair.png" alt="Ícone de Sair" />
-        </button>
+
+        <div class="btn-nav-white">
+          <img src="../assets/iconHomev.png" alt="Dashboard" class="icon-nav" />
+          <a href="index.html">
+            <h3 style="color: #008000">Dashboard</h3>
+          </a>
+        </div>
+
+        <div class="btn-nav-white">
+          <img src="../assets/iconPlanejamento.svg" alt="Dashboard" class="icon-nav" />
+          <a href="planos.html">
+            <h3>Planos</h3>
+          </a>
+        </div>
+
+        <div class="btn-nav-white">
+          <img src="../assets/iconEmpresa.svg" alt="Dashboard" class="icon-nav" />
+          <a href="empresa.html">
+            <h3>Empresa</h3>
+          </a>
+        </div>
+
+        <div class="btn-nav-white">
+          <img src="../assets/iconPerfil.svg" alt="Dashboard" class="icon-nav" />
+          <a href="perfil.html">
+            <h3>Perfil</h3>
+          </a>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="user-container">
+            <div class="user-text">
+              <span class="user-name">Usuario</span>
+              <span class="user-email">usuario@gmail.com</span>
+            </div>
+          </div>
+          <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
+            <img src="../assets/iconSair.png" alt="Ãcone de Sair" />
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</body>
 
+    <div class="flex flex-1 font-sans flex-col">
+      <!-- HEADER -->
+      <div class="w-full bg-green-700 text-white rounded-b-3xl shadow-lg">
+        <div class="h-[120px] px-4 flex justify-between p-3">
+          <!-- Texto -->
+          <div class="flex flex-col p-4">
+            <h1 class="text-xl font-bold" id="nome_funcionario"></h1>
+            <p class="text-sm opacity-80">Bem-vindo(a) ao seu dashboard</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="relative w-[75%] mb-8 bg-gray-200 flex-1 p-4 justify-center mx-auto items-center rounded-4xl -mt-8 shadow-lg"
+      >
+        <div class="bg-white p-4 rounded-xl shadow flex gap-4">
+          <input
+            type="text"
+            placeholder="Pesquise um país"
+            class="flex-1 border rounded-lg px-4 py-2 outline-none"
+          />
+
+          <select class="border rounded-lg px-4 py-2">
+            <option>Selecione o estado</option>
+          </select>
+
+          <select class="border rounded-lg px-4 py-2">
+            <option>Selecione o ano</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-4 gap-4 mt-6">
+          <div class="bg-white p-3 rounded-xl shadow">
+            <p class="text-gray-500 text-sm">Visitantes internacionais</p>
+            <h2 class="text-green-600 text-xl font-bold mt-2">1.000.000</h2>
+            <p class="text-green-600 text-sm mt-2">+18% vs. 3 meses anteriores</p>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl shadow">
+            <p class="text-gray-500 text-sm">Crescimento ao ano</p>
+            <h2 class="text-xl font-bold mt-2 text-yellow-500">33%</h2>
+            <p class="text-yellow-600 text-sm mt-2">+8% vs. ano anterior</p> 
+          </div>
+
+          <div class="bg-white p-3 rounded-xl shadow">
+            <p class="text-gray-500 text-sm">Janela de oportunidade</p>
+            <h2 class="text-xl font-bold mt-2 text-green-600">Maio</h2>
+            <p class="text-green-600 text-sm mt-2">Tendência positiva</p>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl shadow">
+            <p class="text-gray-500 text-sm">Mês com mais turistas</p>
+            <h2 class="text-xl font-bold mt-2 text-purple-600">Julho</h2>
+            <p class="text-purple-600 text-sm mt-2">Sazonalidade identificada</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 mt-6">
+          <!-- grafico de barras -->
+          <div class="bg-white p-6 rounded-xl shadow">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="font-semibold">Turistas por mês</h3>
+            </div>
+
+            <div class="h-60 bg-gray-100 rounded-lg"><canvas id="idTuristas"></canvas></div>
+
+            <p class="text-sm text-gray-500 mt-3">Dezembro teve o maior número de turistas.</p>
+          </div>
+
+          <!-- grafico de pizza -->
+          <div class="bg-white p-6 rounded-xl shadow">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="font-semibold">Chegadas por acesso</h3>
+            </div>
+
+            <div class="h-60 bg-gray-100 rounded-lg"><canvas id="idChegadas"></canvas></div>
+
+            <div class="flex gap-4 mt-4 space-y-1 text-sm flex-row">
+              <p>Aérea - 40%</p>
+              <p>Terrestre - 25%</p>
+              <p>Fluvial - 20%</p>
+              <p>Marítima - 15%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    var idNome = document.getElementById('nome_funcionario');
+    idNome.innerHTML = 'Ola, seja bem-vindo ' + sessionStorage.NOME_FUNCIONARIO;
+
+    const ctx = document.getElementById('idTuristas');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        datasets: [{
+          label: 'Turistas',
+          data: [5, 12, 8, 15, 20, 25, 30, 28, 22, 18, 10, 35],
+          borderColor: 'green',
+          borderWidth: 2
+        }]
+      }
+    });
+
+    const ctx2 = document.getElementById('idChegadas');
+
+    new Chart(ctx2, {
+      type: 'pie',
+      data: {
+        labels: ['Aérea', 'Terrestre', 'Fluvial', 'Marítima'],
+        datasets: [{
+          label: 'Chegadas',
+          data: [40, 25, 20, 15],
+          backgroundColor: ['#F4685D', '#F0C15A', '#1E9496', '#B9C36B']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  </script>
 </html>

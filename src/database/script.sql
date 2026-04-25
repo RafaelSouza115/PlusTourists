@@ -24,7 +24,6 @@ CREATE TABLE funcionario (
     id_empresa INT NOT NULL,
     FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
 );
-insert into funcionario (nome, cpf, email, senha, nivel_acesso, id_empresa) values ('Funcionario Padrão', '00000000000', 'funcionario@email.com', 'senha123', 1, 1);
 
 CREATE TABLE status_plano (
     id_status_plano INT PRIMARY KEY AUTO_INCREMENT,
@@ -69,7 +68,7 @@ CREATE TABLE evento (
     tipo_publico VARCHAR(45),
     id_local INT NOT NULL,
     id_plano INT NOT NULL,
-    FOREIGN KEY (id_local) REFERENCES local(id_local),
+    FOREIGN KEY (id_local) REFERENCES locall(id_local),
     FOREIGN KEY (id_plano) REFERENCES plano_turistico(id_plano)
 );
 
@@ -133,3 +132,5 @@ CREATE TABLE log (
 
 INSERT IGNORE INTO empresa (id_empresa, razao_social, cnpj, cep, numero, email_contato) 
 VALUES (1, 'Empresa Padrao', '00000000000000', '00000-000', 'S/N', 'contato@email.com');
+
+insert into funcionario (nome, cpf, email, senha, nivel_acesso, id_empresa) values ('Funcionario Padrão', '00000000000', 'funcionario@email.com', 'senha123', 1, 1);

@@ -1,6 +1,9 @@
 package school.sptech;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,15 +15,27 @@ public class Main {
         LeituraExcelEventos leituraEventos = new LeituraExcelEventos();
         LeituraExcelTuristas leituraTuristas = new LeituraExcelTuristas();
         LogsConexaoBancoDeDados log = new LogsConexaoBancoDeDados(conexao.getJdbcTemplate());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         log.inserirLogs(
                 LocalDateTime.now(),
                 "INICIADO",
                 "INFO",
                 "INICIO_CARGA",
-                "main",
+                "registro_turismo e evento",
                 "Processo geral de leitura e carga iniciado"
         );
+
+        System.out.println("-".repeat(180));
+        System.out.println(
+                "[" + LocalDateTime.now().format(formatter) + "]" +
+                        " | Status: INICIADO" +
+                        " | Nível: INFO" +
+                        " | Ação: INICIO_CARGA" +
+                        " | Tabela: registro_turismo e evento" +
+                        " | Mensagem: Processo geral de leitura e carga iniciado"
+        );
+        System.out.println("-".repeat(180));
 
         List<ListaDeDados> eventos  = leituraEventos.extrairRegistroEvento("Excel-unificacao.xlsx");
         List<ListaDeDados> turistas = leituraTuristas.extrairRegistroTuristas("chegadas-2025.xlsx");
@@ -30,7 +45,7 @@ public class Main {
                 "SUCESSO",
                 "INFO",
                 "PLANILHAS_PROCESSADAS",
-                "main",
+                "registro_turismo",
                 "Leitura concluída. Registros carregados - Eventos: " + eventos.size() + " | Turistas: " + turistas.size()
         );
 
@@ -42,9 +57,24 @@ public class Main {
                     "INSERT IGNORE INTO status_plano (id_status_plano, nome) " +
                             "VALUES (1,'PENDENTE'), (2,'APROVADO'), (3,'REPROVADO')"
             );
-            System.out.println("status_plano verificado.");
-        } catch (Exception e) {
-            System.err.println("Erro em status_plano: " + e.getMessage());
+            System.out.println(
+                    "[" + LocalDateTime.now().format(formatter) + "]" +
+                            " | Status: SUCESSO" +
+                            " | Nível: INFO" +
+                            " | Ação: VALIDACAO_CONCLUIDA" +
+                            " | Tabela: status_plano" +
+                            " | Mensagem: status_plano verificado."
+            );
+
+            } catch (Exception e) {
+            System.err.println(
+                    "[" + LocalDateTime.now().format(formatter) + "]" +
+                            " | Status: ERRO" +
+                            " | Nível: ERROR" +
+                            " | Ação: VALIDACAO_FALHOU" +
+                            " | Tabela: status_plano" +
+                            " | Mensagem: Erro em status_plano: " + e.getMessage()
+            );
         }
 
         // ══════════════════════════════════════════════════════════
@@ -63,88 +93,144 @@ public class Main {
                 "Iniciando inserção de turistas"
         );
 
-        System.out.println("\n===== Inserindo dados de turistas =====");
-        int i = 1;
-        for (ListaDeDados dado : turistas) {
-            System.out.println("Processando " + i + " de " + turistas.size());
-            i++;
-            System.out.println("Processando: " + dado.getUF() + " - " + dado.getPais());
+       // System.out.println("\n===== Inserindo dados de turistas =====");
+        System.out.println("-".repeat(180));
+        System.out.println("Inserindo dados de turistas");
+        System.out.println("-".repeat(180));
+
+        System.out.println(
+                "[" + LocalDateTime.now().format(formatter) + "]" +
+                        " | Status: INICIADO" +
+                        " | Nível: INFO" +
+                        " | Ação: INSERÇÃO_ARQUIVO" +
+                        " | Tabela: registro_turismo" +
+                        " | Mensagem: Iniciando inserção dos dados de turistas de um total de " + turistas.size() + " linhas"
+        );
+
+        Map<String, Integer> cacheEstados = new HashMap<>();
+        Map<String, Integer> cachePaises = new HashMap<>();
+        Map<String, Integer> cacheTransporte = new HashMap<>();
+
+        String sqlTurista = "INSERT INTO registro_turismo (data_registro, quantidade_turistas, id_pais, id_transporte, id_estado, id_empresa) VALUES (?, ?, ?, ?, ?, ?)";
+        List<Object[]> batchTuristas = new ArrayList<>();
+
+        for (int i = 0; i < turistas.size(); i++) {
+            ListaDeDados dado = turistas.get(i);
+
+            if (i % 500 == 0 && i != 0) {
+                System.out.println(
+                        "[" + LocalDateTime.now().format(formatter) + "]" +
+                                " | Status: PROCESSANDO" +
+                                " | Nível: INFO" +
+                                " | Ação: INSERÇÃO_LOTE" +
+                                " | Tabela: registro_turismo" +
+                                " | Mensagem: " + i + " linhas inseridas"
+                );
+            }
+
             try {
-                String nomeEstado = dado.getUF();
+                // Limpeza de dados básica para evitar erros de busca
+                String nomeEstado = dado.getUF() != null ? dado.getUF().trim() : "Desconhecido";
                 String siglaUF    = converterNomeParaSigla(nomeEstado);
+                String nomePais   = dado.getPais() != null ? dado.getPais().trim() : "Desconhecido";
+                String viaAcesso  = dado.getViaAcesso() != null ? dado.getViaAcesso().trim() : "Outros";
 
-                // 1. ESTADO - Usamos ON DUPLICATE KEY para evitar erro de UNIQUE
-                conexao.getJdbcTemplate().update(
-                        "INSERT INTO estado (nome_estado, UF) VALUES (?, ?) " +
-                                "ON DUPLICATE KEY UPDATE nome_estado = VALUES(nome_estado)",
-                        nomeEstado, siglaUF
-                );
+                // --- 1. ESTADO ---
+                if (!cacheEstados.containsKey(siglaUF)) {
+                    conexao.getJdbcTemplate().update(
+                            "INSERT INTO estado (nome_estado, UF) VALUES (?, ?) ON DUPLICATE KEY UPDATE nome_estado = VALUES(nome_estado)",
+                            nomeEstado, siglaUF
+                    );
+                    Integer id = conexao.getJdbcTemplate().queryForObject("SELECT id_estado FROM estado WHERE UF = ? LIMIT 1", Integer.class, siglaUF);
+                    cacheEstados.put(siglaUF, id);
+                }
 
-                // 2. PAIS_ORIGEM - Garante que o país seja único
-                conexao.getJdbcTemplate().update(
-                        "INSERT INTO pais_origem (nome) VALUES (?) " +
-                                "ON DUPLICATE KEY UPDATE nome = VALUES(nome)",
-                        dado.getPais()
-                );
+                // --- 2. PAIS ---
+                if (!cachePaises.containsKey(nomePais)) {
+                    conexao.getJdbcTemplate().update(
+                            "INSERT INTO pais_origem (nome) VALUES (?) ON DUPLICATE KEY UPDATE nome = VALUES(nome)",
+                            nomePais
+                    );
+                    Integer id = conexao.getJdbcTemplate().queryForObject("SELECT id_pais FROM pais_origem WHERE nome = ? LIMIT 1", Integer.class, nomePais);
+                    cachePaises.put(nomePais, id);
+                }
 
-                // 3. TIPO_TRANSPORTE
-                conexao.getJdbcTemplate().update(
-                        "INSERT INTO tipo_transporte (nome_transporte) VALUES (?) " +
-                                "ON DUPLICATE KEY UPDATE nome_transporte = VALUES(nome_transporte)",
-                        dado.getViaAcesso()
-                );
+                // --- 3. TRANSPORTE ---
+                if (!cacheTransporte.containsKey(viaAcesso)) {
+                    conexao.getJdbcTemplate().update(
+                            "INSERT INTO tipo_transporte (nome_transporte) VALUES (?) ON DUPLICATE KEY UPDATE nome_transporte = VALUES(nome_transporte)",
+                            viaAcesso
+                    );
+                    Integer id = conexao.getJdbcTemplate().queryForObject("SELECT id_transporte FROM tipo_transporte WHERE nome_transporte = ? LIMIT 1", Integer.class, viaAcesso);
+                    cacheTransporte.put(viaAcesso, id);
+                }
 
-                // Usamos LIMIT 1 para garantir que apenas um ID retorne caso haja duplicatas acidentais
-                Integer idEstado = conexao.getJdbcTemplate().queryForObject(
-                        "SELECT id_estado FROM estado WHERE UF = ? LIMIT 1",
-                        Integer.class, siglaUF
-                );
-                Integer idPais = conexao.getJdbcTemplate().queryForObject(
-                        "SELECT id_pais FROM pais_origem WHERE nome = ? LIMIT 1",
-                        Integer.class, dado.getPais()
-                );
-                Integer idTransporte = conexao.getJdbcTemplate().queryForObject(
-                        "SELECT id_transporte FROM tipo_transporte WHERE nome_transporte = ? LIMIT 1",
-                        Integer.class, dado.getViaAcesso()
-                );
-
-                // Tratamento da Data e Chegadas
+                // Preparação dos dados finais
                 String dataRegistro = dado.getAno() + "-" + converterMesParaNumero(dado.getMes()) + "-01";
-                int qtdTuristas = parsarInteiro(dado.getChegadas()) != null ? parsarInteiro(dado.getChegadas()) : 0;
+                Integer qtd = parsarInteiro(dado.getChegadas());
+                int qtdTuristas = (qtd != null) ? qtd : 0;
 
-                // 4. REGISTRO_TURISMO
-                conexao.getJdbcTemplate().update(
-                        "INSERT INTO registro_turismo " +
-                                "(data_registro, quantidade_turistas, id_pais, id_transporte, id_estado, id_empresa) " +
-                                "VALUES (?, ?, ?, ?, ?, ?)",
-                        dataRegistro, qtdTuristas, idPais, idTransporte, idEstado, 1
-                );
+                batchTuristas.add(new Object[]{
+                        dataRegistro,
+                        qtdTuristas,
+                        cachePaises.get(nomePais),
+                        cacheTransporte.get(viaAcesso),
+                        cacheEstados.get(siglaUF),
+                        1
+                });
+
+                // Batch Update
+                if (batchTuristas.size() >= 1000) {
+                    conexao.getJdbcTemplate().batchUpdate(sqlTurista, batchTuristas);
+                    batchTuristas.clear();
+                }
 
             } catch (Exception e) {
-
                 log.inserirLogs(
                         LocalDateTime.now(),
                         "ERRO",
                         "ERROR",
                         "ERRO_TURISTA",
                         "registro_turismo",
-                        "UF: " + dado.getUF() + " | País: " + dado.getPais() +
-                                " | " + e.getMessage()
+                        "UF: " + dado.getUF() + " | País: " + dado.getPais() + " | " + e.getMessage()
                 );
 
-                System.err.println("Erro turista [" + dado.getUF() + " / " + dado.getPais() + "]: " + e.getMessage());
+                System.err.println(
+                        "[" + LocalDateTime.now().format(formatter) + "]" +
+                                " | Status: ERRO" +
+                                " | Nível: ERROR" +
+                                " | Ação: ERRO_TURISTA" +
+                                " | Tabela: registro_turismo" +
+                                " | Descrição: UF: " + dado.getUF() + " | País: " + dado.getPais() +
+                                " | Mensagem: Erro na linha " + i + ": " + e.getMessage()
+                );
             }
         }
 
-        System.out.println("Turistas concluidos. Total processado: " + turistas.size());
+        if (!batchTuristas.isEmpty()) {
+            conexao.getJdbcTemplate().batchUpdate(sqlTurista, batchTuristas);
+        }
+
+        System.out.println(
+                "[" + LocalDateTime.now().format(formatter) + "]" +
+                        " | Status: SUCESSO" +
+                        " | Nível: INFO" +
+                        " | Ação: INSERÇÃO_FINALIZADA" +
+                        " | Tabela: registro_turismo" +
+                        " | Mensagem: Total de registros inseridos: " + turistas.size()
+        );
+
+
+        System.out.println("\u001B[32mInserção finalizada!\u001B[0m");
+        System.out.println("-".repeat(180));
 
         log.inserirLogs(
                 LocalDateTime.now(),
                 "SUCESSO",
                 "INFO",
-                "FIM_CARGA_TURISTAS",
+                "INSERÇÃO_FINALIZADA",
                 "registro_turismo",
-                "Total processado: " + turistas.size()
+                "Total inserido: " + turistas.size()
         );
 
         // ══════════════════════════════════════════════════════════
@@ -157,14 +243,38 @@ public class Main {
                 LocalDateTime.now(),
                 "PROCESSANDO",
                 "INFO",
-                "INICIO_CARGA_EVENTOS",
+                "INSERÇÃO_LOTE",
                 "evento",
                 "Iniciando inserção de eventos"
         );
-        System.out.println("\n===== Inserindo dados de eventos =====");
 
-        for (ListaDeDados dado : eventos) {
+        System.out.println("Inserindo dados de eventos...");
+        System.out.println("-".repeat(180));
+
+        System.out.println(
+                "[" + LocalDateTime.now().format(formatter) + "]" +
+                        " | Status: INICIADO" +
+                        " | Nível: INFO" +
+                        " | Ação: INSERÇÃO_ARQUIVO" +
+                        " | Tabela: evento" +
+                        " | Mensagem: Iniciando inserção dos dados de eventos de um total de " + eventos.size() + " linhas"
+        );
+
+        for (int i = 0; i < eventos.size(); i++) {
+            ListaDeDados dado = eventos.get(i);
+
             try {
+
+                if (i % 500 == 0 && i != 0) {
+                    System.out.println(
+                            "[" + LocalDateTime.now().format(formatter) + "]" +
+                                    " | Status: PROCESSANDO" +
+                                    " | Nível: INFO" +
+                                    " | Ação: LEITURA_LOTE" +
+                                    " | Tabela: evento" +
+                                    " | Mensagem: " + i + " de " + eventos.size() + " linhas processadas"
+                    );
+                }
 
                 // ── 1. ORGANIZADOR ────────────────────────────────
                 // No Excel, responsavelPelaOrganizacao tem limite 10 (coluna 22)
@@ -276,11 +386,22 @@ public class Main {
                 "FINALIZADO",
                 "INFO",
                 "PROCESSO_CONCLUIDO",
-                "main",
+                "evento",
                 "Carga completa finalizada com sucesso"
         );
 
-        System.out.println("Eventos concluidos. Total processado: " + eventos.size());
+        System.out.println(
+                "[" + LocalDateTime.now().format(formatter) + "]" +
+                        " | Status: SUCESSO" +
+                        " | Nível: INFO" +
+                        " | Ação: INSERÇÃO_FINALIZADA" +
+                        " | Tabela: evento" +
+                        " | Mensagem: Total de registros inseridos: " + eventos.size()
+        );
+
+
+        System.out.println("\u001B[32mInserção finalizada!\u001B[0m");
+        System.out.println("-".repeat(180));
     }
 
     // ══════════════════════════════════════════════════════════════

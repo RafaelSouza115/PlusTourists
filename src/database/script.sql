@@ -10,7 +10,8 @@ CREATE TABLE empresa (
     cep CHAR(9) NOT NULL,
     complemento VARCHAR(50),
     numero CHAR(6) NOT NULL,
-    email_contato VARCHAR(150) NOT NULL
+    email_contato VARCHAR(150) NOT NULL,
+    codigo_ativacao CHAR(6) NOT NULL
 );
 
 CREATE TABLE funcionario (

@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,8 @@ public class LeituraExcelEventos {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         ConexaoBancoDeDados conexao = new ConexaoBancoDeDados();
         LogsConexaoBancoDeDados log = new LogsConexaoBancoDeDados(conexao.getJdbcTemplate());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
 
         log.inserirLogs(
                 LocalDateTime.now(),
@@ -34,8 +37,18 @@ public class LeituraExcelEventos {
                 InputStream arquivo = new FileInputStream(nomeArquivo);
                 Workbook workbook = new XSSFWorkbook(arquivo)
         ) {
+            System.out.println("-".repeat(180));
+            System.out.println("Iniciando leitura do arquivo de eventos...");
+            System.out.println("-".repeat(180));
 
-            System.out.printf("Iniciando leitura do arquivo %s%n", nomeArquivo);
+            System.out.println(
+                    "[" + LocalDateTime.now().format(formatter) + "]" +
+                            " | Status: INICIADO" +
+                            " | Nível: INFO" +
+                            " | Ação: ABRIR_ARQUIVO" +
+                            " | Tabela: evento" +
+                            " | Mensagem: Iniciando leitura do arquivo: " + nomeArquivo
+            );
 
             Sheet sheet = workbook.getSheetAt(0);
             for (Row row : sheet) {
@@ -43,13 +56,18 @@ public class LeituraExcelEventos {
                     if (row.getRowNum() == 0) {
                     printarCabecalho(row);
                     continue;
-                }
-
-                // Validação de segurança: se a linha estiver totalmente vazia, pula
+                }// Validação de segurança: se a linha estiver totalmente vazia, pula
                 if (row.getCell(1) == null && row.getCell(3) == null) continue;
-
-                System.out.println("Lendo linha " + row.getRowNum());
-
+                if (row.getRowNum() % 500 == 0) {
+                    System.out.println(
+                                "[" + LocalDateTime.now().format(formatter) + "]" +
+                                        " | Status: PROCESSANDO" +
+                                        " | Nível: INFO" +
+                                        " | Ação: LEITURA_LOTE" +
+                                        " | Tabela: evento" +
+                                        " | Mensagem: " + row.getRowNum() + " linhas processadas"
+                        );
+                    }
                 // --- Campos de Texto com Tratamento de Célula Vazia e Truncamento ---
                 String municipio = extrairTextoSeguro(row.getCell(1), df, 100);
                 String regiaoTuristica = extrairTextoSeguro(row.getCell(2), df, 100);
@@ -103,9 +121,17 @@ public class LeituraExcelEventos {
                 }
             }
 
-            System.out.println("-".repeat(20));
-            System.out.println("Leitura finalizada! Total de registros: " + eventosExtraidos.size());
-            System.out.println("-".repeat(20));
+            System.out.println(
+                    "[" + LocalDateTime.now().format(formatter) + "]" +
+                            " | Status: SUCESSO" +
+                            " | Nível: INFO" +
+                            " | Ação: LEITURA_FINALIZADA" +
+                            " | Tabela: evento" +
+                            " | Mensagem: Total de registros lidos: " + eventosExtraidos.size()
+            );
+
+            System.out.println("\u001B[32mLeitura finalizada!\u001B[0m");
+            System.out.println("-".repeat(180));
 
             log.inserirLogs(
                     LocalDateTime.now(),
@@ -193,10 +219,28 @@ public class LeituraExcelEventos {
 
     private void printarCabecalho(Row row) {
         DataFormatter df = new DataFormatter();
-        System.out.println("Lendo cabeçalho...");
-        for (int i = 0; i < 5; i++) {
-            System.out.print("[" + df.formatCellValue(row.getCell(i)) + "] ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        int totalColunas = 5;
+
+        System.out.print(
+                "[" + LocalDateTime.now().format(formatter) + "]" +
+                        " | Status: PROCESSANDO" +
+                        " | Nível: DEBUG" +
+                        " | Ação: MAPEAMENTO" +
+                        " | Tabela: evento" +
+                        " | Mensagem: " + totalColunas +
+                        " colunas detectadas: "
+        );
+
+        for (int i = 0; i < totalColunas; i++) {
+            System.out.print(df.formatCellValue(row.getCell(i)));
+
+            if (i < totalColunas - 1) {
+                System.out.print(" | ");
+            }
         }
+
         System.out.println();
     }
 }

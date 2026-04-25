@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,8 @@ public class LeituraExcelTuristas {
         List<ListaDeDados> turistasExtraidos = new ArrayList<>();
         DataFormatter df = new DataFormatter();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
 
         ConexaoBancoDeDados conexao = new ConexaoBancoDeDados();
         LogsConexaoBancoDeDados log =
@@ -24,7 +27,7 @@ public class LeituraExcelTuristas {
                 "INICIADO",
                 "INFO",
                 "ABRIR_ARQUIVO",
-                "turista",
+                "registro_turismo",
                 "Iniciando leitura do arquivo " + nomeArquivo
         );
 
@@ -33,7 +36,17 @@ public class LeituraExcelTuristas {
                 Workbook workbook = new XSSFWorkbook(arquivo)
         ) {
 
-            System.out.printf("Iniciando leitura do arquivo %s%n", nomeArquivo);
+            System.out.println("Iniciando leitura do arquivo de turistas...");
+            System.out.println("-".repeat(180));
+
+            System.out.println(
+                    "[" + LocalDateTime.now().format(formatter) + "]" +
+                            " | Status: INICIADO" +
+                            " | Nível: INFO" +
+                            " | Ação: ABRIR_ARQUIVO" +
+                            " | Tabela: registro_turismo" +
+                            " | Mensagem: Iniciando leitura do arquivo: " + nomeArquivo
+            );
 
             Sheet sheet = workbook.getSheetAt(0);
             for (Row row : sheet) {
@@ -45,8 +58,16 @@ public class LeituraExcelTuristas {
 
                     // Validação de segurança: se a linha estiver totalmente vazia, pula
                     if (row.getCell(1) == null && row.getCell(3) == null) continue;
-
-                    System.out.println("Lendo linha " + row.getRowNum());
+                    if (row.getRowNum() % 500 == 0) {
+                        System.out.println(
+                                "[" + LocalDateTime.now().format(formatter) + "]" +
+                                        " | Status: PROCESSANDO" +
+                                        " | Nível: INFO" +
+                                        " | Ação: LEITURA_LOTE" +
+                                        " | Tabela: registro_turismo" +
+                                        " | Mensagem: " + row.getRowNum() + " linhas processadas"
+                        );
+                    }
 
                     // --- Campos de Texto com Tratamento de Célula Vazia e Truncamento --
                     String viaAcesso = extrairTextoSeguro(row.getCell(0), df, 50);
@@ -71,22 +92,31 @@ public class LeituraExcelTuristas {
                             "ERRO",
                             "ERRO",
                             "ERRO_LINHA",
-                            "turista",
+                            "registro_turismo",
                             "Erro na linha " + row.getRowNum() + ": " + e.getMessage()
                     );
                 }
             }
 
-            System.out.println("-".repeat(20));
-            System.out.println("Leitura finalizada! Total de registros: " + turistasExtraidos.size());
-            System.out.println("-".repeat(20));
+            System.out.println(
+                    "[" + LocalDateTime.now().format(formatter) + "]" +
+                            " | Status: SUCESSO" +
+                            " | Nível: INFO" +
+                            " | Ação: LEITURA_FINALIZADA" +
+                            " | Tabela: registro_turismo" +
+                            " | Mensagem: Total de registros lidos: " + turistasExtraidos.size()
+            );
+
+
+            System.out.println("\u001B[32mLeitura finalizada!\u001B[0m");
+            System.out.println("-".repeat(180));
 
             log.inserirLogs(
                     LocalDateTime.now(),
                     "SUCESSO",
                     "INFO",
                     "LEITURA_FINALIZADA",
-                    "turista",
+                    "registro_turismo",
                     "Total de registros lidos: " + turistasExtraidos.size()
             );
 
@@ -98,7 +128,7 @@ public class LeituraExcelTuristas {
                     "ERRO",
                     "ERRO",
                     "FALHA_LEITURA",
-                    "turista",
+                    "registro_turismo",
                     e.getMessage()
             );
 
@@ -111,7 +141,7 @@ public class LeituraExcelTuristas {
                     "ERRO",
                     "ERRO",
                     "ERRO_GERAL",
-                    "turista",
+                    "registro_turismo",
                     e.getMessage()
             );
         }
@@ -142,10 +172,28 @@ public class LeituraExcelTuristas {
 
     private void printarCabecalho(Row row) {
         DataFormatter df = new DataFormatter();
-        System.out.println("Lendo cabeçalho...");
-        for (int i = 0; i < 5; i++) {
-            System.out.print("[" + df.formatCellValue(row.getCell(i)) + "] ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        int totalColunas = 5;
+
+        System.out.print(
+                "[" + LocalDateTime.now().format(formatter) + "]" +
+                        " | Status: PROCESSANDO" +
+                        " | Nível: DEBUG" +
+                        " | Ação: MAPEAMENTO" +
+                        " | Tabela: registro_turismo" +
+                        " | Mensagem: " + totalColunas +
+                        " colunas detectadas: "
+        );
+
+        for (int i = 0; i < totalColunas; i++) {
+            System.out.print(df.formatCellValue(row.getCell(i)));
+
+            if (i < totalColunas - 1) {
+                System.out.print(" | ");
+            }
         }
+
         System.out.println();
     }
 

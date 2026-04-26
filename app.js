@@ -1,3 +1,4 @@
+require('dotenv').config();
 var ambiente_processo = 'producao';
 
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';

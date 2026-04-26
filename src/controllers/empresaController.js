@@ -1,9 +1,18 @@
 var empresaModel = require("../models/empresaModel");
 
 function listar(req, res) {
-  empresaModel.listar().then((resultado) => {
+  empresaModel.listar()
+  .then((resultado) => {
     res.status(200).json(resultado);
-  });
+  })
+  .catch((erro) => {
+      console.error("Erro ao listar empresas:", erro);
+      res.status(500).json({
+        mensagem: "Erro ao listar empresas.",
+        erro
+      });
+    })
+  ;
 }
 
 function buscarPorCnpj(req, res) {
@@ -11,7 +20,14 @@ function buscarPorCnpj(req, res) {
 
   empresaModel.buscarPorCnpj(cnpj).then((resultado) => {
     res.status(200).json(resultado);
-  });
+  })
+  .catch((erro) => {
+      console.error("Erro ao buscar empresa por CNPJ:", erro);
+      res.status(500).json({
+        mensagem: "Erro ao buscar empresa por CNPJ.",
+        erro
+      });
+    });
 }
 
 function apenasNumeros(str) {
@@ -81,49 +97,69 @@ function cadastrar(req, res) {
   var codigoAtivacao = req.body.codigoAtivacaoServer;
 
   if (!razaoSocial || String(razaoSocial).trim() === "") {
-        return res.status(400).json({
-            mensagem: "É obrigatório o preenchimento da razão social"
-        });
-    }
+    return res.status(400).json({
+      mensagem: "É obrigatório o preenchimento da razão social"
+    });
+  }
 
-    if (!cnpj || String(cnpj).trim() === "") {
-        return res.status(400).json({
-            mensagem: "É obrigatório o preenchimento do CNPJ"
-        });
-    }
+  if (!cnpj || String(cnpj).trim() === "") {
+    return res.status(400).json({
+      mensagem: "É obrigatório o preenchimento do CNPJ"
+    });
+  }
 
-    if (!email || String(email).trim() === "") {
-        return res.status(400).json({
-            mensagem: "Campo email é obrigatório."
-        });
-    }
-    if (!emailValido(email)) {
-        return res.status(400).json({
-            mensagem: "Preencha o email corretamente."
-        });
-    }
+  if (!email || String(email).trim() === "") {
+    return res.status(400).json({
+      mensagem: "Campo email é obrigatório."
+    });
+  }
 
+  if (!emailValido(email)) {
+    return res.status(400).json({
+      mensagem: "Preencha o email corretamente."
+    });
+  }
 
-    var apenasNumerosCnpj = apenasNumeros(cnpj);
-    if (apenasNumerosCnpj.length !== 14) {
-        return res.status(400).json({
-            mensagem: "CNPJ deve conter apenas números e ter exatamente 14 dígitos."
+  var apenasNumerosCnpj = apenasNumeros(cnpj);
+  if (apenasNumerosCnpj.length !== 14) {
+    return res.status(400).json({
+      mensagem: "CNPJ deve conter apenas números e ter exatamente 14 dígitos."
+    });
+  }
+
+  empresaModel.buscarPorCnpj(cnpj)
+    .then((resultado) => {
+      if (resultado.length > 0) {
+        return res.status(401).json({
+          mensagem: `Já existe um cadastro vinculado ao cnpj ${cnpj}`
         });
-    }
+      }
 
-    
-  empresaModel.buscarPorCnpj(cnpj).then((resultado) => {
-    if (resultado.length > 0) {
-      res
-        .status(401)
-        .json({ mensagem: `Já existe um cadastro vinculado ao cnpj ${cnpj}` });
-    } else {
-      empresaModel.cadastrar(razaoSocial, nomeFantasia, cnpj, email, cep, numero, complemento, codigoAtivacao).then((resultado) => {
+      return empresaModel.cadastrar(
+        razaoSocial,
+        nomeFantasia,
+        cnpj,
+        email,
+        cep,
+        numero,
+        complemento,
+        codigoAtivacao
+      );
+    })
+    .then((resultado) => {
+      if (resultado) {
         res.status(201).json(resultado);
+      }
+    })
+    .catch((erro) => {
+      console.error("Erro ao cadastrar empresa:", erro);
+      res.status(500).json({
+        mensagem: "Erro ao cadastrar empresa.",
+        erro
       });
-    }
-  });
+    });
 }
+
 
 module.exports = {
     listar,

@@ -10,7 +10,7 @@ var mySqlConfig = {
 
 function execute(instruction, params = []) {
 	
-	if (process.env.AMBIENTE_PROCESSO !== "prod" && process.env.AMBIENTE_PROCESSO !== "desenvolvimento") {
+	if (process.env.AMBIENTE_PROCESSO !== "producao" && process.env.AMBIENTE_PROCESSO !== "desenvolvimento") {
 		console.log("\nO AMBIENTE (prod ou dev) NÃO FOI DEFINIDO EM .env OU .env.dev OU app.js\n");
 		return Promise.reject("AMBIENTE NÃO CONFIGURADO EM .env");
 	}

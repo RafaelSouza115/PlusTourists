@@ -9,7 +9,7 @@
 
 .janela {
   background-color: #f7f7ff;
-  min-height: 100vh;
+  max-height: 100%;
   display: flex;
 }
 
@@ -22,6 +22,11 @@
   padding-top: 3.7rem;
   background-color: #f2f0ef;
   z-index: 1000;
+      width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
 }
 
 #img-header {

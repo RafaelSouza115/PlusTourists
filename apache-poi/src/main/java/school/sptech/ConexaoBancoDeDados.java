@@ -15,7 +15,10 @@ public class ConexaoBancoDeDados {
         BasicDataSource conexao = new BasicDataSource();
 
         conexao.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        conexao.setUrl("jdbc:mysql://localhost:3306/plusTourists?rewriteBatchedStatements=true&useSSL=false&allowPublicKeyRetrieval=true");
+        String host = System.getenv("DB_HOST");
+        conexao.setUrl(
+                "jdbc:mysql://" + host + ":3306/plusTourists?rewriteBatchedStatements=true&useSSL=false&allowPublicKeyRetrieval=true"
+        );
         conexao.setUsername("root");
         conexao.setPassword("urubu100");
 

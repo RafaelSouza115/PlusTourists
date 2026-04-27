@@ -1,5 +1,8 @@
 package school.sptech;
 
+import S3.S3Provider;
+
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -37,8 +40,17 @@ public class Main {
         );
         System.out.println("-".repeat(180));
 
-        List<ListaDeDados> eventos  = leituraEventos.extrairRegistroEvento("Excel-unificacao.xlsx");
-        List<ListaDeDados> turistas = leituraTuristas.extrairRegistroTuristas("chegadas-2025.xlsx");
+
+        S3Provider s3 = new S3Provider();
+
+        InputStream eventosStream = s3.baixarArquivo("excel-unificacao.xlsx");
+        InputStream turistasStream = s3.baixarArquivo("chegadas-2025.xlsx");
+
+        List<ListaDeDados> eventos =
+                leituraEventos.extrairRegistroEvento(eventosStream);
+
+        List<ListaDeDados> turistas =
+                leituraTuristas.extrairRegistroTuristas(turistasStream);
 
         log.inserirLogs(
                 LocalDateTime.now(),

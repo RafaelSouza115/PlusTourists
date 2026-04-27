@@ -1,9 +1,13 @@
-package school.sptech;
+package S3;
 
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
+import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+
+import java.io.InputStream;
 
 public class S3Provider {
 
@@ -20,5 +24,15 @@ public class S3Provider {
                 .build();
     }
 
+    public InputStream baixarArquivo(String key) {
+        S3Client s3Client = getS3Client();
 
+        return s3Client.getObject(
+                GetObjectRequest.builder()
+                        .bucket("turistsbucket")
+                        .key(key)
+                        .build(),
+                ResponseTransformer.toInputStream()
+        );
+    }
 }

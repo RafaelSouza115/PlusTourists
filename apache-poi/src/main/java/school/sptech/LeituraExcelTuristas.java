@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LeituraExcelTuristas {
-    public List<ListaDeDados> extrairRegistroTuristas(String nomeArquivo) {
+    public List<ListaDeDados> extrairRegistroTuristas(InputStream inputStream) {
         List<ListaDeDados> turistasExtraidos = new ArrayList<>();
         DataFormatter df = new DataFormatter();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -28,12 +28,11 @@ public class LeituraExcelTuristas {
                 "INFO",
                 "ABRIR_ARQUIVO",
                 "registro_turismo",
-                "Iniciando leitura do arquivo " + nomeArquivo
+                "Iniciando leitura do arquivo "
         );
 
         try (
-                InputStream arquivo = new FileInputStream(nomeArquivo);
-                Workbook workbook = new XSSFWorkbook(arquivo)
+                Workbook workbook = new XSSFWorkbook(inputStream)
         ) {
 
             System.out.println("Iniciando leitura do arquivo de turistas...");
@@ -45,7 +44,7 @@ public class LeituraExcelTuristas {
                             " | Nível: INFO" +
                             " | Ação: ABRIR_ARQUIVO" +
                             " | Tabela: registro_turismo" +
-                            " | Mensagem: Iniciando leitura do arquivo: " + nomeArquivo
+                            " | Mensagem: Iniciando leitura do arquivo: "
             );
 
             Sheet sheet = workbook.getSheetAt(0);

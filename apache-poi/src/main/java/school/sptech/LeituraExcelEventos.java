@@ -3,12 +3,10 @@ package school.sptech;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +14,7 @@ import java.util.List;
 
 public class LeituraExcelEventos {
 
-    public List<ListaDeDados> extrairRegistroEvento(String nomeArquivo) {
+    public List<ListaDeDados> extrairRegistroEvento(InputStream inputStream) {
         List<ListaDeDados> eventosExtraidos = new ArrayList<>();
         DataFormatter df = new DataFormatter();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -31,11 +29,11 @@ public class LeituraExcelEventos {
                 "INFO",
                 "ABRIR_ARQUIVO",
                 "evento",
-                "Iniciando leitura do arquivo " + nomeArquivo);
+                "Iniciando leitura do arquivo " + inputStream);
 
         try (
-                InputStream arquivo = new FileInputStream(nomeArquivo);
-                Workbook workbook = new XSSFWorkbook(arquivo)
+                InputStream is = inputStream;
+                Workbook workbook = new XSSFWorkbook(inputStream)
         ) {
             System.out.println("-".repeat(180));
             System.out.println("Iniciando leitura do arquivo de eventos...");
@@ -47,7 +45,7 @@ public class LeituraExcelEventos {
                             " | Nível: INFO" +
                             " | Ação: ABRIR_ARQUIVO" +
                             " | Tabela: evento" +
-                            " | Mensagem: Iniciando leitura do arquivo: " + nomeArquivo
+                            " | Mensagem: Iniciando leitura do arquivo: "
             );
 
             Sheet sheet = workbook.getSheetAt(0);

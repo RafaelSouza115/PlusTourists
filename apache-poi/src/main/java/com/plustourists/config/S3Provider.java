@@ -1,4 +1,4 @@
-package S3;
+package com.plustourists.config;
 
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
@@ -29,10 +29,11 @@ public class S3Provider {
 
         return s3Client.getObject(
                 GetObjectRequest.builder()
-                        .bucket("turistsbucket")
+                        .bucket("plustourists-s3")
                         .key(key)
                         .build(),
                 ResponseTransformer.toInputStream()
         );
     }
+
 }

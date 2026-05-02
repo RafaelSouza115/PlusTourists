@@ -1,7 +1,11 @@
-package school.sptech;
+package com.plustourists.reader;
+
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.FileInputStream;
+import com.plustourists.model.ListaDeDados;
+import com.plustourists.repository.ConexaoBancoDeDados;
+import com.plustourists.log.LogsConexaoBancoDeDados;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -70,11 +74,11 @@ public class LeituraExcelTuristas {
 
                     // --- Campos de Texto com Tratamento de Célula Vazia e Truncamento --
                     String viaAcesso = extrairTextoSeguro(row.getCell(0), df, 50);
-                    String UF = extrairTextoSeguro(row.getCell(1),df, 50);
-                    String pais = extrairTextoSeguro(row.getCell(2),df, 50);
-                    String mes = extrairTextoSeguro(row.getCell(3),df, 50);
-                    String ano = extrairTextoSeguro(row.getCell(4),df, 50);
-                    String chegadas = extrairTextoSeguro(row.getCell(5),df, 50);
+                    String UF = extrairTextoSeguro(row.getCell(1), df, 50);
+                    String pais = extrairTextoSeguro(row.getCell(2), df, 50);
+                    String mes = extrairTextoSeguro(row.getCell(3), df, 50);
+                    String ano = extrairTextoSeguro(row.getCell(4), df, 50);
+                    String chegadas = extrairTextoSeguro(row.getCell(5), df, 50);
                     ListaDeDados turistas = new ListaDeDados(
                             viaAcesso,
                             UF,
@@ -157,10 +161,8 @@ public class LeituraExcelTuristas {
         // 2. Pegamos o texto que está lá dentro
         String valor = df.formatCellValue(cell).trim();
 
-        // 3. AQUI ENTRA A TESOURA!
         // Se o nome for maior que o tamanho da caixa (limite)...
         if (valor.length() > limite) {
-            // A gente corta o papel para ele caber na caixa!
             // O substring(0, limite) pega só as primeiras letrinhas que cabem.
             return valor.substring(0, limite);
         }

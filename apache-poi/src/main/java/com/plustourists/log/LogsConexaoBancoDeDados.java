@@ -1,4 +1,4 @@
-package school.sptech;
+package com.plustourists.log;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

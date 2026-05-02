@@ -1,30 +1,30 @@
-package school.sptech;
+package com.plustourists.model;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ListaDeDados {
     //dados eventos
-   private String municipio;
-   private String regiaoTuristica;
-   private String nomeDoEvento;
-   private String descricaoDoEvento;
-   private String enderecoDoEvento;
-   private String mesDeRealizacaoDoEvento;
-   private Date dataInicialDoEvento;
-   private Date dataFinalDoEvento;
-   private LocalDateTime horarioInicioEvento;
-   private LocalDateTime horarioFinalevento;
-   private String tipoDeEvento;
-   private String tipoDePublico;
-   private String edicao2025;
-   private String edicao2024;
-   private String publicoEsperado;
-   private String responsavelPelaOrganizacao;
-   private String siteDoIngresso;
-   private String classificacaoEtaria;
+    private String municipio;
+    private String regiaoTuristica;
+    private String nomeDoEvento;
+    private String descricaoDoEvento;
+    private String enderecoDoEvento;
+    private String mesDeRealizacaoDoEvento;
+    private Date dataInicialDoEvento;
+    private Date dataFinalDoEvento;
+    private LocalDateTime horarioInicioEvento;
+    private LocalDateTime horarioFinalevento;
+    private String tipoDeEvento;
+    private String tipoDePublico;
+    private String edicao2025;
+    private String edicao2024;
+    private String publicoEsperado;
+    private String responsavelPelaOrganizacao;
+    private String siteDoIngresso;
+    private String classificacaoEtaria;
 
-   //dados turistas
+    //dados turistas
     private String viaAcesso;
     private String UF;
     private String pais;

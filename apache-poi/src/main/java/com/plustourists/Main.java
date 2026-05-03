@@ -48,7 +48,7 @@ public class Main {
 
             // 3. BAIXAR + PROCESSAR
             try (
-                    InputStream eventosStream = s3Service.baixarArquivo("excel-unificacao.xlsx");
+                    InputStream eventosStream = s3Service.baixarArquivo("Excel-unificacao.xlsx");
                     InputStream turistasStream = s3Service.baixarArquivo("chegadas-2025.xlsx");
             ) {
 
@@ -60,7 +60,7 @@ public class Main {
                 List<ListaDeDados> eventos = excelService.lerEventos(eventosStream);
                 List<ListaDeDados> turistas = excelService.lerTuristas(turistasStream);
 
-                System.out.println("✔ Arquivos lidos com sucesso!");
+                System.out.println(" Arquivos lidos com sucesso!");
                 System.out.println("Eventos: " + eventos.size());
                 System.out.println("Turistas: " + turistas.size());
 

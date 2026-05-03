@@ -80,35 +80,25 @@ public class EventoService {
                         Integer.class, municipio, regiao
                 );
 
-                // ──────────────── 3. PLANO ────────────────
-                conexao.getJdbcTemplate().update(
-                        "INSERT INTO plano_turistico (id_empresa, id_status_plano) VALUES (?, ?)",
-                        1, 1
-                );
 
-                Integer idPlano = conexao.getJdbcTemplate().queryForObject(
-                        "SELECT LAST_INSERT_ID()", Integer.class
-                );
-
-                // ──────────────── 4. EVENTO ────────────────
+                // ──────────────── 3. EVENTO ────────────────
                 conexao.getJdbcTemplate().update(
                         "INSERT INTO evento " +
-                                "(nome_evento, descricao_evento, classificacao_etaria, tipo_evento, tipo_publico, id_local, id_plano) " +
+                                "(nome_evento, descricao_evento, classificacao_etaria, tipo_evento, tipo_publico, id_local) " +
                                 "VALUES (?, ?, ?, ?, ?, ?, ?)",
                         dado.getNomeDoEvento(),
                         dado.getDescricaoDoEvento(),
                         dado.getClassificacaoEtaria(),
                         dado.getTipoDeEvento(),
                         dado.getTipoDePublico(),
-                        idLocal,
-                        idPlano
+                        idLocal
                 );
 
                 Integer idEvento = conexao.getJdbcTemplate().queryForObject(
                         "SELECT LAST_INSERT_ID()", Integer.class
                 );
 
-                // ──────────────── 5. EDIÇÃO 2025 ────────────────
+                // ──────────────── 4. EDIÇÃO 2025 ────────────────
                 inserirEdicao(
                         dado.getDataInicialDoEvento(),
                         dado.getDataFinalDoEvento(),
@@ -121,7 +111,7 @@ public class EventoService {
                         idOrganizador
                 );
 
-                // ──────────────── 6. EDIÇÃO 2024 ────────────────
+                // ──────────────── 5. EDIÇÃO 2024 ────────────────
                 inserirEdicao(
                         null, null, null, null,
                         parsarInteiro(dado.getEdicao2024()),

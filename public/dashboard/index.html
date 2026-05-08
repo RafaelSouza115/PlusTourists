@@ -16,6 +16,7 @@
 
   <body class="flex flex-row h-screen bg-[#f5f5f5]">
     <div class="janela">
+      <!--
       <div class="header-left">
         <div>
           <a href="index.html"
@@ -64,6 +65,75 @@
         </div>
       </div>
     </div>
+  -->
+     <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <a href="index.html">
+                    <img id="img-header"
+                        src="../assets/logoSemFundo.png"
+                        alt="Logo do site">
+                </a>
+            </div>
+
+            <nav class="menu-lateral">
+
+                <a class="btn-nav-white ativo" href="index.html">
+                    <img src="../assets/iconHomev.png"
+                        alt=""
+                        class="icon-nav">
+                    <span>Dashboard</span>
+                </a>
+
+                <a class="btn-nav-white" href="planos.html">
+                    <img src="../assets/iconPlanejamento.svg"
+                        alt=""
+                        class="icon-nav">
+                    <span>Planos</span>
+                </a>
+
+                <a class="btn-nav-white" href="empresa.html">
+                    <img src="../assets/iconEmpresa.svg"
+                        alt=""
+                        class="icon-nav">
+                    <span>Empresa</span>
+                </a>
+
+                <a class="btn-nav-white" href="perfil.html">
+                    <img src="../assets/iconPerfil.svg"
+                        alt=""
+                        class="icon-nav">
+                    <span>Perfil</span>
+                </a>
+
+            </nav>
+
+            <footer class="sidebar-footer">
+
+                <div class="user-container">
+
+                    <div class="user-text">
+                        <span class="user-name">Usuário</span>
+                        <span class="user-email">
+                            usuario@gmail.com
+                        </span>
+                    </div>
+
+                </div>
+
+                <button id="btn-logout"
+                    class="icon-logout"
+                    onclick="limparSessao()">
+
+                    <img src="../assets/iconSair.png"
+                        alt="Sair">
+
+                </button>
+
+            </footer>
+
+        </aside>
 
     <div class="flex flex-1 font-sans flex-col">
       <!-- HEADER -->

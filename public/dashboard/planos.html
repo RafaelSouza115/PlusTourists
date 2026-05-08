@@ -12,52 +12,74 @@
 <body>
      <div class="janela">
 
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
 
-        <div class="header-left">
-
-            <div>
-                <a href="index.html"><img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site"></a>
-            </div>
-
-            
-            <div class="btn-nav-white">
-                <img src="../assets/iconCasa.svg" alt="Dashboard" class="icon-nav">
+            <div class="logo">
                 <a href="index.html">
-                    <h3>Dashboard</h3>
+                    <img id="img-header"
+                        src="../assets/logoSemFundo.png"
+                        alt="Logo do site">
                 </a>
             </div>
 
-            <div class="btn-nav-white">
-                <img src="../assets/iconPlanev.png" alt="Dashboard" class="icon-nav">
-                <a href="planos.html">
-                    <h3 style="color: #008000;">Planos</h3>
-                </a>
-            </div>
-            <div class="btn-nav-white">
-                <img src="../assets/iconEmpresa.svg" alt="Dashboard" class="icon-nav">
-                <a href="empresa.html">
-                    <h3>Empresa</h3>
-                </a>
-            </div>
-            <div class="btn-nav-white">
-                <img src="../assets/iconPerfil.svg" alt="Dashboard" class="icon-nav">
-                <a href="perfil.html">
+            <nav class="menu-lateral">
 
-                    <h3>Perfil</h3>
+                <a class="btn-nav-white" href="index.html">
+                    <img src="../assets/iconCasa.svg"
+                        alt=""
+                        class="icon-nav">
+                    <span>Dashboard</span>
                 </a>
-            </div>
 
-           <div class="sidebar-footer">
-        <div class="user-container">
-             <div class="user-text">
-                <span class="user-name">Usuário</span>
-                <span class="user-email">usuario@gmail.com</span>
-            </div>
-        </div>
-        <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
-            <img src="../assets/iconSair.png" alt="Ícone de Sair"> </button>
-    </div>
+                <a class="btn-nav-white ativo" href="planos.html">
+                    <img src="../assets/iconPlanev.png"
+                        alt=""
+                        class="icon-nav">
+                    <span>Planos</span>
+                </a>
 
+                <a class="btn-nav-white" href="empresa.html">
+                    <img src="../assets/iconEmpresa.svg"
+                        alt=""
+                        class="icon-nav">
+                    <span>Empresa</span>
+                </a>
+
+                <a class="btn-nav-white" href="perfil.html">
+                    <img src="../assets/iconPerfil.svg"
+                        alt=""
+                        class="icon-nav">
+                    <span>Perfil</span>
+                </a>
+
+            </nav>
+
+            <footer class="sidebar-footer">
+
+                <div class="user-container">
+
+                    <div class="user-text">
+                        <span class="user-name">Usuário</span>
+                        <span class="user-email">
+                            usuario@gmail.com
+                        </span>
+                    </div>
+
+                </div>
+
+                <button id="btn-logout"
+                    class="icon-logout"
+                    onclick="limparSessao()">
+
+                    <img src="../assets/iconSair.png"
+                        alt="Sair">
+
+                </button>
+
+            </footer>
+
+        </aside>
 </div>
 
 

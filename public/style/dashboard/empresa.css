@@ -20,23 +20,30 @@ body {
 
 .janela {
     background-color: #649B54;
-    height: 100%;
     min-height: 100vh;
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.header-left {
+.sidebar {
     width: 280px; 
     z-index: 0;
     position: relative;
 }
 
+.conteudo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    width: 100%;
+}
+
 .content {
-    height: 80%;
-    width: 95%;
+    height: 100%;
+    max-width: 1300px;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -44,9 +51,10 @@ body {
     & .options {
         background-color: #d9d9d9b0;
         border-radius: 30px;
-        width: 35%;
+        width: 320px;
         height: 50px;
         display: inline-flex;
+        overflow: hidden;
         & button {
             width: 200px;
             height: 50px;
@@ -55,10 +63,10 @@ body {
             cursor: pointer;
             position: relative;
             background-color: #d9d9d99f;
-        }
+        } /*
         & button + button {
-            margin-left: -20px;
-        }
+            /*margin-left: -20px; */
+        }*/
         & .destaque{
             z-index: 2;
             width: 230px;
@@ -77,12 +85,13 @@ body {
     }
     & .edit {
         background-color: #F5F5F5;
-        height: 80%;
-        width: 80%;
-        padding-top: 5%;
+        width: 150%;
+        max-width: 1920px;
+        min-height: 650px;
+        padding: 50px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        /*justify-content: space-between;*/
         border-radius: 15px;
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
         & h2 {
@@ -93,12 +102,14 @@ body {
             margin-bottom: 1%;
         }
         & .inp {
-            align-self: center;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+              width: 100%;
+    /*align-self: center;*/
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 50px;
             & .iptOpt {
-                width: 350px;
+                width: 100%;
                 & p {
                     margin: 0;
                     margin-bottom: 1%;
@@ -107,28 +118,54 @@ body {
                 }
                 & input {
                     width: 100%;
-                    height: 50px;
+                    height: 55px;
                     border: none;
                     font-size: 14px;
                     font-family: "Montserrat", sans-serif;
                     background-color: #1c4f0d35;
                     border-radius: 0px 10px 0px 10px;
+                    padding: 0 15px;
+                    /*
                     padding-left: 2%;
                     padding-right: 2%;
+                    */
                 }
             }
         }
         & button {
-            width: 200px;
-            height: 50px;
-            align-self: center;
+            width: 220px;
+            height: 55px;
+            margin: 60px auto 0;
+            border: none;
             color: white;
             background-image: linear-gradient(to right, #4BAF27, #1F4910);
-            padding: 8px 20px;
+            /*padding: 8px 20px;*/
             border-radius: 8px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
             font-size: 18px;
-            white-space: nowrap;
+            /*white-space: nowrap;*/
+            cursor: pointer;
         }
     }
+
+
+#ultimaAtualizacao {
+    margin-top: auto;
+}
+
+@media (max-width: 1200px) {
+
+    .edit {
+        width: 95%;
+        padding: 40px;
+    }
+
+    .inp {
+        grid-template-columns: 1fr;
+    }
+
+    .options {
+        width: 300px;
+    }
+
 }

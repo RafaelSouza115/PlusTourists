@@ -50,50 +50,11 @@
             </div>
         </section>
     </main>
-
+    <div class="modal-overlay" id="modalEmpresa">
+        <div class="modal-content">
+            <p class="codigo-empresa" id="codigoEmpresa"></p>
+            <button type="button" class="btn btn-primary" id="fecharModalEmpresa">Entendi</button>
+        </div>
+    </div>
 </body>
-<script>
-    function autenticar() {
-        const ipt_email = document.getElementById("email").value;
-        const ipt_senha = document.getElementById("senha").value;
-
-
-        fetch("/funcionarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            }, body: JSON.stringify({
-                 email: ipt_email,
-                  senha: ipt_senha })
-        }).then(function (res) {
-            console.log("Validando cadastro...")
-
-            if (res.ok) {
-                console.log(res);
-
-                res.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.ID_FUNCIONARIO = json.id_funcionario;
-                    sessionStorage.NOME_FUNCIONARIO = json.nome;
-                    sessionStorage.EMAIL_FUNCIONARIO = json.email;
-                    sessionStorage.NIVEL_ACESSO = json.nivel_acesso;
-                    sessionStorage.ID_EMPRESA = json.empresa_ligada;
-                    window.location = "../dashboard/index.html";
-                })
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-                res.text().then(text => {
-                    console.log(text);
-                });
-            }
-        }).catch(function (erro) {
-            console.log(erro);
-            return
-        })
-        return;
-    }
-
-</script>
 </html>

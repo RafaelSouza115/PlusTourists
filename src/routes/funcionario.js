@@ -17,4 +17,12 @@ router.post("/autenticar", validarLogin.validarLogin, function(req, res) {
     funcionarioController.autenticar(req, res);
 });
 
+router.get("/buscar/:idFuncionario", function(req, res) {
+    funcionarioController.buscarPorId(req, res);
+});
+
+router.put("/atualizar/:idFuncionario", function(req, res) {
+    funcionarioController.atualizar(req, res);
+});
+
 module.exports = router;

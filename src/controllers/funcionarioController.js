@@ -152,7 +152,98 @@ function autenticar(req, res) {
         });
 }
 
+function buscarPorId(req, res) {
+
+    var idFuncionario = req.params.idFuncionario;
+
+    funcionarioModel.buscarPorId(idFuncionario)
+        .then(function(resultado) {
+
+            if (resultado.length > 0) {
+
+                res.status(200).json(resultado);
+
+            } else {
+
+                res.status(404).json({
+                    mensagem: "Funcionário não encontrado."
+                });
+
+            }
+
+        })
+        .catch(function(erro) {
+
+            console.error("Erro ao buscar funcionário:", erro);
+
+            res.status(500).json({
+                mensagem: "Erro ao buscar funcionário.",
+                erro
+            });
+
+        });
+}
+
+function atualizar(req, res) {
+
+    var idFuncionario = req.params.idFuncionario;
+
+    var nome = req.body.nome;
+    var email = req.body.email;
+    var senha = req.body.senha;
+
+    if (!nome || String(nome).trim() === "") {
+    return res.status(400).json({
+        mensagem: "Campo nome é obrigatório."
+    });
+}
+
+    if (!email || String(email).trim() === "") {
+        return res.status(400).json({
+            mensagem: "Campo email é obrigatório."
+        });
+    }
+
+    if (!emailValido(email)) {
+        return res.status(400).json({
+            mensagem: "Email inválido."
+        });
+    }
+
+    if (senha && !senhaForte(senha)) {
+        return res.status(400).json({
+            mensagem: "Senha fraca."
+        });
+    }
+
+    funcionarioModel.atualizar(
+        idFuncionario,
+        nome,
+        email,
+        senha || null
+    )
+    .then(function(resultado) {
+
+        res.status(200).json({
+            mensagem: "Dados atualizados com sucesso."
+        });
+
+    })
+    .catch(function(erro) {
+
+        console.error("Erro ao atualizar funcionário:", erro);
+
+        res.status(500).json({
+            mensagem: "Erro ao atualizar funcionário.",
+            erro
+        });
+
+    });
+}
+
 module.exports = {
     cadastrar,
-    autenticar
+    autenticar,
+    buscarPorId,
+    atualizar
 };

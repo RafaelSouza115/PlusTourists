@@ -10,7 +10,7 @@
 
     <link rel="icon" href="../assets/logoIcon.png">
 
-    <script src="../js/dashboard/index.js" defer></script>
+    <script src="../js/dashboard/funcionario.js" defer></script>
 
     <title>Perfil</title>
 </head>
@@ -67,9 +67,11 @@
                 <div class="user-container">
 
                     <div class="user-text">
-                        <span class="user-name">Usuário</span>
-                        <span class="user-email">
-                            usuario@gmail.com
+                    <span class="user-name" id="sidebar_nome">
+                        Usuário
+                        </span>
+                    <span class="user-email" id="sidebar_email">
+                        usuario@gmail.com
                         </span>
                     </div>
 
@@ -104,11 +106,13 @@
                     <i class="fi fi-rs-user-pen icon-perfil"></i>
                     <div class="edit">
                         <h1>Seus dados</h1>
-                        <p>Mantenha suas sempre atualizadas.</p>
+                        <p>Mantenha suas informações sempre atualizadas.</p>
                     </div>
                     <div class="function entry-function">
                         <i class="fi fi-rr-briefcase"></i>
-                        <span> Ex: Tecnologia</span>
+                        <span id="cargo_funcionario">
+                        Cargo
+                        </span>
                     </div>
                 </div>
 
@@ -119,13 +123,13 @@
                         Nome completo: <br>
                         <div class="entry">
                             <i class="fi fi-rr-user icon-dada"></i>
-                           <input type="text" value="Richard " disabled>
+                           <input type="text" id="input_nome">
                         </div>
 
                         CPF: <br>
                         <div class="entry">
                             <i class="fi fi-rr-id-card icon-dada"></i>
-                            <input type="number" placeholder="XXX.XXX.XXX-XX">
+                            <input type="text" id="input_cpf" disabled>
                         </div>
                     </div>
 
@@ -133,24 +137,22 @@
                         Email: <br>
                         <div class="entry">
                             <i class="fi fi-rr-envelope icon-dada"></i>
-                            <input type="email" placeholder="email@gmail.com"> 
+                            <input type="email" id="input_email"> 
                         </div>
 
                         Senha: <br>
                         <div class="entry">
                             <i class="fi fi-rr-lock icon-dada"></i>
-                            <input type="password" placeholder="*******">
+                            <input type="password" id="input_senha">
                         </div>
                     </div> 
                 </div>
 
                  <div class="botao">
-                <a href="#">
-                    <button>
+                    <button type="button" onclick="atualizarDados()">
                         <span>Atualizar Dados</span> 
                         <i class="fi fi-rr-arrow-small-right seta"></i>
                     </button>
-                </a>
             </div>
 
             </div>

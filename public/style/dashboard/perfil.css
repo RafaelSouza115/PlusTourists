@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://cdn-uicons.flaticon.com/4.0.0/uicons-regular-straight/css/uicons-regular-straight.css');
+@import url('https://cdn-uicons.flaticon.com/4.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
 
 /* RESET */
 * {
@@ -98,22 +99,30 @@ input[readonly] {
 }
 
 .entry-function {
-    border: 1px solid rgb(141, 138, 138);
     display: flex;
-    justify-items: center;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border: 1px solid #b9b9b9;
     border-radius: 8px;
-    padding: 12px 18px;
-    gap: 8px;
-    font-size: 12px;
+    color: #2e9b3d;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: transparent;
+}
+
+.entry-function i {
+    font-size: 14px;
 }
 
 .entry {
     border: 1px solid rgb(141, 138, 138);
     display: flex;
-    justify-items: center;
+    align-items: center;
+    gap: 10px;
     border-radius: 8px;
-    padding: 12px 70px 12px 8px;
- margin-bottom: 16px;
+    padding: 12px 70px 12px 16px;
+    margin-bottom: 16px;
 }
 
 .botao {

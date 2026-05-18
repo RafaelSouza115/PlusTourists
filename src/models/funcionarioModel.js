@@ -32,7 +32,75 @@ function autenticar(email, senha) {
     return database.execute(instrucao, [email, senha]);
 }
 
+function buscarPorId(idFuncionario) {
+
+    var instrucao = `
+        SELECT
+            id_funcionario,
+            nome,
+            cpf,
+            email,
+            nivel_acesso,
+            id_empresa
+        FROM funcionario
+        WHERE id_funcionario = ?;
+    `;
+
+    console.log("Executando SQL:");
+    console.log(instrucao);
+
+    return database.execute(instrucao, [idFuncionario]);
+}
+
+function atualizar(idFuncionario, nome, email, senha) {
+
+    var instrucao = "";
+    var parametros = [];
+
+    if (senha) {
+
+        instrucao = `
+            UPDATE funcionario
+            SET
+                nome = ?,
+                email = ?,
+                senha = ?
+            WHERE id_funcionario = ?;
+        `;
+
+        parametros = [
+            nome,
+            email,
+            senha,
+            idFuncionario
+        ];
+
+    } else {
+
+        instrucao = `
+            UPDATE funcionario
+            SET
+                nome = ?,
+                email = ?
+            WHERE id_funcionario = ?;
+        `;
+
+        parametros = [
+            nome,
+            email,
+            idFuncionario
+        ];
+    }
+
+    console.log("Executando SQL:");
+    console.log(instrucao);
+
+    return database.execute(instrucao, parametros);
+}
+
 module.exports = {
     cadastrar,
-    autenticar
+    autenticar,
+    buscarPorId,
+    atualizar
 };

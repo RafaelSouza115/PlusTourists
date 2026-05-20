@@ -1,88 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/dashboard/planos.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style/dashboard/planos.css" />
     <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
-    <link rel="icon" href="../assets/logoIcon.png">
-    <script src="../js/dashboard/index.js"> </script>
+    <link rel="icon" href="../assets/logoIcon.png" />
+    <script src="../js/dashboard/index.js"></script>
     <title>Planos</title>
-</head>
-<body>
-     <div class="janela">
+  </head>
+  <body>
+    <div class="janela">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="logo">
+          <a href="index.html">
+            <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
+          </a>
+        </div>
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
+        <nav class="menu-lateral">
+          <a class="btn-nav-white" href="index.html">
+            <img src="../assets/iconCasa.svg" alt="" class="icon-nav" />
+            <span>Dashboard</span>
+          </a>
 
-            <div class="logo">
-                <a href="index.html">
-                    <img id="img-header"
-                        src="../assets/logoSemFundo.png"
-                        alt="Logo do site">
-                </a>
+          <a class="btn-nav-white ativo" href="planos.html">
+            <img src="../assets/iconPlanev.png" alt="" class="icon-nav" />
+            <span>Planos</span>
+          </a>
+
+          <a class="btn-nav-white" href="empresa.html">
+            <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
+            <span>Empresa</span>
+          </a>
+
+          <a class="btn-nav-white" href="perfil.html">
+            <img src="../assets/iconPerfil.svg" alt="" class="icon-nav" />
+            <span>Perfil</span>
+          </a>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <div class="user-container">
+            <div class="user-text">
+              <span class="user-name">Usuário</span>
+              <span class="user-email"> usuario@gmail.com </span>
             </div>
+          </div>
 
-            <nav class="menu-lateral">
-
-                <a class="btn-nav-white" href="index.html">
-                    <img src="../assets/iconCasa.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Dashboard</span>
-                </a>
-
-                <a class="btn-nav-white ativo" href="planos.html">
-                    <img src="../assets/iconPlanev.png"
-                        alt=""
-                        class="icon-nav">
-                    <span>Planos</span>
-                </a>
-
-                <a class="btn-nav-white" href="empresa.html">
-                    <img src="../assets/iconEmpresa.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Empresa</span>
-                </a>
-
-                <a class="btn-nav-white" href="perfil.html">
-                    <img src="../assets/iconPerfil.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Perfil</span>
-                </a>
-
-            </nav>
-
-            <footer class="sidebar-footer">
-
-                <div class="user-container">
-
-                    <div class="user-text">
-                        <span class="user-name">Usuário</span>
-                        <span class="user-email">
-                            usuario@gmail.com
-                        </span>
-                    </div>
-
-                </div>
-
-                <button id="btn-logout"
-                    class="icon-logout"
-                    onclick="limparSessao()">
-
-                    <img src="../assets/iconSair.png"
-                        alt="Sair">
-
-                </button>
-
-            </footer>
-
-        </aside>
-</div>
-
-
-       
-</body>
+          <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
+            <img src="../assets/iconSair.png" alt="Sair" />
+          </button>
+        </footer>
+      </aside>
+    </div>
+  </body>
 </html>

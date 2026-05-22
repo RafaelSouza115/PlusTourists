@@ -22,8 +22,49 @@ function buscarPorCnpj(cnpj) {
   return database.execute(instrucaoSql);
 }
 
+function buscarPorId(idEmpresa) {
+    var instrucao = `
+        SELECT * FROM empresa WHERE idEmpresa = ${idEmpresa};
+    `;
+    return database.execute(instrucao);
+}
+
+function buscarPorId(idEmpresa) {
+    var instrucao = `
+        SELECT 
+            id_empresa AS idEmpresa,
+            nome_fantasia AS nomeFantasia,
+            razao_social AS razaoSocial,
+            cnpj,
+            cep,
+            complemento,
+            numero,
+            email_contato AS email
+        FROM empresa
+        WHERE id_empresa = ${idEmpresa};
+    `;
+    return database.execute(instrucao);
+}
+
+function atualizar(idEmpresa, dados) {
+    var instrucao = `
+        UPDATE empresa SET
+            nome_fantasia = '${dados.nomeFantasia}',
+            razao_social = '${dados.razaoSocial}',
+            cnpj = '${dados.cnpj}',
+            email_contato = '${dados.email}',
+            cep = '${dados.cep}',
+            complemento = '${dados.complemento}',
+            numero = '${dados.numero}'
+        WHERE id_empresa = ${idEmpresa};
+    `;
+    return database.execute(instrucao);
+}
+
 module.exports = {
     listar,
     cadastrar,
-    buscarPorCnpj
+    buscarPorCnpj,
+    buscarPorId,
+    atualizar
 }

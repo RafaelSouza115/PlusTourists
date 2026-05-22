@@ -65,11 +65,268 @@
             </div>
           </div>
 
-          <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
-            <img src="../assets/iconSair.png" alt="Sair" />
-          </button>
-        </footer>
-      </aside>
-    </div>
-  </body>
+                <button id="btn-logout"
+                    class="icon-logout"
+                    onclick="limparSessao()">
+
+                    <img src="../assets/iconSair.png"
+                        alt="Sair">
+
+                </button>
+
+            </footer>
+
+        </aside>
+
+        <div class="header-right">
+
+            <div class="topo">
+                <h1>Planos</h1>
+
+                <button class="btn-criar">+ Criar Plano</button>
+
+                <div class="tabs">
+                    <button class="ativo" onclick="mostrarAba('validados', this)">
+                        <p>Validados</p>
+                    </button>
+                    <button onclick="mostrarAba('pendentes', this)">
+                        <p>Pendentes</p>
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="filtros">
+                <select>
+                    <option>País de Origem</option>
+                </select>
+                <select>
+                    <option>Destino</option>
+                </select>
+                <select>
+                    <option>Duração</option>
+                </select>
+                <select>
+                    <option>Período</option>
+                </select>
+            </div>
+
+            <div id="validados" class="cards-section">
+
+                <div class="cards">
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="cards-dois">
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="pendentes" class="cards-section" style="display: none;">
+
+                <div class="cards">
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+
+                        <div class="botoes-validacao">
+                            <button class="btn-validar">Validar</button>
+                            <button class="btn-excluir">Excluir</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+
+                        <div class="botoes-validacao">
+                            <button class="btn-validar">Validar</button>
+                            <button class="btn-excluir">Excluir</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+
+                        <div class="botoes-validacao">
+                            <button class="btn-validar">Validar</button>
+                            <button class="btn-excluir">Excluir</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="cards-dois">
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+
+                        <div class="botoes-validacao">
+                            <button class="btn-validar">Validar</button>
+                            <button class="btn-excluir">Excluir</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+
+                        <div class="botoes-validacao">
+                            <button class="btn-validar">Validar</button>
+                            <button class="btn-excluir">Excluir</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Férias em Salvador</h3>
+                        <p>Destino: Salvador</p>
+                        <p>Duração: 3 dias</p>
+                        <p>Período: Jun - Jul</p>
+
+                        <div class="roteiro">
+                            <p>Roteiro:</p>
+                            <button>Ampliar</button>
+                        </div>
+
+                        <div class="botoes-validacao">
+                            <button class="btn-validar">Validar</button>
+                            <button class="btn-excluir">Excluir</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            </div>
+
+</body>
+</html>
+
+<script>
+
+    function mostrarAba(tipo, botao) {
+        const secoes = document.querySelectorAll(".cards-section");
+
+        secoes.forEach(sec => {
+            sec.style.display = "none";
+        });
+
+        document.getElementById(tipo).style.display = "block";
+
+        document.querySelectorAll(".tabs button").forEach(btn => {
+            btn.classList.remove("ativo");
+        });
+
+        botao.classList.add("ativo");
+    }
+</script>
+
+       
+</body>
 </html>

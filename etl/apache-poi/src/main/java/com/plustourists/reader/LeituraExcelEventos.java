@@ -38,9 +38,9 @@ public class LeituraExcelEventos {
                 InputStream is = inputStream;
                 Workbook workbook = new XSSFWorkbook(inputStream)
         ) {
-            System.out.println("-".repeat(180));
+            System.out.println("-".repeat(120));
             System.out.println("Iniciando leitura do arquivo de eventos...");
-            System.out.println("-".repeat(180));
+            System.out.println("-".repeat(120));
 
             System.out.println(
                     "[" + LocalDateTime.now().format(formatter) + "]" +
@@ -59,16 +59,16 @@ public class LeituraExcelEventos {
                         continue;
                     }// Validação de segurança: se a linha estiver totalmente vazia, pula
                     if (row.getCell(1) == null && row.getCell(3) == null) continue;
-                    if (row.getRowNum() % 500 == 0) {
-                        System.out.println(
-                                "[" + LocalDateTime.now().format(formatter) + "]" +
-                                        " | Status: PROCESSANDO" +
-                                        " | Nível: INFO" +
-                                        " | Ação: LEITURA_LOTE" +
-                                        " | Tabela: evento" +
-                                        " | Mensagem: " + row.getRowNum() + " linhas processadas"
-                        );
-                    }
+//                    if (row.getRowNum() % 500 == 0) {
+//                        System.out.println(
+//                                "[" + LocalDateTime.now().format(formatter) + "]" +
+//                                        " | Status: PROCESSANDO" +
+//                                        " | Nível: INFO" +
+//                                        " | Ação: LEITURA_LOTE" +
+//                                        " | Tabela: evento" +
+//                                        " | Mensagem: " + row.getRowNum() + " linhas processadas"
+//                        );
+//                    }
                     // --- Campos de Texto com Tratamento de Célula Vazia e Truncamento ---
                     String municipio = extrairTextoSeguro(row.getCell(1), df, 100);
                     String regiaoTuristica = extrairTextoSeguro(row.getCell(2), df, 100);

@@ -335,18 +335,18 @@ function top5PaisesCompleto(ano, nomeEstado) {
   ]);
 }
 
-function selectsAnoEstado() {
-  var instrucaoSql = `
-    SELECT DISTINCT YEAR(dt_registro) AS ano
-    FROM registro_turista
-    ORDER BY ano DESC;
-    
-    select nome_estado from estado order by nome_estado;
-    `;
+// function selectsAnoEstado() {
+//   var instrucaoSql = `
+//     SELECT DISTINCT YEAR(dt_registro) AS ano
+//     FROM registro_turista
+//     ORDER BY ano DESC;
 
-  console.log('Executando a instrução SQL: \n' + instrucaoSql);
-  return database.execute(instrucaoSql);
-}
+//     select nome_estado from estado order by nome_estado;
+//     `;
+
+//   console.log('Executando a instrução SQL: \n' + instrucaoSql);
+//   return database.execute(instrucaoSql);
+// }
 
 module.exports = {
   dadosKPITuristas,
@@ -356,5 +356,5 @@ module.exports = {
   eventosTuristasPorMes,
   turistasPorViaAcesso,
   top5PaisesCompleto,
-  selectsAnoEstado,
+  // selectsAnoEstado,
 };

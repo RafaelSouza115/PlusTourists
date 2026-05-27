@@ -31,7 +31,7 @@ router.get('/top5-paises-completo', function (req, res) {
   dashboardController.top5PaisesCompleto(req, res);
 });
 
-router.get('/selects-ano-estado', function (req, res) {
-  dashboardController.selectsAnoEstado(req, res);
-});
+// router.get('/selects-ano-estado', function (req, res) {
+//   dashboardController.selectsAnoEstado(req, res);
+// });
 module.exports = router;

@@ -21,6 +21,7 @@ var app = express();
 
 var funcionarioRouter = require('./src/routes/funcionario');
 var empresaRouter = require('./src/routes/empresa');
+var dashboardRouter = require('./src/routes/dashboard');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,6 +30,7 @@ app.use(cors());
 
 app.use('/funcionarios', funcionarioRouter);
 app.use('/empresas', empresaRouter);
+app.use('/dashboard', dashboardRouter);
 
 app.post('/perguntar', async (req, res) => {
   const pergunta = req.body.pergunta;

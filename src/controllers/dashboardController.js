@@ -169,20 +169,21 @@ function top5PaisesCompleto(req, res) {
     });
 }
 
-function selectsAnoEstado(req, res) {
-  dashboardModel
-    .selectsAnoEstado()
-    .then((resultado) => {
-      res.status(200).json(resultado);
-    })
-    .catch((erro) => {
-      console.error('Erro ao obter dados de anos e estados:', erro);
-      res.status(500).json({
-        mensagem: 'Erro ao obter dados de anos e estados.',
-        erro,
-      });
-    });
-}
+// function selectsAnoEstado(req, res) {
+//   dashboardModel
+//     .selectsAnoEstado()
+//     .then((resultado) => {
+//       res.status(200).json(resultado);
+//     })
+//     .catch((erro) => {
+//       console.error('Erro ao obter dados de anos e estados:', erro);
+//       res.status(500).json({
+//         mensagem: 'Erro ao obter dados de anos e estados.',
+//         erro,
+//       });
+//     });
+// }
+
 module.exports = {
   dadosKPITuristas,
   mesesMenosTuristas,
@@ -191,5 +192,5 @@ module.exports = {
   eventosTuristasPorMes,
   turistasPorViaAcesso,
   top5PaisesCompleto,
-  selectsAnoEstado,
+  // selectsAnoEstado,
 };

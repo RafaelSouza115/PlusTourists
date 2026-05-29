@@ -8,7 +8,7 @@ import com.plustourists.log.LogsConexaoBancoDeDados;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,11 +18,14 @@ public class LeituraExcelTuristas {
     public List<ListaDeDados> extrairRegistroTuristas(InputStream inputStream) {
         List<ListaDeDados> turistasExtraidos = new ArrayList<>();
         DataFormatter df = new DataFormatter();
+
+        /*
+        DataFormatter df = new DataFormatter();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+*/
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-
-        ConexaoBancoDeDados conexao = new ConexaoBancoDeDados();
+       ConexaoBancoDeDados conexao = new ConexaoBancoDeDados();
         LogsConexaoBancoDeDados log =
                 new LogsConexaoBancoDeDados(conexao.getJdbcTemplate());
 
@@ -61,16 +64,16 @@ public class LeituraExcelTuristas {
 
                     // Validação de segurança: se a linha estiver totalmente vazia, pula
                     if (row.getCell(1) == null && row.getCell(3) == null) continue;
-                    if (row.getRowNum() % 500 == 0) {
-                        System.out.println(
-                                "[" + LocalDateTime.now().format(formatter) + "]" +
-                                        " | Status: PROCESSANDO" +
-                                        " | Nível: INFO" +
-                                        " | Ação: LEITURA_LOTE" +
-                                        " | Tabela: registro_turismo" +
-                                        " | Mensagem: " + row.getRowNum() + " linhas processadas"
-                        );
-                    }
+//                    if (row.getRowNum() % 500 == 0) {
+//                        System.out.println(
+//                                "[" + LocalDateTime.now().format(formatter) + "]" +
+//                                        " | Status: PROCESSANDO" +
+//                                        " | Nível: INFO" +
+//                                        " | Ação: LEITURA_LOTE" +
+//                                        " | Tabela: registro_turismo" +
+//                                        " | Mensagem: " + row.getRowNum() + " linhas processadas"
+//                        );
+//                    }
 
                     // --- Campos de Texto com Tratamento de Célula Vazia e Truncamento --
                     String viaAcesso = extrairTextoSeguro(row.getCell(0), df, 50);
@@ -112,7 +115,7 @@ public class LeituraExcelTuristas {
 
 
             System.out.println("\u001B[32mLeitura finalizada!\u001B[0m");
-            System.out.println("-".repeat(180));
+            System.out.println("-".repeat(120));
 
             log.inserirLogs(
                     LocalDateTime.now(),

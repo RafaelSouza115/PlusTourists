@@ -20,6 +20,8 @@ function buscarDados() {
         input_email.value = funcionario.email;
         input_cpf.value = formatarCPF(funcionario.cpf);
 
+        input_senha.placeholder = "********";
+
         sidebar_nome.innerHTML = funcionario.nome;
         sidebar_email.innerHTML = funcionario.email;
 
@@ -51,6 +53,20 @@ function buscarDados() {
         console.log(erro);
 
     });
+}
+
+function habilitarEdicao() {
+
+    input_nome.removeAttribute("readonly");
+    input_email.removeAttribute("readonly");
+    input_senha.removeAttribute("readonly");
+
+    input_senha.value = "";
+
+    btn_editar.style.display = "none";
+
+    btn_cancelar.style.display = "inline-flex";
+    btn_salvar.style.display = "inline-flex";
 }
 
 function atualizarDados() {
@@ -87,6 +103,18 @@ function atualizarDados() {
         sidebar_nome.innerHTML = nomeVar;
         sidebar_email.innerHTML = emailVar;
 
+        input_nome.setAttribute("readonly", true);
+        input_email.setAttribute("readonly", true);
+        input_senha.setAttribute("readonly", true);
+
+        input_senha.value = "";
+        input_senha.placeholder = "********";
+
+        btn_editar.style.display = "inline-flex";
+
+        btn_cancelar.style.display = "none";
+        btn_salvar.style.display = "none";
+
         alert(dados.mensagem);
 
     } else {
@@ -101,6 +129,20 @@ function atualizarDados() {
         console.log(erro);
 
     });
+}
+
+function cancelarEdicao() {
+
+    buscarDados();
+
+    input_nome.setAttribute("readonly", true);
+    input_email.setAttribute("readonly", true);
+    input_senha.setAttribute("readonly", true);
+
+    btn_editar.style.display = "inline-flex";
+
+    btn_cancelar.style.display = "none";
+    btn_salvar.style.display = "none";
 }
 
 function formatarCPF(cpf) {

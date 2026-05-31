@@ -51,7 +51,7 @@
           <span>Perfil</span>
         </a>
 
-        <a class="btn-nav-white" href="funcionarios.html">
+        <a class="btn-nav-white" href="gerenciamento-funcionarios/gerenciamento-funcionarios.html">
           <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
           <span>Gerenciar Funcionários</span>
         </a>
@@ -90,7 +90,8 @@
                 color: #fff;
               "
             >
-              <option style="color: #222; background: #fff">Selecione o estado</option>
+            <option style="color: #222; background: #fff">São Paulo</option>
+            <option style="color: #222; background: #fff">Selecione o estado</option>
             </select>
           </div>
           <div class="flex flex-col">
@@ -104,6 +105,7 @@
                 color: #fff;
               "
             >
+            <option style="color: #222; background: #fff">2025</option>
               <option style="color: #222; background: #fff">Selecione o ano</option>
             </select>
           </div>
@@ -123,10 +125,10 @@
 
       <!-- KPI CARDS -->
       <div class="grid grid-cols-4 gap-4 px-6 mt-5">
-        <!-- KPI 1: Maior país emissor -->
+        <!-- KPI 1: País que mais visita o Brasil -->
         <div class="bg-white rounded-xl p-4 shadow-sm flex flex-col gap-1.5">
           <div class="flex justify-between items-start">
-            <span class="text-gray-400 text-xs font-medium">Maior país emissor</span>
+            <span class="text-gray-500 text-base font-semibold">País que mais visita o Brasil</span>
             <div
               class="w-9 h-9 rounded-lg flex items-center justify-center text-xl"
               style="background: #e8f5e9"
@@ -134,22 +136,22 @@
               <i class="ti ti-world" style="color: #16a34a"></i>
             </div>
           </div>
-          <p id="MaiorPaisEmissor" class="text-xl font-bold m-0" style="color: #16a34a"></p>
+          <p id="MaiorPaisEmissor" class="text-lg font-bold m-0" style="color: #16a34a"></p>
           <span
-            class="text-xs font-semibold px-2 py-0.5 rounded-full self-start"
+            class=" flex text-xs flex-row font-semibold px-2 py-0.5 rounded-full self-start"
             style="background: #e8f5e9; color: #16a34a"
           >
             <p id="PercentualMaiorPaisEmissor"></p>
-            do total de turistas
+             do total de turistas
           </span>
-          <p class="text-xs text-gray-400 mt-2 mb-0">Destino menos visitado</p>
-          <p class="text-sm font-semibold m-0" id="DestinoMenosVisitado"></p>
+          <p class="text-sm text-gray-400 mt-2 mb-0">Destino menos visitado</p>
+          <p class="text-base font-semibold m-0" id="DestinoMenosVisitado"></p>
         </div>
 
         <!-- KPI 2: Oportunidade de expansão -->
         <div class="bg-white rounded-xl p-4 shadow-sm flex flex-col gap-1.5">
           <div class="flex justify-between items-start">
-            <span class="text-gray-400 text-xs font-medium">Oportunidade de expansão</span>
+            <span class="text-gray-500 text-base font-semibold">Oportunidade de expansão</span>
             <div
               class="w-9 h-9 rounded-lg flex items-center justify-center text-xl"
               style="background: #e8f0fe"
@@ -157,8 +159,8 @@
               <i class="ti ti-trending-up" style="color: #2563eb"></i>
             </div>
           </div>
-          <p id="mesesMenor" class="text-base font-bold m-0" style="color: #2563eb"></p>
-          <p class="text-xs text-gray-500 m-0">
+          <p id="mesesMenor" class="text-lg font-bold m-0" style="color: #2563eb"></p>
+          <p class="text-sm text-gray-500 m-0">
             Meses com baixa atividade de turistas e alta atividade de eventos
           </p>
         </div>
@@ -166,7 +168,7 @@
         <!-- KPI 3: Maior oportunidade de receita -->
         <div class="bg-white rounded-xl p-4 shadow-sm flex flex-col gap-1.5">
           <div class="flex justify-between items-start">
-            <span class="text-gray-400 text-xs font-medium">Maior oportunidade de receita</span>
+            <span class="text-gray-500 text-base font-semibold">Maior oportunidade de receita</span>
             <div
               class="w-9 h-9 rounded-lg flex items-center justify-center text-xl"
               style="background: #e8f5e9"
@@ -174,15 +176,15 @@
               <i class="ti ti-calendar-event" style="color: #16a34a"></i>
             </div>
           </div>
-          <p id="mesTopEvento" class="text-xl font-bold m-0" style="color: #16a34a"></p>
-          <p class="text-xs text-gray-500 m-0">Evento realizado neste mês:</p>
-          <p id="nomeEvento" class="text-sm font-bold text-gray-800 m-0"></p>
+          <p id="mesTopEvento" class="text-lg font-bold m-0" style="color: #16a34a"></p>
+          <p class="text-sm text-gray-500 m-0">Evento realizado neste mês:</p>
+          <p id="nomeEvento" class="text-base font-bold text-gray-800 m-0"></p>
         </div>
 
         <!-- KPI 4: Principal via de acesso -->
         <div class="bg-white rounded-xl p-4 shadow-sm flex flex-col gap-1.5">
           <div class="flex justify-between items-start">
-            <span class="text-gray-400 text-xs font-medium">Principal via de acesso</span>
+            <span class="text-gray-500 text-base font-semibold">Principal via de acesso</span>
             <div
               class="w-9 h-9 rounded-lg flex items-center justify-center text-xl"
               style="background: #e8f0fe"
@@ -190,12 +192,12 @@
               <i class="ti ti-plane" style="color: #2563eb"></i>
             </div>
           </div>
-          <p class="text-xl font-bold m-0" style="color: #2563eb" id="principalViaAcesso"></p>
-          <p class="text-xs font-semibold text-gray-600 m-0">Perfil do turista:</p>
-          <p class="flex items-center gap-1 text-xs m-0">
+          <p class="text-lg font-bold m-0" style="color: #2563eb" id="principalViaAcesso"></p>
+          <p class="text-sm font-semibold text-gray-600 m-0">Perfil do turista:</p>
+          <p class="flex items-center gap-1 text-sm m-0">
             <i class="ti ti-circle-check" style="color: #16a34a"></i> Viagem planejada
           </p>
-          <p class="flex items-center gap-1 text-xs m-0">
+          <p class="flex items-center gap-1 text-sm m-0">
             <i class="ti ti-circle-check" style="color: #16a34a"></i> Busca experiências premium
           </p>
         </div>
@@ -259,9 +261,9 @@
                   <i class="ti ti-plane" style="color: #2563eb"></i>
                 </div>
                 <div>
-                  <p class="text-xs text-gray-500 m-0">Via Aérea</p>
+                  <p class="text-sm text-gray-600 m-0">Via Aérea</p>
                   <p id="percentualArea" class="text-sm font-bold m-0"></p>
-                  <p id="totalArea" class="text-xs text-gray-400 m-0"></p>
+                  <p id="totalArea" class="text-sm text-gray-500 m-0"></p>
                 </div>
               </div>
               <div class="flex items-center gap-2 bg-gray-50 rounded-lg p-2">
@@ -272,9 +274,9 @@
                   <i class="ti ti-car" style="color: #16a34a"></i>
                 </div>
                 <div>
-                  <p class="text-xs text-gray-500 m-0">Via Terrestre</p>
+                  <p class="text-sm text-gray-600 m-0">Via Terrestre</p>
                   <p id="percentualTerrestre" class="text-sm font-bold m-0"></p>
-                  <p id="totalTerrestre" class="text-xs text-gray-400 m-0"></p>
+                  <p id="totalTerrestre" class="text-sm text-gray-500 m-0"></p>
                 </div>
               </div>
               <div class="flex items-center gap-2 bg-gray-50 rounded-lg p-2">
@@ -285,9 +287,9 @@
                   <i class="ti ti-ship" style="color: #d97706"></i>
                 </div>
                 <div>
-                  <p class="text-xs text-gray-500 m-0">Via Marítima</p>
+                  <p class="text-sm text-gray-600 m-0">Via Marítima</p>
                   <p id="percentualMaritima" class="text-sm font-bold m-0"></p>
-                  <p id="totalMaritima" class="text-xs text-gray-400 m-0"></p>
+                  <p id="totalMaritima" class="text-sm text-gray-500 m-0"></p>
                 </div>
               </div>
               <div class="flex items-center gap-2 bg-gray-50 rounded-lg p-2">
@@ -298,9 +300,9 @@
                   <i class="ti ti-ripple" style="color: #9333ea"></i>
                 </div>
                 <div>
-                  <p class="text-xs text-gray-500 m-0">Via Fluvial</p>
+                  <p class="text-sm text-gray-600 m-0">Via Fluvial</p>
                   <p id="percentualFluvial" class="text-sm font-bold m-0"></p>
-                  <p id="totalFluvial" class="text-xs text-gray-400 m-0"></p>
+                  <p id="totalFluvial" class="text-sm text-gray-500 m-0"></p>
                 </div>
               </div>
             </div>
@@ -352,7 +354,7 @@
 
       <!-- TABELA -->
       <div class="bg-white rounded-xl shadow-sm mx-6 mt-4 mb-6 p-5">
-        <h3 class="text-sm font-semibold m-0 mb-4">Top 5 Países Emissores de Turistas</h3>
+        <h3 class="text-sm font-semibold m-0 mb-4">Top 5 Países que mais visitam o Brasil</h3>
         <table class="w-full border-collapse text-xs">
           <!-- colunas -->
           <thead>

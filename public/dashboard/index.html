@@ -1,263 +1,446 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="../assets/logoIcon.png">
-    <script src="../js/dashboard/index.js"></script>
+    <link rel="icon" href="../assets/logoIcon.png" />
     <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
     <link rel="stylesheet" href="../style/output.css" />
-
-    <!-- scripts do Chart.js - 2022-1 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard/sidebar.js" defer></script>
 
     <title>Dashboard</title>
   </head>
 
-  <body class="flex flex-row h-screen bg-[#f5f5f5]">
-    <div class="janela">
-      <!--
-      <div class="header-left">
-        <div>
-          <a href="index.html"
-            ><img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site"
-          /></a>
-        </div>
+  <body style="display: flex; flex-direction: row; height: 100vh; margin: 0">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="index.html">
+          <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
+        </a>
+      </div>
 
-        <div class="btn-nav-white">
-          <img src="../assets/iconHomev.png" alt="Dashboard" class="icon-nav" />
-          <a href="index.html">
-            <h3 style="color: #008000">Dashboard</h3>
-          </a>
-        </div>
+      <nav class="menu-lateral">
+        <a class="btn-nav-white ativo" href="index.html">
+          <img src="../assets/IconDashboardV.svg" alt="" class="icon-nav" />
+          <span>Dashboard</span>
+        </a>
 
-        <div class="btn-nav-white">
-          <img src="../assets/iconPlanejamento.svg" alt="Dashboard" class="icon-nav" />
-          <a href="planos.html">
-            <h3>Planos</h3>
-          </a>
-        </div>
+        <a class="btn-nav-white" href="planos.html">
+          <img src="../assets/iconPlanejamento.svg" alt="" class="icon-nav" />
+          <span>Planos</span>
+        </a>
 
-        <div class="btn-nav-white">
-          <img src="../assets/iconEmpresa.svg" alt="Dashboard" class="icon-nav" />
-          <a href="empresa.html">
-            <h3>Empresa</h3>
-          </a>
-        </div>
+        <a class="btn-nav-white" href="empresa.html">
+          <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
+          <span>Empresa</span>
+        </a>
 
-        <div class="btn-nav-white">
-          <img src="../assets/iconPerfil.svg" alt="Dashboard" class="icon-nav" />
-          <a href="perfil.html">
-            <h3>Perfil</h3>
-          </a>
-        </div>
+        <a class="btn-nav-white" href="eventos.html">
+          <img src="../assets/iconEventos.svg" alt="" class="icon-nav" />
+          <span>Eventos</span>
+        </a>
 
-        <div class="sidebar-footer">
-          <div class="user-container">
-            <div class="user-text">
-              <span class="user-name">Usuario</span>
-              <span class="user-email">usuario@gmail.com</span>
-            </div>
+        <a class="btn-nav-white" href="perfil.html">
+          <img src="../assets/iconPerfil.svg" alt="" class="icon-nav" />
+          <span>Perfil</span>
+        </a>
+
+        <a class="btn-nav-white" href="gerenciamento-funcionarios/gerenciamento-funcionarios.html">
+          <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
+          <span>Gerenciar Funcionários</span>
+        </a>
+      </nav>
+
+      <footer class="sidebar-footer">
+        <div class="user-container">
+          <div class="user-text">
+            <span class="user-name" id="sidebar_nome"> </span>
+            <span class="user-email" id="sidebar_email"> </span>
           </div>
-          <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
-            <img src="../assets/iconSair.png" alt="icone de Sair" />
+        </div>
+
+        <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
+          <img src="../assets/iconSair.png" alt="Sair" />
+        </button>
+      </footer>
+    </aside>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="flex-1 flex flex-col bg-gray-100 overflow-y-auto">
+      <!-- HEADER VERDE -->
+      <div class="flex justify-between items-center px-6 py-4" style="background: #16a34a">
+        <div>
+          <h1 id="nome_funcionario" class="text-white text-lg font-bold m-0"></h1>
+          <p class="text-white text-xs mt-1 opacity-80">Veja o panorama do turismo no Brasil</p>
+        </div>
+        <div class="flex items-end gap-3">
+          <div class="flex flex-col">
+            <label class="text-white text-xs font-semibold mb-1">Estado</label>
+            <select
+              id="filtroEstado"
+              class="border rounded-lg px-3 py-1.5 text-sm min-w-36"
+              style="
+                background: rgba(255, 255, 255, 0.15);
+                border-color: rgba(255, 255, 255, 0.4);
+                color: #fff;
+              "
+            >
+            <option style="color: #222; background: #fff">São Paulo</option>
+            <option style="color: #222; background: #fff">Selecione o estado</option>
+            </select>
+          </div>
+          <div class="flex flex-col">
+            <label class="text-white text-xs font-semibold mb-1">Ano</label>
+            <select
+              id="filtroAno"
+              class="border rounded-lg px-3 py-1.5 text-sm min-w-36"
+              style="
+                background: rgba(255, 255, 255, 0.15);
+                border-color: rgba(255, 255, 255, 0.4);
+                color: #fff;
+              "
+            >
+            <option style="color: #222; background: #fff">2025</option>
+              <option style="color: #222; background: #fff">Selecione o ano</option>
+            </select>
+          </div>
+          <button
+            class="bg-white text-gray-800 font-semibold text-sm px-4 py-1.5 rounded-lg border-0 cursor-pointer"
+          >
+            Limpar
+          </button>
+          <button
+            class="flex items-center gap-1.5 text-white font-semibold text-sm px-4 py-1.5 rounded-lg border-0 cursor-pointer"
+            style="background: #2563eb"
+          >
+            <i class="ti ti-adjustments-horizontal"></i> Aplicar filtros
           </button>
         </div>
       </div>
-    </div>
-  -->
-     <!-- SIDEBAR -->
-        <aside class="sidebar">
 
-            <div class="logo">
-                <a href="index.html">
-                    <img id="img-header"
-                        src="../assets/logoSemFundo.png"
-                        alt="Logo do site">
-                </a>
+      <!-- KPI CARDS -->
+      <div class="grid grid-cols-4 gap-4 px-6 mt-5">
+        <!-- KPI 1: País que mais visita o Brasil -->
+        <div class="bg-white rounded-xl p-4 shadow-sm flex flex-col gap-1.5">
+          <div class="flex justify-between items-start">
+            <span class="text-gray-500 text-base font-semibold">País que mais visita o Brasil</span>
+            <div
+              class="w-9 h-9 rounded-lg flex items-center justify-center text-xl"
+              style="background: #e8f5e9"
+            >
+              <i class="ti ti-world" style="color: #16a34a"></i>
+            </div>
+          </div>
+          <p id="MaiorPaisEmissor" class="text-lg font-bold m-0" style="color: #16a34a"></p>
+          <span
+            class=" flex text-xs flex-row font-semibold px-2 py-0.5 rounded-full self-start"
+            style="background: #e8f5e9; color: #16a34a"
+          >
+            <p id="PercentualMaiorPaisEmissor"></p>
+             do total de turistas
+          </span>
+          <p class="text-sm text-gray-400 mt-2 mb-0">Destino menos visitado</p>
+          <p class="text-base font-semibold m-0" id="DestinoMenosVisitado"></p>
+        </div>
+
+        <!-- KPI 2: Oportunidade de expansão -->
+        <div class="bg-white rounded-xl p-4 shadow-sm flex flex-col gap-1.5">
+          <div class="flex justify-between items-start">
+            <span class="text-gray-500 text-base font-semibold">Oportunidade de expansão</span>
+            <div
+              class="w-9 h-9 rounded-lg flex items-center justify-center text-xl"
+              style="background: #e8f0fe"
+            >
+              <i class="ti ti-trending-up" style="color: #2563eb"></i>
+            </div>
+          </div>
+          <p id="mesesMenor" class="text-lg font-bold m-0" style="color: #2563eb"></p>
+          <p class="text-sm text-gray-500 m-0">
+            Meses com baixa atividade de turistas e alta atividade de eventos
+          </p>
+        </div>
+
+        <!-- KPI 3: Maior oportunidade de receita -->
+        <div class="bg-white rounded-xl p-4 shadow-sm flex flex-col gap-1.5">
+          <div class="flex justify-between items-start">
+            <span class="text-gray-500 text-base font-semibold">Maior oportunidade de receita</span>
+            <div
+              class="w-9 h-9 rounded-lg flex items-center justify-center text-xl"
+              style="background: #e8f5e9"
+            >
+              <i class="ti ti-calendar-event" style="color: #16a34a"></i>
+            </div>
+          </div>
+          <p id="mesTopEvento" class="text-lg font-bold m-0" style="color: #16a34a"></p>
+          <p class="text-sm text-gray-500 m-0">Evento realizado neste mês:</p>
+          <p id="nomeEvento" class="text-base font-bold text-gray-800 m-0"></p>
+        </div>
+
+        <!-- KPI 4: Principal via de acesso -->
+        <div class="bg-white rounded-xl p-4 shadow-sm flex flex-col gap-1.5">
+          <div class="flex justify-between items-start">
+            <span class="text-gray-500 text-base font-semibold">Principal via de acesso</span>
+            <div
+              class="w-9 h-9 rounded-lg flex items-center justify-center text-xl"
+              style="background: #e8f0fe"
+            >
+              <i class="ti ti-plane" style="color: #2563eb"></i>
+            </div>
+          </div>
+          <p class="text-lg font-bold m-0" style="color: #2563eb" id="principalViaAcesso"></p>
+          <p class="text-sm font-semibold text-gray-600 m-0">Perfil do turista:</p>
+          <p class="flex items-center gap-1 text-sm m-0">
+            <i class="ti ti-circle-check" style="color: #16a34a"></i> Viagem planejada
+          </p>
+          <p class="flex items-center gap-1 text-sm m-0">
+            <i class="ti ti-circle-check" style="color: #16a34a"></i> Busca experiências premium
+          </p>
+        </div>
+      </div>
+
+      <!-- CHARTS ROW -->
+      <div class="grid grid-cols-2 gap-4 px-6 mt-4">
+        <!-- Gráfico de Barras + Linha -->
+        <div class="bg-white rounded-xl p-5 shadow-sm">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="text-sm font-semibold m-0">Turistas por mês no estado</h3>
+            <!-- <select class="border border-gray-200 rounded-md px-2 py-1 text-xs cursor-pointer">
+            <option>Ver por: Mês</option>
+            <option>Ver por: Trimestre</option>
+          </select> -->
+          </div>
+          <div class="flex gap-4 mb-2.5">
+            <span class="flex items-center gap-1 text-xs">
+              <span
+                class="w-2.5 h-2.5 rounded-full inline-block"
+                style="background: #2563eb"
+              ></span>
+              Número de Eventos
+            </span>
+            <span class="flex items-center gap-1 text-xs">
+              <span
+                class="w-2.5 h-2.5 rounded-full inline-block"
+                style="background: #16a34a"
+              ></span>
+              Número de Turistas
+            </span>
+          </div>
+          <div style="height: 240px">
+            <canvas id="idTuristasEventos"></canvas>
+          </div>
+        </div>
+
+        <!-- Gráfico de Donut -->
+        <div class="bg-white rounded-xl p-5 shadow-sm">
+          <h3 class="text-sm font-semibold m-0 mb-3">Turistas por via de acesso</h3>
+
+          <div class="flex gap-5 items-center">
+            <!-- Donut -->
+            <div class="relative" style="width: 180px; height: 180px">
+              <canvas id="idChegadas" width="180" height="180"></canvas>
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+              >
+                <p class="text-xs text-gray-400 m-0">Total</p>
+                <p id="totalVias" class="text-base font-bold m-0"></p>
+              </div>
             </div>
 
-            <nav class="menu-lateral">
-
-                <a class="btn-nav-white ativo" href="index.html">
-                    <img src="../assets/iconHomev.png"
-                        alt=""
-                        class="icon-nav">
-                    <span>Dashboard</span>
-                </a>
-
-                <a class="btn-nav-white" href="planos.html">
-                    <img src="../assets/iconPlanejamento.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Planos</span>
-                </a>
-
-                <a class="btn-nav-white" href="empresa.html">
-                    <img src="../assets/iconEmpresa.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Empresa</span>
-                </a>
-
-                <a class="btn-nav-white" href="perfil.html">
-                    <img src="../assets/iconPerfil.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Perfil</span>
-                </a>
-
-            </nav>
-
-            <footer class="sidebar-footer">
-
-                <div class="user-container">
-
-                    <div class="user-text">
-                        <span class="user-name">Usuário</span>
-                        <span class="user-email">
-                            usuario@gmail.com
-                        </span>
-                    </div>
-
+            <!-- Legenda 2x2 -->
+            <div class="grid grid-cols-2 gap-2.5 flex-1">
+              <div class="flex items-center gap-2 bg-gray-50 rounded-lg p-2">
+                <div
+                  class="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style="background: #e8f0fe"
+                >
+                  <i class="ti ti-plane" style="color: #2563eb"></i>
                 </div>
+                <div>
+                  <p class="text-sm text-gray-600 m-0">Via Aérea</p>
+                  <p id="percentualArea" class="text-sm font-bold m-0"></p>
+                  <p id="totalArea" class="text-sm text-gray-500 m-0"></p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 bg-gray-50 rounded-lg p-2">
+                <div
+                  class="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style="background: #e8f5e9"
+                >
+                  <i class="ti ti-car" style="color: #16a34a"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-600 m-0">Via Terrestre</p>
+                  <p id="percentualTerrestre" class="text-sm font-bold m-0"></p>
+                  <p id="totalTerrestre" class="text-sm text-gray-500 m-0"></p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 bg-gray-50 rounded-lg p-2">
+                <div
+                  class="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style="background: #fff3cd"
+                >
+                  <i class="ti ti-ship" style="color: #d97706"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-600 m-0">Via Marítima</p>
+                  <p id="percentualMaritima" class="text-sm font-bold m-0"></p>
+                  <p id="totalMaritima" class="text-sm text-gray-500 m-0"></p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 bg-gray-50 rounded-lg p-2">
+                <div
+                  class="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style="background: #f3e8ff"
+                >
+                  <i class="ti ti-ripple" style="color: #9333ea"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-600 m-0">Via Fluvial</p>
+                  <p id="percentualFluvial" class="text-sm font-bold m-0"></p>
+                  <p id="totalFluvial" class="text-sm text-gray-500 m-0"></p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                <button id="btn-logout"
-                    class="icon-logout"
-                    onclick="limparSessao()">
-
-                    <img src="../assets/iconSair.png"
-                        alt="Sair">
-
-                </button>
-
-            </footer>
-
-        </aside>
-
-    <div class="flex flex-1 font-sans flex-col">
-      <!-- HEADER -->
-      <div class="w-full bg-green-700 text-white rounded-b-3xl shadow-lg">
-        <div class="h-[120px] px-4 flex justify-between p-3">
-          <!-- Texto -->
-          <div class="flex flex-col p-4">
-            <h1 class="text-xl font-bold" id="nome_funcionario"></h1>
-            <p class="text-sm opacity-80">Bem-vindo(a) ao seu dashboard</p>
+          <!-- Perfil do Turista por Via de Acesso -->
+          <div
+            class="grid grid-cols-4 gap-2.5 mt-3.5 pt-3.5 border-t border-gray-100 text-xs text-gray-500 leading-relaxed"
+          >
+            <div>
+              <strong class="block font-bold mb-1" style="color: #2563eb">
+                <i class="ti ti-plane" style="font-size: 11px"></i> Via Aérea
+              </strong>
+              Faixa etária: 25-45 anos<br />
+              Renda média: Alta<br />
+              Estadia: 5-10 dias<br />
+              Gasto médio: Alto
+            </div>
+            <div>
+              <strong class="block font-bold mb-1" style="color: #16a34a">
+                <i class="ti ti-car" style="font-size: 11px"></i> Via Terrestre
+              </strong>
+              Faixa etária: 18-40 anos<br />
+              Renda média: Média<br />
+              Estadia: 2-5 dias<br />
+              Gasto médio: Médio
+            </div>
+            <div>
+              <strong class="block font-bold mb-1" style="color: #d97706">
+                <i class="ti ti-ship" style="font-size: 11px"></i> Via Marítima
+              </strong>
+              Faixa etária: 30-60 anos<br />
+              Renda média: Alta<br />
+              Estadia: 5-10 dias<br />
+              Gasto médio: Médio/Alto
+            </div>
+            <div>
+              <strong class="block font-bold mb-1" style="color: #9333ea">
+                <i class="ti ti-ripple" style="font-size: 11px"></i> Via Fluvial
+              </strong>
+              Faixa etária: 25-50 anos<br />
+              Renda média: Baixa<br />
+              Estadia: 1-3 dias<br />
+              Gasto médio: Baixo/Médio
+            </div>
           </div>
         </div>
       </div>
 
-      <div
-        class="relative w-[75%] mb-8 bg-gray-200 flex-1 p-4 justify-center mx-auto items-center rounded-4xl -mt-8 shadow-lg"
-      >
-        <div class="bg-white p-4 rounded-xl shadow flex gap-4">
-          <input
-            type="text"
-            placeholder="Pesquise um país"
-            class="flex-1 border rounded-lg px-4 py-2 outline-none"
-          />
+      <!-- TABELA -->
+      <div class="bg-white rounded-xl shadow-sm mx-6 mt-4 mb-6 p-5">
+        <h3 class="text-sm font-semibold m-0 mb-4">Top 5 Países que mais visitam o Brasil</h3>
+        <table class="w-full border-collapse text-xs">
+          <!-- colunas -->
+          <thead>
+            <tr class="border-b border-gray-100">
+              <th class="text-left py-2 px-3 text-gray-400 font-semibold text-xs">País</th>
+              <th class="text-left py-2 px-3 text-gray-400 font-semibold text-xs">Participação</th>
+              <th class="text-left py-2 px-3 text-gray-400 font-semibold text-xs">
+                Estados que mais visitam
+              </th>
+              <th class="text-left py-2 px-3 text-gray-400 font-semibold text-xs">
+                Estados que menos visitam
+              </th>
+              <th class="text-left py-2 px-3 text-gray-400 font-semibold text-xs">
+                Mês que mais visitam
+              </th>
+              <th class="text-left py-2 px-3 text-gray-400 font-semibold text-xs">
+                Mês que menos visitam
+              </th>
+            </tr>
+          </thead>
 
-          <select class="border rounded-lg px-4 py-2">
-            <option>Selecione o estado</option>
-          </select>
-
-          <select class="border rounded-lg px-4 py-2">
-            <option>Selecione o ano</option>
-          </select>
-        </div>
-
-        <div class="grid grid-cols-4 gap-4 mt-6">
-          <div class="bg-white p-3 rounded-xl shadow">
-            <p class="text-gray-500 text-sm">Visitantes internacionais</p>
-            <h2 class="text-green-600 text-xl font-bold mt-2">1.000.000</h2>
-            <p class="text-green-600 text-sm mt-2">+18% vs. 3 meses anteriores</p>
-          </div>
-
-          <div class="bg-white p-3 rounded-xl shadow">
-            <p class="text-gray-500 text-sm">Crescimento ao ano</p>
-            <h2 class="text-xl font-bold mt-2 text-yellow-500">33%</h2>
-            <p class="text-yellow-600 text-sm mt-2">+8% vs. ano anterior</p> 
-          </div>
-
-          <div class="bg-white p-3 rounded-xl shadow">
-            <p class="text-gray-500 text-sm">Janela de oportunidade</p>
-            <h2 class="text-xl font-bold mt-2 text-green-600">Maio</h2>
-            <p class="text-green-600 text-sm mt-2">Tendência positiva</p>
-          </div>
-
-          <div class="bg-white p-3 rounded-xl shadow">
-            <p class="text-gray-500 text-sm">Mês com mais turistas</p>
-            <h2 class="text-xl font-bold mt-2 text-purple-600">Julho</h2>
-            <p class="text-purple-600 text-sm mt-2">Sazonalidade identificada</p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-6 mt-6">
-          <!-- grafico de barras -->
-          <div class="bg-white p-6 rounded-xl shadow">
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="font-semibold">Turistas por mês</h3>
-            </div>
-
-            <div class="h-60 bg-gray-100 rounded-lg"><canvas id="idTuristas"></canvas></div>
-
-            <p class="text-sm text-gray-500 mt-3">Dezembro teve o maior número de turistas.</p>
-          </div>
-
-          <!-- grafico de pizza -->
-          <div class="bg-white p-6 rounded-xl shadow">
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="font-semibold">Chegadas por acesso</h3>
-            </div>
-
-            <div class="h-60 bg-gray-100 rounded-lg"><canvas id="idChegadas"></canvas></div>
-
-            <div class="flex gap-4 mt-4 space-y-1 text-sm flex-row">
-              <p>Aérea - 40%</p>
-              <p>Terrestre - 25%</p>
-              <p>Fluvial - 20%</p>
-              <p>Marítima - 15%</p>
-            </div>
-          </div>
-        </div>
+          <tbody>
+            <tr class="border-b border-gray-50 hover:bg-gray-50">
+              <td class="py-2.5 px-3">
+                <div class="flex items-center gap-2 font-semibold">
+                  <span id="primeiroPais" class="py-2.5 px-3 font-bold"></span>
+                </div>
+              </td>
+              <td id="percentualPrimeiroPais" class="py-2.5 px-3 font-bold"></td>
+              <td id="estadosMaisVisitadosPrimeiro" class="py-2.5 px-3 text-gray-600"></td>
+              <td id="estadosMenosVisitadosPrimeiro" class="py-2.5 px-3 text-gray-600"></td>
+              <td id="mesMaisVisitadoPrimeiro" class="py-2.5 px-3 text-gray-700"></td>
+              <td id="mesMenosVisitadoPrimeiro" class="py-2.5 px-3 text-gray-700"></td>
+            </tr>
+            <tr class="border-b border-gray-50 hover:bg-gray-50">
+              <td class="py-2.5 px-3">
+                <div class="flex items-center gap-2 font-semibold">
+                  <span id="segundoPais" class="py-2.5 px-3 font-bold"></span>
+                </div>
+              </td>
+              <td id="percentualSegundoPais" class="py-2.5 px-3 font-bold"></td>
+              <td id="estadosMaisVisitadosSegundo" class="py-2.5 px-3 text-gray-600"></td>
+              <td id="estadosMenosVisitadosSegundo" class="py-2.5 px-3 text-gray-600"></td>
+              <td id="mesMaisVisitadoSegundo" class="py-2.5 px-3 text-gray-700"></td>
+              <td id="mesMenosVisitadoSegundo" class="py-2.5 px-3 text-gray-700"></td>
+            </tr>
+            <tr class="border-b border-gray-50 hover:bg-gray-50">
+              <td class="py-2.5 px-3">
+                <div class="flex items-center gap-2 font-semibold">
+                  <span id="terceiroPais" class="py-2.5 px-3 font-bold"></span>
+                </div>
+              </td>
+              <td id="percentualTerceiroPais" class="py-2.5 px-3 font-bold"></td>
+              <td id="estadosMaisVisitadosTerceiro" class="py-2.5 px-3 text-gray-600"></td>
+              <td id="estadosMenosVisitadosTerceiro" class="py-2.5 px-3 text-gray-600"></td>
+              <td id="mesMaisVisitadoTerceiro" class="py-2.5 px-3 text-gray-700"></td>
+              <td id="mesMenosVisitadoTerceiro" class="py-2.5 px-3 text-gray-700"></td>
+            </tr>
+            <tr class="border-b border-gray-50 hover:bg-gray-50">
+              <td class="py-2.5 px-3">
+                <div class="flex items-center gap-2 font-semibold">
+                  <span id="quartoPais" class="py-2.5 px-3 font-bold"></span>
+                </div>
+              </td>
+              <td id="percentualQuartoPais" class="py-2.5 px-3 font-bold"></td>
+              <td id="estadosMaisVisitadosQuarto" class="py-2.5 px-3 text-gray-600"></td>
+              <td id="estadosMenosVisitadosQuarto" class="py-2.5 px-3 text-gray-600"></td>
+              <td id="mesMaisVisitadoQuarto" class="py-2.5 px-3 text-gray-700"></td>
+              <td id="mesMenosVisitadoQuarto" class="py-2.5 px-3 text-gray-700"></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2.5 px-3">
+                <div class="flex items-center gap-2 font-semibold">
+                  <span id="quintoPais" class="py-2.5 px-3 font-bold"></span>
+                </div>
+              </td>
+              <td id="percentualQuintoPais" class="py-2.5 px-3 font-bold"></td>
+              <td id="estadosMaisVisitadosQuinto" class="py-2.5 px-3 text-gray-600"></td>
+              <td id="estadosMenosVisitadosQuinto" class="py-2.5 px-3 text-gray-600"></td>
+              <td id="mesMaisVisitadoQuinto" class="py-2.5 px-3 text-gray-700"></td>
+              <td id="mesMenosVisitadoQuinto" class="py-2.5 px-3 text-gray-700"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </body>
-  <script>
-    var idNome = document.getElementById('nome_funcionario');
-    idNome.innerHTML = 'Ola, seja bem-vindo ' + sessionStorage.NOME_FUNCIONARIO;
-
-    const ctx = document.getElementById('idTuristas');
-
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-        datasets: [{
-          label: 'Turistas',
-          data: [5, 12, 8, 15, 20, 25, 30, 28, 22, 18, 10, 35],
-          borderColor: 'green',
-          borderWidth: 2
-        }]
-      }
-    });
-
-    const ctx2 = document.getElementById('idChegadas');
-
-    new Chart(ctx2, {
-      type: 'pie',
-      data: {
-        labels: ['Aérea', 'Terrestre', 'Fluvial', 'Marítima'],
-        datasets: [{
-          label: 'Chegadas',
-          data: [40, 25, 20, 15],
-          backgroundColor: ['#F4685D', '#F0C15A', '#1E9496', '#B9C36B']
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    });
-  </script>
+  <script src="../js/dashboard/dashboard.js" defer></script>
 </html>

@@ -1,3 +1,8 @@
+const { rejects } = require('assert');
+const { error } = require('console');
+const { resolve } = require('dns');
+const { stdout, stderr } = require('process');
+
 function cadastrar() {
   var razaoSocialVar = razaoSocial.value;
   var nomeFantasiaVar = nomeFantasia.value;

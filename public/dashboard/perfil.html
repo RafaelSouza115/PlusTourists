@@ -1,165 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../style/dashboard/perfil.css">
-    <link rel="stylesheet" href="../style/dashboard/sidebar.css">
-
-    <link rel="icon" href="../assets/logoIcon.png">
-
-    <script src="../js/dashboard/index.js" defer></script>
-
+    <link rel="stylesheet" href="../style/global/global.css" />
+    <link rel="stylesheet" href="../style/dashboard/perfil.css" />
+    <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
+    <script src="../js/dashboard/funcionario.js" defer></script>
+    <link rel="icon" href="../assets/logoIcon.png" />
     <title>Perfil</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="janela">
-
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-
-            <div class="logo">
-                <a href="index.html">
-                    <img id="img-header"
-                        src="../assets/logoSemFundo.png"
-                        alt="Logo do site">
-                </a>
-            </div>
-
-            <nav class="menu-lateral">
-
-                <a class="btn-nav-white" href="index.html">
-                    <img src="../assets/iconCasa.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Dashboard</span>
-                </a>
-
-                <a class="btn-nav-white" href="planos.html">
-                    <img src="../assets/iconPlanejamento.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Planos</span>
-                </a>
-
-                <a class="btn-nav-white" href="empresa.html">
-                    <img src="../assets/iconEmpresa.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Empresa</span>
-                </a>
-
-                <a class="btn-nav-white ativo" href="perfil.html">
-                    <img src="../assets/iconPerfilv.png"
-                        alt=""
-                        class="icon-nav">
-                    <span>Perfil</span>
-                </a>
-
-            </nav>
-
-            <footer class="sidebar-footer">
-
-                <div class="user-container">
-
-                    <div class="user-text">
-                        <span class="user-name">Usuário</span>
-                        <span class="user-email">
-                            usuario@gmail.com
-                        </span>
-                    </div>
-
-                </div>
-
-                <button id="btn-logout"
-                    class="icon-logout"
-                    onclick="limparSessao()">
-
-                    <img src="../assets/iconSair.png"
-                        alt="Sair">
-
-                </button>
-
-            </footer>
-
-        </aside>
-
-        <!-- CONTEÚDO -->
-        <main class="conteudo">
-
-             <div class="model-perfil">
-
-         <div class="header">
-               <p>Empresa > <span class="palavra">Perfil</span></p>
-            <h1>Visão Geral</h1>
-            <h3>Informações do funcionário da empresa</h3>
-         </div>
-
-            <div class="overview">
-                <div class="perfil">
-                    <i class="fi fi-rs-user-pen icon-perfil"></i>
-                    <div class="edit">
-                        <h1>Seus dados</h1>
-                        <p>Mantenha suas sempre atualizadas.</p>
-                    </div>
-                    <div class="function entry-function">
-                        <i class="fi fi-rr-briefcase"></i>
-                        <span> Ex: Tecnologia</span>
-                    </div>
-                </div>
-
-                <div class="input-dada">
-
-                    <div class="first-dada">
-                       
-                        Nome completo: <br>
-                        <div class="entry">
-                            <i class="fi fi-rr-user icon-dada"></i>
-                           <input type="text" value="Richard " disabled>
-                        </div>
-
-                        CPF: <br>
-                        <div class="entry">
-                            <i class="fi fi-rr-id-card icon-dada"></i>
-                            <input type="number" placeholder="XXX.XXX.XXX-XX">
-                        </div>
-                    </div>
-
-                    <div class="second-dada">
-                        Email: <br>
-                        <div class="entry">
-                            <i class="fi fi-rr-envelope icon-dada"></i>
-                            <input type="email" placeholder="email@gmail.com"> 
-                        </div>
-
-                        Senha: <br>
-                        <div class="entry">
-                            <i class="fi fi-rr-lock icon-dada"></i>
-                            <input type="password" placeholder="*******">
-                        </div>
-                    </div> 
-                </div>
-
-                 <div class="botao">
-                <a href="#">
-                    <button>
-                        <span>Atualizar Dados</span> 
-                        <i class="fi fi-rr-arrow-small-right seta"></i>
-                    </button>
-                </a>
-            </div>
-
-            </div>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="logo">
+          <a href="index.html">
+            <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
+          </a>
         </div>
 
+        <nav class="menu-lateral">
+          <a class="btn-nav-white" href="index.html">
+            <img src="../assets/IconDashboard.svg" alt="" class="icon-nav" />
 
-        </main>
+            <span>Dashboard</span>
+          </a>
 
+          <a class="btn-nav-white" href="planos.html">
+            <img src="../assets/iconPlanejamento.svg" alt="" class="icon-nav" />
+            <span>Planos</span>
+          </a>
+
+          <a class="btn-nav-white" href="empresa.html">
+            <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
+            <span>Empresa</span>
+          </a>
+
+
+          <a class="btn-nav-white" href="eventos.html">
+            <img src="../assets/iconEventos.svg" alt="" class="icon-nav" />
+            <span>Eventos</span>
+          </a>
+
+
+          <a class="btn-nav-white ativo" href="perfil.html">
+            <img src="../assets/iconPerfilv.png" alt="" class="icon-nav" />
+            <span>Perfil</span>
+          </a>
+
+
+          <a class="btn-nav-white" href="funcionarios.html">
+            <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
+            <span>Gerenciar Funcionários</span>
+          </a>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <div class="user-container">
+            <div class="user-text">
+
+              <span class="user-name" id="sidebar_nome"> </span>
+              <span class="user-email" id="sidebar_email"> </span>
+            </div>
+          </div>
+
+          <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
+            <img src="../assets/iconSair.png" alt="Sair" />
+          </button>
+        </footer>
+      </aside>
+
+      <!-- CONTEÚDO -->
+      <main class="conteudo">
+        <div class="model-perfil">
+          <div class="header">
+            <p>Empresa > <span class="palavra">Perfil</span></p>
+            <h1>Visão Geral</h1>
+            <h3>Informações do funcionário da empresa</h3>
+          </div>
+
+          <div class="overview">
+            <div class="perfil">
+              <i class="fi fi-rs-user-pen icon-perfil"></i>
+              <div class="edit">
+                <h1>Seus dados</h1>
+                <p>Mantenha suas informações sempre atualizadas.</p>
+              </div>
+              <div class="function entry-function">
+                <i class="fi fi-rr-briefcase"></i>
+                <span id="cargo_funcionario"> Cargo </span>
+              </div>
+            </div>
+
+            <div class="input-dada">
+              <div class="first-dada">
+                Nome completo: <br />
+                <div class="entry">
+                  <i class="fi fi-rr-user icon-dada"></i>
+                  <input type="text" id="input_nome" />
+                </div>
+
+                CPF: <br />
+                <div class="entry">
+                  <i class="fi fi-rr-id-card icon-dada"></i>
+                  <input type="text" id="input_cpf" disabled />
+                </div>
+              </div>
+
+              <div class="second-dada">
+                Email: <br />
+                <div class="entry">
+                  <i class="fi fi-rr-envelope icon-dada"></i>
+                  <input type="email" id="input_email" />
+                </div>
+
+                Senha: <br />
+                <div class="entry">
+                  <i class="fi fi-rr-lock icon-dada"></i>
+                  <input type="password" id="input_senha" />
+                </div>
+              </div>
+            </div>
+
+            <div class="botao">
+              <button type="button" onclick="atualizarDados()">
+                <span>Atualizar Dados</span>
+                <i class="fi fi-rr-arrow-small-right seta"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-
-</body>
+  </body>
 </html>

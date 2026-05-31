@@ -1,4 +1,5 @@
 var empresaModel = require("../models/empresaModel");
+var emailService = require("../services/emailService");
 
 function listar(req, res) {
   empresaModel.listar()
@@ -148,6 +149,7 @@ function cadastrar(req, res) {
     })
     .then((resultado) => {
       if (resultado) {
+        emailService.enviarCodigo(razaoSocial, email, codigoAtivacao);
         res.status(201).json(resultado);
       }
     })

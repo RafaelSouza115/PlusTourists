@@ -71,34 +71,51 @@
       <main class="conteudo">
         <div class="content">
           <div class="options" id="buttons">
-            <button class="destaque" id="btnEmpresa" onclick="empresa()">
+            <button class="destaque" id="btnEmpresa" onclick="mostrarAba('formEmpresa')">
               <p>Dados da Empresa</p>
             </button>
-            <button id="btnEndereco" onclick="endereco()">
-              <p>Endereço</p>
-            </button>
+            <button id="btnEndereco" onclick="mostrarAba('formEndereco')"><p>Endereço</p></button>
           </div>
           <div class="edit">
-            <h2 id="title">Dados da Empresa</h2>
-            <div class="inp" id="inp">
-              <div class="iptOpt">
-                <p>Razão Social</p>
-                <input type="text" id="iptRazaoSocial" placeholder="Ex: PlusTourists LTDA" />
-              </div>
-              <div class="iptOpt">
-                <p>Nome Fantasia</p>
-                <input type="text" id="iptNomeFantasia" placeholder="Ex: PlusTourists" />
-              </div>
-              <div class="iptOpt">
-                <p>CNPJ</p>
-                <input type="text" id="iptCnpj" placeholder="00.000.000/0000-000" maxlength="14" />
-              </div>
-              <div class="iptOpt">
-                <p>E-mail responsável</p>
-                <input type="text" id="iptEmail" placeholder="contato@empresa.com.br" />
+            <div id="formEmpresa">
+              <h2 id="title">Dados da Empresa</h2>
+              <div class="inp" id="inp">
+                <div class="iptOpt">
+                  <p>Razão Social</p>
+                  <input type="text" id="iptRazaoSocial" disabled />
+                </div>
+                <div class="iptOpt">
+                  <p>Nome Fantasia</p>
+                  <input type="text" id="iptNomeFantasia" disabled />
+                </div>
+                <div class="iptOpt">
+                  <p>CNPJ</p>
+                  <input type="text" id="iptCnpj" disabled maxlength="14" />
+                </div>
+                <div class="iptOpt">
+                  <p>E-mail responsável</p>
+                  <input type="text" id="iptEmail" disabled />
+                </div>
               </div>
             </div>
-            <button>Atualizar</button>
+            <div id="formEndereco" style="display: none">
+              <h2 id="title">Endereco</h2>
+              <div class="inp" id="inp">
+                <div class="iptOpt">
+                  <p>CEP</p>
+                  <input type="text" id="iptCep" disabled maxlength="8" />
+                </div>
+                <div class="iptOpt">
+                  <p>Complemento</p>
+                  <input type="text" id="iptComplemento" disabled />
+                </div>
+                <div class="iptOpt">
+                  <p>Numero</p>
+                  <input type="text" id="iptNumero" disabled maxlength="6" />
+                </div>
+              </div>
+            </div>
+            <button onclick="toggleEdicao(this)">Atualizar Dados</button>
             <p id="ultimaAtualizacao">Data da última atualização: 01/01/2026 às 14h 30min</p>
           </div>
         </div>

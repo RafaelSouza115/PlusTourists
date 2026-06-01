@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -10,67 +11,64 @@
     <script src="../js/dashboard/sidebar.js" defer></script>
     <link rel="icon" href="../assets/logoIcon.png" />
     <title>Planos</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="janela">
-      <!-- SIDEBAR -->
-      <aside class="sidebar">
-        <div class="logo">
-          <a href="index.html">
-            <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
-          </a>
-        </div>
-
-        <nav class="menu-lateral">
-          <a class="btn-nav-white" href="index.html">
-            <img src="../assets/IconDashboard.svg" alt="" class="icon-nav" />
-
-            <span>Dashboard</span>
-          </a>
-
-          <a class="btn-nav-white ativo" href="planos.html">
-            <img src="../assets/iconPlanev.png" alt="" class="icon-nav" />
-            <span>Planos</span>
-          </a>
-
-          <a class="btn-nav-white" href="empresa.html">
-            <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
-            <span>Empresa</span>
-          </a>
-
-
-          <a class="btn-nav-white" href="eventos.html">
-            <img src="../assets/iconEventos.svg" alt="" class="icon-nav" />
-            <span>Eventos</span>
-          </a>
-          <a class="btn-nav-white" href="perfil.html">
-            <img src="../assets/iconPerfil.svg" alt="" class="icon-nav" />
-            <span>Perfil</span>
-          </a>
-
-
-          <a class="btn-nav-white" href="funcionarios.html">
-            <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
-            <span>Gerenciar Funcionários</span>
-          </a>
-
-        </nav>
-
-        <footer class="sidebar-footer">
-          <div class="user-container">
-            <div class="user-text">
-              <span class="user-name" id="sidebar_nome"> </span>
-              <span class="user-email" id="sidebar_email"> </span>
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="index.html">
+                    <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
+                </a>
             </div>
-          </div>
 
-                <button id="btn-logout"
-                    class="icon-logout"
-                    onclick="limparSessao()">
+            <nav class="menu-lateral">
+                <a class="btn-nav-white" href="index.html">
+                    <img src="../assets/IconDashboard.svg" alt="" class="icon-nav" />
 
-                    <img src="../assets/iconSair.png"
-                        alt="Sair">
+                    <span>Dashboard</span>
+                </a>
+
+                <a class="btn-nav-white ativo" href="planos.html">
+                    <img src="../assets/iconPlanev.png" alt="" class="icon-nav" />
+                    <span>Planos</span>
+                </a>
+
+                <a class="btn-nav-white" href="empresa.html">
+                    <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
+                    <span>Empresa</span>
+                </a>
+
+
+                <a class="btn-nav-white" href="eventos.html">
+                    <img src="../assets/iconEventos.svg" alt="" class="icon-nav" />
+                    <span>Eventos</span>
+                </a>
+                <a class="btn-nav-white" href="perfil.html">
+                    <img src="../assets/iconPerfil.svg" alt="" class="icon-nav" />
+                    <span>Perfil</span>
+                </a>
+
+
+                <a class="btn-nav-white" href="funcionarios.html">
+                    <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
+                    <span>Gerenciar Funcionários</span>
+                </a>
+
+            </nav>
+
+            <footer class="sidebar-footer">
+                <div class="user-container">
+                    <div class="user-text">
+                        <span class="user-name" id="sidebar_nome"> </span>
+                        <span class="user-email" id="sidebar_email"> </span>
+                    </div>
+                </div>
+
+                <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
+
+                    <img src="../assets/iconSair.png" alt="Sair">
 
                 </button>
 
@@ -78,234 +76,424 @@
 
         </aside>
 
-        <div class="header-right">
+
+        <div class="header-topo">
 
             <div class="topo">
-                <h1>Planos</h1>
-
-                <button class="btn-criar">+ Criar Plano</button>
-
-                <div class="tabs">
-                    <button class="ativo" onclick="mostrarAba('validados', this)">
-                        <p>Validados</p>
-                    </button>
-                    <button onclick="mostrarAba('pendentes', this)">
-                        <p>Pendentes</p>
-                    </button>
+                <div class="texto-topo">
+                    <h1>Planos</h1>
+                    <p>Utilize os dados da plataforma para estruturar os melhores planos para sua empresa</p>
+                    <div class="acoes">
+                    <div class="tabs">
+                        <button class="ativo" onclick="mostrarAba('validados', this)">
+                            <p>Validados</p>
+                        </button>
+                        <button onclick="mostrarAba('pendentes', this)">
+                            <p>Pendentes</p>
+                        </button>
+                    </div>
                 </div>
             </div>
 
+                </div>
 
-            <div class="filtros">
-                <select>
-                    <option>País de Origem</option>
-                </select>
-                <select>
-                    <option>Destino</option>
-                </select>
-                <select>
-                    <option>Duração</option>
-                </select>
-                <select>
-                    <option>Período</option>
-                </select>
+                
+            <div class="header-right">
+                <div id="btn-planos">
+                    <button class="btn-criar" onclick="abrirModal()">+ Criar Plano</button>
+                </div>
+                <div class="filtros">
+                    <select>
+                        <option>País de Origem</option>
+                    </select>
+                    <select>
+                        <option>Destino</option>
+                    </select>
+                    <select>
+                        <option>Duração</option>
+                    </select>
+                    <select>
+                        <option>Período</option>
+                    </select>
+                </div>
+
+                <div id="validados" class="cards-section">
+                    <div class="carousel-container">
+                        <button class="seta" onclick="voltarCard('validados')">&#10094;</button>
+
+                        <div class="carousel-viewport">
+                            <div class="cards" id="esteira-validados">
+
+                                <div class="card">
+                                    <h3>Férias em<br>Salvador</h3>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/pin.png"
+                                                alt="pin"></div>
+                                        <p><strong>Destino:</strong><br>Salvador</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/clock.png"
+                                                alt="pin"></div>
+                                        <p><strong>Duração:</strong><br>3 dias</p>
+                                    </div>
+                                    <div class="info-item no-border">
+                                        <div class="icon-circle"><img class="icones-card"
+                                                src="/public/assets/calendario.png" alt="pin"></div>
+                                        <p><strong>Período:</strong><br>Jun - Jul</p>
+                                    </div>
+                                    <div class="roteiro">
+                                        <button class="btn-ampliar" onclick="modelAbrirAmpliar(this)">
+                                            <img class="icones-card" src="/public/assets/roteiro.png" alt="pin"> Ampliar
+                                            Roteiro
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <h3>Férias em<br>Salvador</h3>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/pin.png"
+                                                alt="pin"></div>
+                                        <p><strong>Destino:</strong><br>Salvador</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/clock.png"
+                                                alt="pin"></div>
+                                        <p><strong>Duração:</strong><br>3 dias</p>
+                                    </div>
+                                    <div class="info-item no-border">
+                                        <div class="icon-circle"><img class="icones-card"
+                                                src="/public/assets/calendario.png" alt="pin"></div>
+                                        <p><strong>Período:</strong><br>Jun - Jul</p>
+                                    </div>
+                                    <div class="roteiro">
+                                        <button class="btn-ampliar">
+                                            <img class="icones-card" src="/public/assets/roteiro.png" alt="pin"> Ampliar
+                                            Roteiro
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <h3>Férias em<br>Salvador</h3>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/pin.png"
+                                                alt="pin"></div>
+                                        <p><strong>Destino:</strong><br>Salvador</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/clock.png"
+                                                alt="pin"></div>
+                                        <p><strong>Duração:</strong><br>3 dias</p>
+                                    </div>
+                                    <div class="info-item no-border">
+                                        <div class="icon-circle"><img class="icones-card"
+                                                src="/public/assets/calendario.png" alt="pin"></div>
+                                        <p><strong>Período:</strong><br>Jun - Jul</p>
+                                    </div>
+                                    <div class="roteiro">
+                                        <button class="btn-ampliar">
+                                            <img class="icones-card" src="/public/assets/roteiro.png" alt="pin"> Ampliar
+                                            Roteiro
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <button class="seta" onclick="avancarCard('validados')">&#10095;</button>
+                    </div>
+
+                    <div class="bolinhas" id="bolinhas-validados">
+                        <span class="bola ativa"></span>
+                        <span class="bola"></span>
+                    </div>
+                </div>
+
+                <div id="pendentes" class="cards-section" style="display: none;">
+                    <div class="carousel-container">
+                        <button class="seta" onclick="voltarCard('pendentes')">&#10094;</button>
+
+                        <div class="carousel-viewport">
+                            <div class="cards" id="esteira-pendentes">
+
+                                <div class="card">
+                                    <h3>Férias em<br>Salvador</h3>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/pin.png"
+                                                alt="pin"></div>
+                                        <p><strong>Destino:</strong><br>Salvador</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/clock.png"
+                                                alt="pin"></div>
+                                        <p><strong>Duração:</strong><br>3 dias</p>
+                                    </div>
+                                    <div class="info-item no-border">
+                                        <div class="icon-circle"><img class="icones-card"
+                                                src="/public/assets/calendario.png" alt="pin"></div>
+                                        <p><strong>Período:</strong><br>Jun - Jul</p>
+                                    </div>
+                                    <div class="roteiro">
+                                        <button class="btn-ampliar">
+                                            <img class="icones-card" src="/public/assets/roteiro.png" alt="pin"> Ampliar
+                                            Roteiro
+                                        </button>
+                                    </div>
+                                    <div class="botoes-validacao">
+                                        <button class="btn-validar" onclick="validar(this)">Validar</button>
+                                        <button class="btn-excluir" onclick="excluir(this)">Excluir</button>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <h3>Férias em<br>Salvador</h3>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/pin.png"
+                                                alt="pin"></div>
+                                        <p><strong>Destino:</strong><br>Salvador</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/clock.png"
+                                                alt="pin"></div>
+                                        <p><strong>Duração:</strong><br>3 dias</p>
+                                    </div>
+                                    <div class="info-item no-border">
+                                        <div class="icon-circle"><img class="icones-card"
+                                                src="/public/assets/calendario.png" alt="pin"></div>
+                                        <p><strong>Período:</strong><br>Jun - Jul</p>
+                                    </div>
+                                    <div class="roteiro">
+                                        <button class="btn-ampliar">
+                                            <img class="icones-card" src="/public/assets/roteiro.png" alt="pin"> Ampliar
+                                            Roteiro
+                                        </button>
+                                    </div>
+                                    <div class="botoes-validacao">
+                                        <button class="btn-validar" onclick="validar(this)">Validar</button>
+                                        <button class="btn-excluir" onclick="excluir(this)">Excluir</button>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <h3>Férias em<br>Salvador</h3>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/pin.png"
+                                                alt="pin"></div>
+                                        <p><strong>Destino:</strong><br>Salvador</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="icon-circle"><img class="icones-card" src="/public/assets/clock.png"
+                                                alt="pin"></div>
+                                        <p><strong>Duração:</strong><br>3 dias</p>
+                                    </div>
+                                    <div class="info-item no-border">
+                                        <div class="icon-circle"><img class="icones-card"
+                                                src="/public/assets/calendario.png" alt="pin"></div>
+                                        <p><strong>Período:</strong><br>Jun - Jul</p>
+                                    </div>
+                                    <div class="roteiro">
+                                        <button class="btn-ampliar">
+                                            <img class="icones-card" src="/public/assets/roteiro.png" alt="pin"> Ampliar
+                                            Roteiro
+                                        </button>
+                                    </div>
+                                    <div class="botoes-validacao">
+                                        <button class="btn-validar" onclick="validar(this)">Validar</button>
+                                        <button class="btn-excluir" onclick="excluir(this)">Excluir</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <button class="seta" onclick="avancarCard('pendentes')">&#10095;</button>
+                    </div>
+
+                    <div class="bolinhas" id="bolinhas-pendentes">
+                        <span class="bola ativa"></span>
+                        <span class="bola"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="modal-plano" class="modal-container" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Crie seu plano personalizado</h2>
+                <button class="btn-fechar" onclick="fecharModal()">
+                    <img class="icones-card" src="/public/assets/sair.png" alt="sair">
+                </button>
             </div>
 
-            <div id="validados" class="cards-section">
+            <form class="modal-form" onsubmit="event.preventDefault();">
+                <div class="form-group">
+                    <label>Nome do Plano:</label>
+                    <input type="text" placeholder="Ex: Férias em Salvador" required>
+                </div>
 
-                <div class="cards">
+                <div class="form-group">
+                    <label>Destino:</label>
+                    <input type="text" placeholder="Ex: Salvador" required>
+                </div>
 
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
+                <div class="linha-dupla">
+                    <div class="form-group">
+                        <label>Data inicial:</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Data final:</label>
+                        <input type="date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Eventos do local:</label>
+                    <div class="linha-eventos">
+                        <select>
+                            <option value="" disabled selected>Selecione os eventos</option>
+                        </select>
+                        <button type="button" class="btn-adicionar" onclick="adicionarEvento()">+</button>
+                    </div>
+
+                    <input type="text" class="input-evento-selecionado" value="Evento Exemplo 1" readonly>
+                </div>
+
+                <button type="button" class="btn-salvar" onclick="salvarPlano()">Criar Plano</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-roteiro" class="modal-container" style="display: none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2>Detalhes do Roteiro</h2>
+                <button class="btn-fechar" onclick="fecharModalRoteiro()">
+                    ✖
+                </button>
+            </div>
+
+            <div class="header-cabecalho">
+                <div class="info-cabecalho">
+                    <div class="texto-cabecalho">
+                        <div class="icon-roteiro"></div>
+                        <div>
+                            <span>Destino</span>
+                            <p id="destino">Salvador</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-cabecalho">
+                    <div class="texto-cabecalho">
+                        <div class="icon-roteiro"></div>
+                        <div>
+                            <span>Duração</span>
+                            <p id="duracao">3 dias</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-cabecalho">
+                    <div class="texto-cabecalho">
+                        <div class="icon-roteiro"></div>
+                        <div>
+                            <span>Período</span>
+                            <p id="periodo">Jun - Jul</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="linha"></div>
+
+            <div class="info-grid">
+                <div class="titulo-model">
+                    <div class="icon-roteiro"></div>
+                    <h3>Informações do Roteiro</h3>
+                </div>
+                <div class="linha-dupla-roteiro">
+                    <div class="info-roteiro">
+                        <div class="icon-roteiro"></div>
+                        <div class="detalhes-roteiro">
+                            <span>Nome do Plano</span>
+                            <p id="nomePlano">Férias em Salvador</p>
                         </div>
                     </div>
 
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
+                    <div class="info-roteiro">
+                        <div class="icon-roteiro"></div>
+                        <div class="detalhes-roteiro">
+                            <span>Destino:</span>
+                            <p id="criado">Salvador</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linha-dupla-roteiro">
+                    <div class="info-roteiro">
+                        <div class="icon-roteiro"></div>
+                        <div class="detalhes-roteiro">
+                            <span>Data Inicial:</span>
+                            <p id="periodo">01/06/2025</p>
                         </div>
                     </div>
 
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
+                    <div class="info-roteiro">
+                        <div class="icon-roteiro"></div>
+                        <div class="detalhes-roteiro">
+                            <span>Data Final:</span>
+                            <p id="criado">01/06/2026</p>
                         </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="linha"></div>
+            <div class="eventos-box">
+
+                <div class="titulo-model">
+                    <div class="icon-roteiro"></div>
+                    <h3>Eventos do Roteiro</h3>
+                </div>
+
+                <div class="evento-card">
+                    <div class="evento-header">
+                        <h4>Festa de São João</h4>
+                        <span> Data do Evento:</span>
+                        <p>01/06/2026</p>
+                    </div>
+                    <div class="descricao-roteiro">
+                        <div class="linha-info">
+                            <span>Local:</span>
+                            <p>Salvador</p>
+                        </div>
+                        <div class="linha-info">
+                            <span>Classificação:</span>
+                            <p>Livre</p>
+                        </div>
+
                     </div>
 
                 </div>
 
-                <div class="cards-dois">
-
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
 
-            <div id="pendentes" class="cards-section" style="display: none;">
 
-                <div class="cards">
-
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
-                        </div>
-
-                        <div class="botoes-validacao">
-                            <button class="btn-validar">Validar</button>
-                            <button class="btn-excluir">Excluir</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
-                        </div>
-
-                        <div class="botoes-validacao">
-                            <button class="btn-validar">Validar</button>
-                            <button class="btn-excluir">Excluir</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
-                        </div>
-
-                        <div class="botoes-validacao">
-                            <button class="btn-validar">Validar</button>
-                            <button class="btn-excluir">Excluir</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="cards-dois">
-
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
-                        </div>
-
-                        <div class="botoes-validacao">
-                            <button class="btn-validar">Validar</button>
-                            <button class="btn-excluir">Excluir</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
-                        </div>
-
-                        <div class="botoes-validacao">
-                            <button class="btn-validar">Validar</button>
-                            <button class="btn-excluir">Excluir</button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Férias em Salvador</h3>
-                        <p>Destino: Salvador</p>
-                        <p>Duração: 3 dias</p>
-                        <p>Período: Jun - Jul</p>
-
-                        <div class="roteiro">
-                            <p>Roteiro:</p>
-                            <button>Ampliar</button>
-                        </div>
-
-                        <div class="botoes-validacao">
-                            <button class="btn-validar">Validar</button>
-                            <button class="btn-excluir">Excluir</button>
-                        </div>
-                    </div>
-
-                </div>
-
+            <div class="modal-footer">
+                <button class="btn-salvar" onclick="fecharModalRoteiro()">Fechar</button>
             </div>
 
-            </div>
+        </div>
+    </div>
+    </div>
 
 </body>
+
 </html>
 
 <script>
@@ -325,8 +513,99 @@
 
         botao.classList.add("ativo");
     }
+
+    let pagValidados = 0;
+    let pagPendentes = 0;
+
+    function avancarCard(aba) {
+        if (aba === 'validados') {
+            if (pagValidados < 1) {
+                pagValidados++;
+                atualizarCarrossel('validados', pagValidados);
+            }
+        } else {
+            if (pagPendentes < 1) {
+                pagPendentes++;
+                atualizarCarrossel('pendentes', pagPendentes);
+            }
+        }
+    }
+
+    function voltarCard(aba) {
+        if (aba === 'validados') {
+            if (pagValidados > 0) {
+                pagValidados--;
+                atualizarCarrossel('validados', pagValidados);
+            }
+        } else {
+            if (pagPendentes > 0) {
+                pagPendentes--;
+                atualizarCarrossel('pendentes', pagPendentes);
+            }
+        }
+    }
+    function atualizarCarrossel(aba, paginaAtual) {
+
+        let deslocamento = paginaAtual * 780;
+
+        document.querySelector("#esteira-" + aba).style.transform = "translateX(-" + deslocamento + "px)";
+
+        let containerBolinhas = document.querySelector("#bolinhas-" + aba);
+        let listaBolas = containerBolinhas.querySelectorAll(".bola");
+
+        listaBolas.forEach(bola => bola.classList.remove("ativa"));
+        listaBolas[paginaAtual].classList.add("ativa");
+    }
+
+
+    function abrirModal() {
+        document.getElementById("modal-plano").style.display = "flex";
+    }
+
+    function fecharModal() {
+        document.getElementById("modal-plano").style.display = "none";
+        document.querySelector(".modal-form").reset();
+
+        const eventosCriados = document.querySelectorAll(".modal-form .input-evento-selecionado");
+        eventosCriados.forEach(input => input.remove());
+    }
+
+    function adicionarEvento() {
+        const container = document.querySelector('.linha-eventos').parentElement;
+
+
+        const select = document.querySelector('.linha-eventos select');
+        const textoEvento = select.options[select.selectedIndex].text;
+
+
+        const novoInput = document.createElement('input');
+        novoInput.type = 'text';
+        novoInput.className = 'input-evento-selecionado';
+        novoInput.value = textoEvento;
+        novoInput.readOnly = true;
+
+        container.appendChild(novoInput);
+    }
+
+    function modelAbrirAmpliar() {
+        document.getElementById("modal-roteiro").style.display = "flex";
+    }
+
+    function fecharModalRoteiro() {
+        document.getElementById("modal-roteiro").style.display = "none";
+        document.querySelector(".modal-form").reset();
+
+        const eventosCriados = document.querySelectorAll(".modal-form .input-evento-selecionado");
+        eventosCriados.forEach(input => input.remove());
+    }
+
+
+    fecharModal();
+
+
 </script>
 
-       
+
 </body>
+
 </html>

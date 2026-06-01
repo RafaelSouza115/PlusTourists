@@ -1,5 +1,5 @@
-school\sptech\EmailService$1.class
-school\sptech\Slack.class
-school\sptech\EmailService.class
-school\sptech\App.class
-school\sptech\CadastroService.class
+school/sptech/CadastroService.class
+school/sptech/Slack.class
+school/sptech/App.class
+school/sptech/EmailService.class
+school/sptech/EmailService$1.class

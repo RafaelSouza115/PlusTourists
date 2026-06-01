@@ -27,19 +27,19 @@ function buscarDados() {
 
         var cargo = "";
 
-        if (funcionario.nivel_acesso == 0) {
+        if (funcionario.nivel_acesso == 1) {
 
             cargo = "Gerente";
 
-        } else if (funcionario.nivel_acesso == 1) {
+        } else if (funcionario.nivel_acesso == 2) {
 
             cargo = "Analista Sênior";
 
-        } else if (funcionario.nivel_acesso == 2) {
+        } else if (funcionario.nivel_acesso == 3) {
 
             cargo = "Analista";
 
-        } else if (funcionario.nivel_acesso == 3) {
+        } else if (funcionario.nivel_acesso == 4) {
 
             cargo = "Empresa PlusTourists";
 
@@ -64,7 +64,7 @@ function habilitarEdicao() {
     input_senha.value = "";
 
     btn_editar.style.display = "none";
-
+    icone_senha.style.display = "block";
     btn_cancelar.style.display = "inline-flex";
     btn_salvar.style.display = "inline-flex";
 }
@@ -110,16 +110,16 @@ function atualizarDados() {
         input_senha.value = "";
         input_senha.placeholder = "********";
 
-        btn_editar.style.display = "inline-flex";
+        btn_editar.style.display = "block";
 
         btn_cancelar.style.display = "none";
         btn_salvar.style.display = "none";
 
-        alert(dados.mensagem);
+        abrirModal(dados.mensagem);
 
     } else {
 
-        alert(dados.mensagem);
+        abrirModal(dados.mensagem);
 
     }
 
@@ -139,10 +139,14 @@ function cancelarEdicao() {
     input_email.setAttribute("readonly", true);
     input_senha.setAttribute("readonly", true);
 
-    btn_editar.style.display = "inline-flex";
+    btn_editar.style.display = "block";
 
     btn_cancelar.style.display = "none";
     btn_salvar.style.display = "none";
+
+    icone_senha.style.display = "none";
+    input_senha.type = "password";
+    icone_senha.className = "fi fi-rr-eye";
 }
 
 function formatarCPF(cpf) {
@@ -154,6 +158,34 @@ function formatarCPF(cpf) {
         '$1.$2.$3-$4'
     );
 }
+
+function alternarSenha() {
+
+    if (input_senha.type === "password") {
+
+        input_senha.type = "text";
+        icone_senha.className = "fi fi-rr-eye-crossed";
+
+    } else {
+
+        input_senha.type = "password";
+        icone_senha.className = "fi fi-rr-eye";
+
+    }
+}
+
+function abrirModal(mensagem) {
+    textoModal.innerHTML = mensagem;
+    modalMensagem.classList.add("aberto");
+}
+
+function fecharModal() {
+    modalMensagem.classList.remove("aberto");
+}
+
+document
+    .getElementById("fecharModal")
+    .addEventListener("click", fecharModal);
 
 function limparSessao() {
 

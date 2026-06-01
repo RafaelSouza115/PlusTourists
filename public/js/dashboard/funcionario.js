@@ -20,24 +20,26 @@ function buscarDados() {
         input_email.value = funcionario.email;
         input_cpf.value = formatarCPF(funcionario.cpf);
 
+        input_senha.placeholder = "********";
+
         sidebar_nome.innerHTML = funcionario.nome;
         sidebar_email.innerHTML = funcionario.email;
 
         var cargo = "";
 
-        if (funcionario.nivel_acesso == 0) {
+        if (funcionario.nivel_acesso == 1) {
 
             cargo = "Gerente";
 
-        } else if (funcionario.nivel_acesso == 1) {
+        } else if (funcionario.nivel_acesso == 2) {
 
             cargo = "Analista Sênior";
 
-        } else if (funcionario.nivel_acesso == 2) {
+        } else if (funcionario.nivel_acesso == 3) {
 
             cargo = "Analista";
 
-        } else if (funcionario.nivel_acesso == 3) {
+        } else if (funcionario.nivel_acesso == 4) {
 
             cargo = "Empresa PlusTourists";
 
@@ -51,6 +53,20 @@ function buscarDados() {
         console.log(erro);
 
     });
+}
+
+function habilitarEdicao() {
+
+    input_nome.removeAttribute("readonly");
+    input_email.removeAttribute("readonly");
+    input_senha.removeAttribute("readonly");
+
+    input_senha.value = "";
+
+    btn_editar.style.display = "none";
+    icone_senha.style.display = "block";
+    btn_cancelar.style.display = "inline-flex";
+    btn_salvar.style.display = "inline-flex";
 }
 
 function atualizarDados() {
@@ -87,11 +103,23 @@ function atualizarDados() {
         sidebar_nome.innerHTML = nomeVar;
         sidebar_email.innerHTML = emailVar;
 
-        alert(dados.mensagem);
+        input_nome.setAttribute("readonly", true);
+        input_email.setAttribute("readonly", true);
+        input_senha.setAttribute("readonly", true);
+
+        input_senha.value = "";
+        input_senha.placeholder = "********";
+
+        btn_editar.style.display = "block";
+
+        btn_cancelar.style.display = "none";
+        btn_salvar.style.display = "none";
+
+        abrirModal(dados.mensagem);
 
     } else {
 
-        alert(dados.mensagem);
+        abrirModal(dados.mensagem);
 
     }
 
@@ -103,6 +131,24 @@ function atualizarDados() {
     });
 }
 
+function cancelarEdicao() {
+
+    buscarDados();
+
+    input_nome.setAttribute("readonly", true);
+    input_email.setAttribute("readonly", true);
+    input_senha.setAttribute("readonly", true);
+
+    btn_editar.style.display = "block";
+
+    btn_cancelar.style.display = "none";
+    btn_salvar.style.display = "none";
+
+    icone_senha.style.display = "none";
+    input_senha.type = "password";
+    icone_senha.className = "fi fi-rr-eye";
+}
+
 function formatarCPF(cpf) {
 
     cpf = cpf.replace(/\D/g, '');
@@ -112,6 +158,34 @@ function formatarCPF(cpf) {
         '$1.$2.$3-$4'
     );
 }
+
+function alternarSenha() {
+
+    if (input_senha.type === "password") {
+
+        input_senha.type = "text";
+        icone_senha.className = "fi fi-rr-eye-crossed";
+
+    } else {
+
+        input_senha.type = "password";
+        icone_senha.className = "fi fi-rr-eye";
+
+    }
+}
+
+function abrirModal(mensagem) {
+    textoModal.innerHTML = mensagem;
+    modalMensagem.classList.add("aberto");
+}
+
+function fecharModal() {
+    modalMensagem.classList.remove("aberto");
+}
+
+document
+    .getElementById("fecharModal")
+    .addEventListener("click", fecharModal);
 
 function limparSessao() {
 

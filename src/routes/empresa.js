@@ -15,4 +15,12 @@ router.get("/buscar", function (req, res) {
     empresaController.buscarPorCnpj(req, res);
 });
 
+router.get("/buscar/:idEmpresa", function (req, res) {
+    empresaController.buscarPorId(req, res);
+});
+
+router.put("/atualizar/:idEmpresa", function (req, res) {
+    empresaController.atualizar(req, res);
+});
+
 module.exports = router;

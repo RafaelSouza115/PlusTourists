@@ -1,6 +1,7 @@
 package com.plustourists.service;
 
 import com.plustourists.model.ListaDeDados;
+import com.plustourists.model.NotificacaoErroService;
 import com.plustourists.repository.ConexaoBancoDeDados;
 import com.plustourists.log.LogsConexaoBancoDeDados;
 
@@ -25,7 +26,6 @@ public class EventoService {
         Connection conn = null;
 
         try {
-
             conn = conexao.getConexao().getConnection();
 
             conn.setAutoCommit(false);
@@ -84,11 +84,11 @@ public class EventoService {
                     // Select para buscar municipio corretamente.
 
                     Integer idEstado = 3;
-//                    conexao.getJdbcTemplate().queryForObject(
-//                            "SELECT id_estado FROM estado WHERE uf = ?",
-//                            Integer.class,
-//                            uf
-//                    );
+                    conexao.getJdbcTemplate().queryForObject(
+                            "SELECT id_estado FROM estado WHERE uf = ?",
+                            Integer.class,
+                            uf
+                    );
 
                     conexao.getJdbcTemplate().update(
                             "INSERT INTO municipio " +
@@ -109,14 +109,14 @@ public class EventoService {
                     );
 
 
-//                    conexao.getJdbcTemplate().update(
-//                            "INSERT INTO municipio " +
-//                                    "(municipio, id_estado) " +
-//                                    "SELECT ?, 2 FROM DUAL " +
-//                                    "WHERE NOT EXISTS (" +
-//                                    "SELECT 1 FROM municipio WHERE municipio = ?)",
-//                            municipio, municipio
-//                    );
+                    conexao.getJdbcTemplate().update(
+                            "INSERT INTO municipio " +
+                                    "(municipio, id_estado) " +
+                                    "SELECT ?, 2 FROM DUAL " +
+                                    "WHERE NOT EXISTS (" +
+                                    "SELECT 1 FROM municipio WHERE municipio = ?)",
+                            municipio, municipio
+                    );
 
 
                     // =====================================================
@@ -177,7 +177,7 @@ public class EventoService {
                             dado.getHorarioInicioEvento(),
                             dado.getHorarioFinalevento(),
                             parsarInteiro(dado.getEdicao2025()),
-                            2025,
+                            "2025",
                             parsarInteiro(dado.getPublicoEsperado()),
                             idEvento,
                             idOrganizador
@@ -187,7 +187,7 @@ public class EventoService {
                     inserirEdicao(
                             null, null, null, null,
                             parsarInteiro(dado.getEdicao2024()),
-                            2024,
+                            "2024",
                             null,
                             idEvento,
                             idOrganizador
@@ -195,17 +195,21 @@ public class EventoService {
 
                 } catch (Exception e) {
 
-                  //  conn.rollback(); // <- adiciona isso / ROLLBACK ERRO INTERNO
+                    conn.rollback(); // <- adiciona isso / ROLLBACK ERRO INTERNO
 
-//                    log.inserirLogs(
-//                            LocalDateTime.now(),
-//                            "ERRO",
-//                            "ERROR",
-//                            "ERRO_EVENTO",
-//                            "evento",
-//                            "Evento: " + dado.getNomeDoEvento() + " | " + e.getMessage()
-//                    );
-
+                    log.inserirLogs(
+                            LocalDateTime.now(),
+                            "ERRO",
+                            "ERROR",
+                            "ERRO_EVENTO",
+                            "evento",
+                            "Evento: " + dado.getNomeDoEvento() + " | " + e.getMessage()
+                    );
+                    NotificacaoErroService erro = new NotificacaoErroService(LocalDateTime.now(),
+                            "ERRO",
+                            "Evento: " + dado.getNomeDoEvento() + " | " + e.getMessage(),
+                            "evento");
+                    erro.notificar();
                     System.err.println(
                             "[" + LocalDateTime.now().format(formatter) + "] ERRO: " + e.getMessage()
                     );
@@ -244,14 +248,18 @@ public class EventoService {
         } finally { // Fecha conexão
 
             try {
-
                 if (conn != null) {
                     conn.close();
                 }
 
             } catch (Exception e) {
-
                 System.err.println(e.getMessage());
+                NotificacaoErroService erro = new NotificacaoErroService(
+                        LocalDateTime.now(),
+                        "ERRO",
+                        e.getMessage(),
+                        "evento");
+                erro.notificar();
             }
         }
         }
@@ -266,7 +274,7 @@ public class EventoService {
             java.time.LocalDateTime hr_inicio,
             java.time.LocalDateTime hr_fim,
             Integer publico_atingido,
-            int ano_realizacao,
+            String ano_realizacao,
             Integer publico_esperado,
             Integer id_evento,
             Integer id_organizador
@@ -313,6 +321,12 @@ public class EventoService {
 
         } catch (Exception e) {
             System.err.println("Erro ao inserir edição " + ano_realizacao + ": " + e.getMessage());
+            NotificacaoErroService erro = new NotificacaoErroService(
+                    LocalDateTime.now(),
+                    "ERRO",
+                    "Erro ao inserir edição " + ano_realizacao + ": " + e.getMessage(),
+                    "evento");
+            erro.notificar();
         }
     }
 

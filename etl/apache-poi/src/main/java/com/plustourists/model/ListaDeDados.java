@@ -32,7 +32,8 @@ public class ListaDeDados {
     private String ano;
     private String chegadas;
 
-    public ListaDeDados(String municipio, String regiaoTuristica, String nomeDoEvento, String descricaoDoEvento, String enderecoDoEvento, String mesDeRealizacaoDoEvento, Date dataInicialDoEvento, Date dataFinalDoEvento, LocalDateTime horarioInicioEvento, LocalDateTime horarioFinalevento, String tipoDeEvento, String tipoDePublico, String edicao2025, String edicao2024, String publicoEsperado, String responsavelPelaOrganizacao, String siteDoIngresso, String classificacaoEtaria) {
+    public ListaDeDados(String UF, String municipio, String regiaoTuristica, String nomeDoEvento, String descricaoDoEvento, String enderecoDoEvento, String mesDeRealizacaoDoEvento, Date dataInicialDoEvento, Date dataFinalDoEvento, LocalDateTime horarioInicioEvento, LocalDateTime horarioFinalevento, String tipoDeEvento, String tipoDePublico, String edicao2025, String edicao2024, String publicoEsperado, String responsavelPelaOrganizacao, String siteDoIngresso, String classificacaoEtaria) {
+        this.UF = UF;
         this.municipio = municipio;
         this.regiaoTuristica = regiaoTuristica;
         this.nomeDoEvento = nomeDoEvento;

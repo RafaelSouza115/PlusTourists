@@ -1,5 +1,6 @@
 package com.plustourists.reader;
 
+import com.plustourists.model.NotificacaoErroService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.plustourists.model.ListaDeDados;
@@ -8,7 +9,6 @@ import com.plustourists.log.LogsConexaoBancoDeDados;
 
 import java.io.IOException;
 import java.io.InputStream;
-//import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,10 +19,6 @@ public class LeituraExcelTuristas {
         List<ListaDeDados> turistasExtraidos = new ArrayList<>();
         DataFormatter df = new DataFormatter();
 
-        /*
-        DataFormatter df = new DataFormatter();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-*/
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
        ConexaoBancoDeDados conexao = new ConexaoBancoDeDados();
@@ -64,16 +60,16 @@ public class LeituraExcelTuristas {
 
                     // Validação de segurança: se a linha estiver totalmente vazia, pula
                     if (row.getCell(1) == null && row.getCell(3) == null) continue;
-//                    if (row.getRowNum() % 500 == 0) {
-//                        System.out.println(
-//                                "[" + LocalDateTime.now().format(formatter) + "]" +
-//                                        " | Status: PROCESSANDO" +
-//                                        " | Nível: INFO" +
-//                                        " | Ação: LEITURA_LOTE" +
-//                                        " | Tabela: registro_turismo" +
-//                                        " | Mensagem: " + row.getRowNum() + " linhas processadas"
-//                        );
-//                    }
+                    if (row.getRowNum() % 500 == 0) {
+                        System.out.println(
+                                "[" + LocalDateTime.now().format(formatter) + "]" +
+                                        " | Status: PROCESSANDO" +
+                                        " | Nível: INFO" +
+                                        " | Ação: LEITURA_LOTE" +
+                                        " | Tabela: registro_turismo" +
+                                        " | Mensagem: " + row.getRowNum() + " linhas processadas"
+                        );
+                    }
 
                     // --- Campos de Texto com Tratamento de Célula Vazia e Truncamento --
                     String viaAcesso = extrairTextoSeguro(row.getCell(0), df, 50);
@@ -92,7 +88,12 @@ public class LeituraExcelTuristas {
                     turistasExtraidos.add(turistas);
 
                 } catch (Exception e) {
-
+                    NotificacaoErroService erro = new NotificacaoErroService(
+                            LocalDateTime.now(),
+                            "ERRO",
+                            "Erro na linha " + row.getRowNum() + ": " + e.getMessage(),
+                            "registro_turismo");
+                    erro.notificar();
                     log.inserirLogs(
                             LocalDateTime.now(),
                             "ERRO",
@@ -128,7 +129,12 @@ public class LeituraExcelTuristas {
 
         } catch (IOException e) {
             System.err.println("Erro ao abrir o arquivo: " + e.getMessage());
-
+            NotificacaoErroService erro = new NotificacaoErroService(
+                    LocalDateTime.now(),
+                    "ERRO",
+                    e.getMessage(),
+                    "registro_turismo");
+            erro.notificar();
             log.inserirLogs(
                     LocalDateTime.now(),
                     "ERRO",
@@ -141,7 +147,12 @@ public class LeituraExcelTuristas {
         } catch (Exception e) {
             System.err.println("Erro inesperado: " + e.getMessage());
             e.printStackTrace();
-
+            NotificacaoErroService erro = new NotificacaoErroService(
+                    LocalDateTime.now(),
+                    "ERRO",
+                    e.getMessage(),
+                    "registro_turismo");
+            erro.notificar();
             log.inserirLogs(
                     LocalDateTime.now(),
                     "ERRO",

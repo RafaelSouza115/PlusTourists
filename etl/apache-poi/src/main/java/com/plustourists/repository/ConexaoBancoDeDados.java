@@ -15,26 +15,18 @@ public class ConexaoBancoDeDados {
         // Driver
         conexao.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
-        // Banco teste
-        String host = System.getenv("DB_HOST") != null ? System.getenv("DB_HOST") : "localhost";
-        String port = System.getenv("DB_PORT") != null ? System.getenv("DB_PORT") : "3306";
-        String database = System.getenv("DB_NAME") != null ? System.getenv("DB_NAME") : "plustourists";
-        String user = System.getenv("DB_USER") != null ? System.getenv("DB_USER") : "group";
-        String password = System.getenv("DB_PASSWORD") != null ? System.getenv("DB_PASSWORD") : "*****";
-
         // Variáveis de ambiente
-        /*
+
         String host = System.getenv("DB_HOST");
         String port = System.getenv("DB_PORT");
         String database = System.getenv("DB_NAME");
         String user = System.getenv("DB_USER");
         String password = System.getenv("DB_PASSWORD");
-         */
+
 
         // URL do banco
         String url = String.format(
                 "jdbc:mysql://%s:%s/%s?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
-               // "jdbc:mysql://%s:%s/%s?useSSL=false&serverTimezone=UTC",
                 host, port, database
         );
 
@@ -46,7 +38,7 @@ public class ConexaoBancoDeDados {
 
         try {
             conexao.getConnection();
-           // System.out.println("Conexão com o banco de dados realizada com sucesso!");
+            System.out.println("Conexão com o banco de dados realizada com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao conectar com o banco!");
             e.printStackTrace();

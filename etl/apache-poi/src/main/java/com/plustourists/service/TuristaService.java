@@ -1,6 +1,7 @@
 package com.plustourists.service;
 
 import com.plustourists.model.ListaDeDados;
+import com.plustourists.model.NotificacaoErroService;
 import com.plustourists.repository.ConexaoBancoDeDados;
 import com.plustourists.log.LogsConexaoBancoDeDados;
 
@@ -23,7 +24,6 @@ public class TuristaService {
     public void processar(List<ListaDeDados> turistas) {
         Connection conn = null;
         try {
-
             conn = conexao.getConexao().getConnection();
 
             conn.setAutoCommit(false);
@@ -198,6 +198,12 @@ public class TuristaService {
                             "registro_turismo",
                             "UF: " + dado.getUF() + " | País: " + dado.getPais() + " | " + e.getMessage()
                     );
+                    NotificacaoErroService erro = new NotificacaoErroService(
+                            LocalDateTime.now(),
+                            "ERRO",
+                            "UF: " + dado.getUF() + " | País: " + dado.getPais() + " | " + e.getMessage(),
+                            "registro_turismo");
+                    erro.notificar();
 
                     System.err.println(
                             "[" + LocalDateTime.now().format(formatter) + "] ERRO: " + e.getMessage()

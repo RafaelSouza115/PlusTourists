@@ -1,23 +1,22 @@
 <!doctype html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
+    <link rel="stylesheet" href="../style/dashboard/evento-modal.css" />
+    <link rel="stylesheet" href="../style/dashboard/evento.css" />
+    <link rel="icon" href="../assets/logoIcon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+    />
+    <script src="../js/dashboard/sidebar.js" defer></script>
+    <script src="../js/dashboard/evento-modal.js" defer></script>
+    <title>Eventos</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../style/global/global.css" />
-  <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
-  <link rel="stylesheet" href="../style/dashboard/evento.css">
-  <link rel="stylesheet" href="../style/dashboard/evento-modal.css">
-  <link rel="icon" href="../assets/logoIcon.png" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />  <script src="../js/dashboard/sidebar.js" defer></script>
-  <script src="../js/dashboard/eventos.js" defer></script>
-  <script src="../js/dashboard/evento-modal.js"></script>
-  <title>Eventos</title>
-</head>
-
-<body>
-  <div class="janela">
-
+  <body>
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="logo">
@@ -25,7 +24,6 @@
           <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
         </a>
       </div>
-
       <nav class="menu-lateral">
         <a class="btn-nav-white" href="index.html">
           <img src="../assets/IconDashboard.svg" alt="" class="icon-nav" />
@@ -47,12 +45,11 @@
           <img src="../assets/iconPerfil.svg" alt="" class="icon-nav" />
           <span>Perfil</span>
         </a>
-        <a class="btn-nav-white" href="funcionarios.html">
+        <a class="btn-nav-white" href="funcionarios/gerenciamento-funcionarios.html">
           <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
           <span>Gerenciar Funcionários</span>
         </a>
       </nav>
-
       <footer class="sidebar-footer">
         <div class="user-container">
           <div class="user-text">
@@ -65,376 +62,37 @@
         </button>
       </footer>
     </aside>
-    <!-- /sidebar -->
 
     <!-- CONTEÚDO PRINCIPAL -->
-    <main class="conteudo eventos-page">
+    <main class="eventos-page">
+      <div class="header">
+        <p>Eventos</p>
+        <span>Gerencie e visualize os eventos disponíveis</span>
+      </div>
 
       <div class="eventos-card-principal">
-
-        <!-- Cabeçalho -->
-        <div class="eventos-header">
-          <h1 class="eventos-titulo">Eventos</h1>
-          <a class="eventos-cadastrados-link">Eventos cadastrados</a>
-        </div>
-
         <!-- Filtros -->
         <div class="eventos-filtros">
           <div class="filtro-wrapper">
             <select id="filtro-destino" class="filtro-select">
-              <option value="#">Selecione: Destino</option>
-              <option value="sao-paulo">São Paulo</option>
+              <option value="">Selecione: Destino</option>
             </select>
-
           </div>
-
-          <select id="filtro-classificacao" class="filtro-classificacao" aria-label="Filtrar por classificação etária">
+          <select id="filtro-classificacao" class="filtro-classificacao">
             <option value="">Selecione: Classificação etária</option>
-            <option value="livre">Livre</option>
-            <option value="10">+10</option>
-            <option value="12">+12</option>
-            <option value="14">+14</option>
-            <option value="16">+16</option>
-            <option value="18">+18</option>
           </select>
         </div>
 
-        <!-- Carrossel de Eventos -->
+        <!-- Grid de cards — injetado pelo JS -->
         <section class="eventos-carrossel-section">
-          <button class="carrossel-btn" id="btn-anterior" >&#8249;</button>
-
-          <div class="eventos-cards-wrapper" id="eventos-cards-wrapper">
-            <!-- Card 01 -->
-            <article class="evento-card">
-              <h2 class="evento-card-titulo">Evento 01</h2>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-calendar-star" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Nome do evento:</span>
-                  <span class="card-info-value">Rock in Rio</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-map-pin" style="color:  #2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Município:</span>
-                  <span class="card-info-value">São Paulo</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-users-group" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Classificação etária:</span>
-                  <span class="card-info-value">+18</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                    <i class="ti ti-baseline-density-small" style="color:#2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Descrição</span>
-                  <span class="card-info-value">Rock in Rio é um dos maiores festivais de música</span>
-                </div>
-              </div>
-
-              <a href="#" class="btn-visualizar">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-                <p>Visualizar evento </p>
-              </a>
-            </article>
-
-            <!-- Card 02 -->
-            <article class="evento-card">
-              <h2 class="evento-card-titulo">Evento 02</h2>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-calendar-star" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Nome do evento:</span>
-                  <span class="card-info-value">Rock in Rio</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-map-pin" style="color:  #2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Município:</span>
-                  <span class="card-info-value">São Paulo</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-users-group" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Classificação etária:</span>
-                  <span class="card-info-value">+18</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                    <i class="ti ti-baseline-density-small" style="color:#2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Descrição</span>
-                  <span class="card-info-value">Rock in Rio é um dos maiores festivais de música</span>
-                </div>
-              </div>
-
-              <a href="#" class="btn-visualizar">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-                <p>Visualizar evento </p>
-              </a>
-            </article>
-
-            <!-- Card 03 -->
-            <article class="evento-card">
-              <h2 class="evento-card-titulo">Evento 03</h2>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-calendar-star" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Nome do evento:</span>
-                  <span class="card-info-value">Rock in Rio</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-map-pin" style="color: #2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Município:</span>
-                  <span class="card-info-value">São Paulo</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-users-group" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Classificação etária:</span>
-                  <span class="card-info-value">+18</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                    <i class="ti ti-baseline-density-small" style="color:#2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Descrição</span>
-                  <span class="card-info-value">Rock in Rio é um dos maiores festivais de música</span>
-                </div>
-              </div>
-
-              <a href="#" class="btn-visualizar">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-                Visualizar evento
-              </a>
-            </article>
-
-            <!-- Card 04 -->
-            <article class="evento-card">
-              <h2 class="evento-card-titulo">Evento 04</h2>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-calendar-star" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Nome do evento:</span>
-                  <span class="card-info-value">Rock in Rio</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-map-pin" style="color:  #2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Município:</span>
-                  <span class="card-info-value">São Paulo</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-users-group" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Classificação etária:</span>
-                  <span class="card-info-value">+18</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                    <i class="ti ti-baseline-density-small" style="color:#2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Descrição</span>
-                  <span class="card-info-value">Festival de música e cultura</span>
-                </div>
-              </div>
-
-              <a href="#" class="btn-visualizar">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-                <p>Visualizar evento</p>
-              </a>
-            </article>
-
-            <!-- Card 05 -->
-            <article class="evento-card">
-              <h2 class="evento-card-titulo">Evento 05</h2>
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-calendar-star" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Nome do evento:</span>
-                  <span class="card-info-value">Rock in Rio</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-map-pin" style="color:  #2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Município:</span>
-                  <span class="card-info-value">São Paulo</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-users-group" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Classificação etária:</span>
-                  <span class="card-info-value">+18</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                    <i class="ti ti-baseline-density-small" style="color:#2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Descrição</span>
-                  <span class="card-info-value">Festival de música e cultura</span>
-                </div>
-              </div>
-
-              <a href="#" class="btn-visualizar">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-                <p>Visualizar evento</p>
-              </a>
-            </article>
-
-            <!-- Card 06 -->
-            <article class="evento-card">
-              <h2 class="evento-card-titulo">Evento 06</h2>
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-calendar-star" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Nome do evento:</span>
-                  <span class="card-info-value">Rock in Rio</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-map-pin" style="color:  #2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Município:</span>
-                  <span class="card-info-value">São Paulo</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                  <i class="ti ti-users-group" style="color: #2e7d32;"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Classificação etária:</span>
-                  <span class="card-info-value">+18</span>
-                </div>
-              </div>
-
-              <div class="card-info-row">
-                <span class="card-info-icon">
-                    <i class="ti ti-baseline-density-small" style="color:#2e7d32"></i>
-                </span>
-                <div class="card-info-text">
-                  <span class="card-info-label">Descrição</span>
-                  <span class="card-info-value">Festival de música e cultura</span>
-                </div>
-              </div>
-
-              <a href="#" class="btn-visualizar">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-                <p>Visualizar evento</p>
-              </a>
-            </article>
-          </div>
-
+          <button class="carrossel-btn" id="btn-anterior">&#8249;</button>
+          <div class="eventos-cards-wrapper" id="eventos-cards-wrapper"></div>
           <button class="carrossel-btn" id="btn-proximo">&#8250;</button>
         </section>
+
+        <!-- Paginação — injetada pelo JS -->
+        <div class="paginacao" id="paginacao"></div>
       </div>
     </main>
-
-
-
-  </div>
-</body>
-
+  </body>
 </html>

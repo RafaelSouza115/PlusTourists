@@ -23,6 +23,7 @@ var funcionarioRouter = require('./src/routes/funcionario');
 var empresaRouter = require('./src/routes/empresa');
 var dashboardRouter = require('./src/routes/dashboard');
 var gerenciarFuncionarioRouter = require('./src/routes/gerenciarFuncionario');
+var eventosRouter = require('./src/routes/eventos');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,6 +34,7 @@ app.use('/funcionarios', funcionarioRouter);
 app.use('/empresas', empresaRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/gerenciar-funcionario', gerenciarFuncionarioRouter);
+app.use('/eventos', eventosRouter);
 
 app.post('/perguntar', async (req, res) => {
   const pergunta = req.body.pergunta;

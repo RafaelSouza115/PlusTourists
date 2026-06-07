@@ -4,30 +4,30 @@
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.45);
     z-index: 1000;
     display: flex;
+    visibility: hidden;
     align-items: center;
     justify-content: center;
+    background-color: rgba(0, 0, 0, 0.45);
     opacity: 0;
-    visibility: hidden;
     transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
 .modal-overlay.ativo {
-    opacity: 1;
     visibility: visible;
+    opacity: 1;
 }
 
 .modal-container {
-    background-color: #ffffff;
-    border-radius: 20px;
+    position: relative;
     width: 90%;
     max-width: 660px;
     max-height: 88vh;
-    overflow-y: auto;
     padding: 2rem 2.2rem 2rem 2.2rem;
-    position: relative;
+    overflow-y: auto;
+    background-color: #ffffff;
+    border-radius: 20px;
     transform: translateY(20px);
     transition: transform 0.25s ease;
 }
@@ -51,19 +51,19 @@
 }
 
 .modal-btn-fechar {
-    background: none;
-    border: 1.5px solid #ccc;
-    border-radius: 8px;
-    width: 36px;
-    height: 36px;
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
+    width: 36px;
+    height: 36px;
     font-size: 1.1rem;
     color: #444;
     cursor: pointer;
+    background: none;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
     transition: background-color 0.2s, border-color 0.2s;
-    flex-shrink: 0;
 }
 
 .modal-btn-fechar:hover {
@@ -81,18 +81,18 @@
 
 .modal-info-item {
     display: flex;
-    align-items: flex-start;
     gap: 0.75rem;
+    align-items: flex-start;
 }
 
 .modal-info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 38px;
     height: 38px;
     background-color: #e8f5e9;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .modal-info-icon img {
@@ -128,29 +128,29 @@
 
 /* Seção de dados agregados */
 .modal-dados-agregados {
+    margin-bottom: 1.4rem;
+    overflow: hidden;
     border: 1.5px solid #e0e0e0;
     border-radius: 14px;
-    overflow: hidden;
-    margin-bottom: 1.4rem;
 }
 
 .modal-dados-header {
     display: flex;
-    align-items: center;
     gap: 0.75rem;
+    align-items: center;
     padding: 0.85rem 1.2rem;
     background-color: #fff;
     border-bottom: 1.5px solid #e0e0e0;
 }
 
 .modal-dados-header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 32px;
     height: 32px;
     background-color: #e8f5e9;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 
@@ -159,8 +159,8 @@
     font-size: 0.82rem;
     font-weight: 800;
     color: #121212;
-    letter-spacing: 0.03em;
     text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 /* Tabela de dados */
@@ -170,11 +170,11 @@
 }
 
 .modal-dados-table td {
+    width: 50%;
     padding: 0.85rem 1.2rem;
     font-size: 0.84rem;
     color: #121212;
     border-bottom: 1.5px solid #e0e0e0;
-    width: 50%;
 }
 
 .modal-dados-table tr:last-child td {
@@ -186,18 +186,18 @@
 }
 
 .modal-dados-table .td-label {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.78rem;
     font-weight: 600;
     color: #555;
-    font-size: 0.78rem;
-    margin-bottom: 0.2rem;
-    display: block;
 }
 
 .modal-dados-table .td-value {
-    font-weight: 600;
-    font-size: 0.88rem;
-    color: #121212;
     display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #121212;
 }
 
 /* Linha de descrição dentro dos dados agregados */
@@ -207,8 +207,8 @@
 
 .td-descricao-inner {
     display: flex;
-    align-items: flex-start;
     gap: 0.75rem;
+    align-items: flex-start;
     padding: 0.85rem 1.2rem;
 }
 
@@ -224,36 +224,36 @@
 }
 
 .td-descricao-texto .td-label {
+    display: block;
+    font-size: 0.78rem;
     font-weight: 600;
     color: #555;
-    font-size: 0.78rem;
-    display: block;
 }
 
 .td-descricao-texto .td-value {
-    font-weight: 500;
-    font-size: 0.88rem;
-    color: #121212;
     display: block;
+    font-size: 0.88rem;
+    font-weight: 500;
     line-height: 1.5;
+    color: #121212;
 }
 
 /* Dots paginação */
 .modal-dots {
     display: flex;
-    justify-content: center;
     gap: 0.5rem;
+    justify-content: center;
     margin-top: 0.5rem;
 }
 
 .modal-dot {
     width: 10px;
     height: 10px;
-    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
     background-color: #ccc;
     border: none;
-    cursor: pointer;
-    padding: 0;
+    border-radius: 50%;
     transition: background-color 0.2s, transform 0.2s;
 }
 

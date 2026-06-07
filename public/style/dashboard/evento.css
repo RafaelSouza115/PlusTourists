@@ -1,65 +1,65 @@
 /* ===== EVENTOS PAGE ===== */
+body {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 24px;
+    color: white;
+    background-color: rgb(3, 141, 67);
+}
+
+.header p {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.header span {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
 
 .eventos-page {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 2rem;
-    min-height: 100vh;
-    background-color: #649B54;
     flex: 1;
-}
-
-/* Card branco principal */
-.eventos-card-principal {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 2rem 2rem 2.5rem 2rem;
-    display: flex;
     flex-direction: column;
-    flex: 1;
-    min-height: 0;
-}
-
-/* ── Cabeçalho ── */
-
-
-.eventos-header {
-    position: relative;
-    display: flex;
     align-items: center;
-    margin-bottom: 1.8rem;
+    overflow-y: auto;
+    background-color: #f3f4f6;
 }
 
-.eventos-titulo {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #121212;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+/* Card branco principal — mesmo padrão do .overview do gerenciamento */
+.eventos-card-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: min(100%, 1200px);
+    min-height: calc(80vh - 150px);
+    padding: 2rem;
+    margin: -20px auto 2rem auto;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
-
-.eventos-cadastrados-link {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.20rem;
-    font-weight: 700;
-    color: #121212;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
 
 /* ── Filtros ── */
 .eventos-filtros {
     display: flex;
-    justify-content: center;
-    gap: 12rem;
-    margin-bottom: 1.8rem;
+    flex-shrink: 0;
+    gap: 6rem;
     align-items: center;
+    justify-content: center;
 }
 
 .filtro-wrapper {
@@ -69,236 +69,260 @@
 }
 
 .filtro-wrapper select,
-.filtro-select {
-    background-color: #e8e8e8;
-    border: none;
-    text-align: center;
-    border-radius: 8px;
-    padding: 0.55rem 1.6rem 0.55rem 1.1rem;
-    font-size: 1rem;
+.filtro-select,
+.filtro-classificacao {
+    min-width: 180px;
+    padding: 0.5rem 1.1rem;
     font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
     font-weight: 600;
     color: #121212;
-    cursor: pointer;
     appearance: none;
+    cursor: pointer;
     outline: none;
-    transition: background-color 0.2s;
-    min-width: 120px;
-}
-
-.filtro-wrapper .chevron-icon {
-    position: absolute;
-    right: 0.75rem;
-    pointer-events: none;
-    width: 16px;
-    height: 16px;
-    color: #555;
-}
-
-.filtro-classificacao {
-    background-color: #e8e8e8;
-    border: none;
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
     border-radius: 8px;
-    padding: 0.55rem 1.1rem;
-    font-size: 0.9rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    color:#121212;
-    cursor: pointer;
-    appearance: none;
-    outline: none;
-    transition: background-color 0.2s;
-    min-width: 160px;
+    transition: background-color 0.2s, border-color 0.2s;
 }
 
-.filtro-classificacao:hover {
-    background-color: #dcdcdc;
+.filtro-wrapper select:focus,
+.filtro-select:focus,
+.filtro-classificacao:focus {
+    background-color: #fff;
+    border-color: rgb(3, 141, 67);
+    box-shadow: 0 0 0 3px rgb(3 141 67 / 0.12);
 }
 
-/* ── Carrossel ── */
+.filtro-classificacao:hover,
+.filtro-select:hover {
+    background-color: #e8e8e8;
+}
+
+/* ── Grid de cards (sem botões de carrossel) ── */
 .eventos-carrossel-section {
-    position: relative;
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: 18px;
-    padding: 2rem 1.2rem 0.3rem 0.4rem;
     flex: 1;
-    min-height: 300px;
+    min-height: 0;
 }
 
+/* botões removidos visualmente — mantidos no HTML para não quebrar JS */
 .carrossel-btn {
-    background: none;
-    border: none;
-    font-size: 4rem;
-    font-weight: 700;
-    color: black;
-    cursor: pointer;
-    padding: 0.8rem 0.6rem;
-    border-radius: 50%;
-    line-height: 1;
-    z-index: 2;
-}
-
-.carrossel-btn:hover {
-    background-color: rgba(255, 255, 255, 0.18);
-    transform: scale(1.12);
+    display: none;
 }
 
 .eventos-cards-wrapper {
     display: grid;
+    flex: 1;
+    grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    flex: 1;
+    min-height: 0;
 }
 
 /* ── Evento Card ── */
 .evento-card {
-    background-color: #e8f5e9;
-    border-radius: 14px;
-    padding: 1.4rem 1.2rem 1.2rem 1.2rem;
-    flex: 1;
-    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    gap: 0.45rem;
+    min-height: 0;
+    padding: 1.1rem 1.1rem 0.9rem 1.1rem;
+    overflow: hidden;
+    background-color: #f0faf1;
+    border: 1px solid #c8e6c9;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .evento-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.13);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.11);
+    transform: translateY(-3px);
 }
 
-.evento-card-titulo {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #121212;
-    margin-bottom: 0.6rem;
-}
-
-.card-info-row {
+/* Linha do topo: nome + município lado a lado */
+.evento-card-header {
     display: flex;
-    align-items: flex-start;
-    padding-top: 0.4rem;
-    gap: 0.7rem;
+    gap: 1rem;
+    align-items: center;
+    min-width: 0;
     margin-bottom: 0.2rem;
 }
 
-.card-info-icon {
-    width: 22px;
-    height: 22px;
+.evento-card-titulo {
     flex-shrink: 0;
+    max-width: 55%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #121212;
+    white-space: nowrap;
+}
+
+.evento-card-municipio {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #2e7d32;
+    white-space: nowrap;
+}
+
+.evento-card-municipio .ti {
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+
+/* Separador visual entre título e município */
+.evento-card-sep {
+    flex-shrink: 0;
+    width: 1px;
+    height: 16px;
+    background-color: #a5d6a7;
+}
+
+/* Linhas de info */
+.card-info-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+}
+
+.card-info-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
     margin-top: 1px;
     color: #2e7d32;
 }
 
-.card-info-icon svg {
-    width: 100%;
-    height: 100%;
+.card-info-icon .ti {
+    font-size: 1.05rem;
 }
 
 .card-info-text {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .card-info-label {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    color: #121212;
+    color: #374151;
+    white-space: nowrap;
 }
 
 .card-info-value {
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 0.78rem;
     font-weight: 500;
-    color: #333;
+    color: #444;
+    white-space: nowrap;
 }
 
 /* Botão Visualizar */
 .btn-visualizar {
     display: flex;
+    gap: 0.4rem;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    border: 2px solid #121212;
-    background: none;
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    font-size: 0.82rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    color: #121212;
-    cursor: pointer;
+    padding: 0.45rem 0.8rem;
     margin-top: auto;
-    transition: background-color 0.2s, color 0.2s;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #2e7d32;
     text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: 1.5px solid #2e7d32;
+    border-radius: 7px;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .btn-visualizar:hover {
-    background-color: #121212;
     color: #fff;
+    background-color: #2e7d32;
 }
 
-.btn-visualizar svg {
-    width: 16px;
-    height: 16px;
+.btn-visualizar .ti {
+    font-size: 0.95rem;
 }
 
-/* ── Ícones como imagem ── */
-.card-info-icon-img {
-    width: 25px;
-    height: 25px;
-    object-fit: contain;
-    display: block;
+/* ── Paginação ── */
+.paginacao {
+    display: flex;
     flex-shrink: 0;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.5rem;
 }
 
-.card-info-icon-img-location {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-    display: block;
-    margin-left: -5px;
-    margin-right: auto;
+.paginacao-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
-.ti{
-font-size: 1.5rem;
+.paginacao-btn:hover {
+    color: rgb(3, 141, 67);
+    background-color: #e8f5e9;
+    border-color: rgb(3, 141, 67);
+}
+
+.paginacao-btn.ativo {
+    color: #fff;
+    background-color: rgb(3, 141, 67);
+    border-color: rgb(3, 141, 67);
+}
+
+.paginacao-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.paginacao-info {
+    padding: 0 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #9ca3af;
 }
 
 /* ── Responsivo ── */
-@media (max-width: 900px) {
-    .eventos-page {
-        padding: 1rem;
-    }
-
-    .eventos-filtros {
-        gap: 2rem;
-    }
-
-    .eventos-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.8rem;
-    }
-
-    .eventos-cadastrados-link {
-        position: static;
-        transform: none;
-    }
-
+@media (max-width: 1024px) {
     .eventos-cards-wrapper {
-        flex-direction: column;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
+}
 
-    .eventos-carrossel-section {
+@media (max-width: 700px) {
+    .eventos-filtros {
         flex-direction: column;
-        padding: 1.2rem 1rem 3rem 1rem;
+        gap: 1rem;
     }
-
-    .carrossel-btn {
-        display: none;
+    .eventos-cards-wrapper {
+        grid-template-rows: none;
+        grid-template-columns: 1fr;
     }
 }

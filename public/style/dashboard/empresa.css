@@ -1,116 +1,144 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght=100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://cdn-uicons.flaticon.com/4.0.0/uicons-regular-straight/css/uicons-regular-straight.css');
 @import url('https://cdn-uicons.flaticon.com/4.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
 
+/* RESET */
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
     font-family: 'Montserrat', sans-serif;
 }
 
+body {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    background-color: #f3f4f6;
+}
+
 .header {
-    background-color: rgb(3, 141, 67);
+    display: flex;
+    flex-direction: row;
     width: 100%;
     padding: 40px 60px 95px;
     color: white;
-}
+    background-color: rgb(3, 141, 67);
 
-.header h3 {
-    font-size: 16px;
-    font-weight: 400;
+    .header-left {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    h3 {
+        font-size: 16px;
+        font-weight: 400;
+    }
 }
 
 .overview {
-    background-color: #f3f4f6;
-    width: 85%;
-    min-height: 75vh;
     display: flex;
     flex-direction: column;
+    gap: 1.25rem;
     justify-content: flex-start;
-    border-radius: 12px;
+    width: min(100%, 1200px);
+    min-height: calc(80vh - 150px);
+    padding: 2rem;
+    margin: 2rem auto;
     margin: -60px auto 0 auto;
-    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
     box-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.1),
-        0 1px 2px rgba(0, 0, 0, 0.1);
+        0 1px 2px 0 rgb(0 0 0 / 0.05);
+
 }
+
 .perfil {
     display: flex;
-    align-items: center;
     gap: 32px;
-    margin-top: 30px;
+    align-items: center;
     padding-left: 120px;
+    margin-top: 30px;
 }
 
 
 .icon-perfil {
-    color: rgb(54, 141, 20);
-    background-color: #e7ebe5;
-    width: 90px;
-    height: 90px;
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    font-size: 42px;
+    width: 90px;
+    height: 90px;
     margin-top: -10px;
+    font-size: 42px;
+    color: rgb(54, 141, 20);
+    background-color: #e7ebe5;
+    border-radius: 50%;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0;
 }
 
 .edit h1 {
+    margin-bottom: 8px;
     font-size: 30px;
     font-weight: 700;
     line-height: 1.1;
     color: #0f172a;
-    margin-bottom: 8px;
 }
 
 .edit p {
-    font-size: 15px;
     margin-bottom: 0;
+    font-size: 15px;
     color: #111827;
 }
 
 .model-empresa {
-    width: 100%;
     position: relative;
+    width: 100%;
 }
 
 .abas-container {
-    width: 85%;
-    margin: -57px auto 0 auto;
-    display: flex;
-    justify-content: flex-end;
     position: relative;
     z-index: 20;
+    display: flex;
+    justify-content: flex-end;
+    width: 85%;
 }
 
 .options {
     display: flex;
-    background-color: #e2e8f0;
+    gap: 0;
     padding: 6px;
+    background-color: #e2e8f0;
     border-radius: 14px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    gap: 0;
 }
 
 .options button {
     display: flex;
-    align-items: center;
     gap: 10px;
-    background: transparent;
-    color: #64748b;
-    border: none;
-    outline: none;
+    align-items: center;
     padding: 12px 24px;
-    border-radius: 10px;
     font-size: 15px;
     font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    color: #64748b;
     text-transform: none;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.2s ease;
 }
 
 .options button i {
@@ -118,19 +146,19 @@
 }
 
 .options .destaque {
-    background-color: #ffffff !important;
-    color: #2e9b3d !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     position: relative;
+    color: #2e9b3d !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .options .destaque::after {
-    content: '';
     position: absolute;
+    right: 15px;
     bottom: 0;
     left: 15px;
-    right: 15px;
     height: 4px;
+    content: '';
     background-color: #2e9b3d;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -147,6 +175,7 @@
     justify-content: center;
     margin-top: 56px;
 }
+
 .first-dada,
 .second-dada {
     width: 377px;
@@ -161,25 +190,25 @@ label {
 }
 
 .entry {
-    gap: 10px;
     position: relative;
-    border: 1px solid rgb(141, 138, 138);
     display: flex;
+    gap: 10px;
     align-items: center;
-    border-radius: 8px;
+    width: 100%;
     padding: 12px 16px;
     margin-bottom: 30px;
-    width: 100%;
+    border: 1px solid rgb(141, 138, 138);
+    border-radius: 8px;
 }
 
 .entry input {
-    border: none;
+    width: 100%;
+    padding-right: 0px;
+    margin-left: 5px;
     outline: none;
     background-color: transparent;
-    margin-left: 5px;
-    padding-right: 0px;
-    width: 100%;
-    
+    border: none;
+
 }
 
 .entry input:disabled,
@@ -188,10 +217,10 @@ label {
 }
 
 .icon-dada {
-    color: rgb(54, 141, 20);
-    font-size: 16px;
     position: relative;
     top: 3px;
+    font-size: 16px;
+    color: rgb(54, 141, 20);
 }
 
 .botao {
@@ -201,27 +230,27 @@ label {
 
 .botao-acoes {
     display: flex;
-    justify-content: center;
     gap: 15px;
+    justify-content: center;
     margin-top: 30px;
 }
 
 .btn,
 .botao-acoes button {
-    background: linear-gradient(120deg, green, rgb(4, 61, 4));
-    border: none;
-    outline: none;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
     padding: 12px 22px;
+    overflow: hidden;
     font-size: 14px;
     font-weight: 600;
     color: white;
     text-transform: uppercase;
-    border-radius: 8px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
     cursor: pointer;
-    overflow: hidden;
+    outline: none;
+    background: linear-gradient(120deg, green, rgb(4, 61, 4));
+    border: none;
+    border-radius: 8px;
     transition:
         background-color 0.3s ease,
         transform 0.3s ease,
@@ -230,9 +259,9 @@ label {
 }
 
 button:hover {
-    transform: translateY(-2px);
-    opacity: 0.95;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0.95;
+    transform: translateY(-2px);
 }
 
 #btn_cancelar {
@@ -246,62 +275,62 @@ button:hover {
 
 #ultimaAtualizacao {
     margin-top: 30px;
-    text-align: center;
-    color: #666;
     font-size: 14px;
+    color: #666;
+    text-align: center;
 }
 
 .modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .modal-overlay.aberto {
-  display: flex;
+    display: flex;
 }
 
 .modal-content {
-  background: #ffffff;
-  color: #111827;
-  padding: 24px 32px;
-  border-radius: 8px;
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 24px 32px;
+    color: #111827;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 8px;
 }
 
 .modal-content p {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .btn-primary {
-  background: #2bb11c;
-  color: #fff;
+    color: #fff;
+    background: #2bb11c;
 }
 
 .erro-msg {
-    display: none;
     position: absolute;
-    bottom: -22px;       
+    bottom: -22px;
     left: 10px;
+    z-index: 5;
+    display: none;
+    font-family: 'Montserrat', sans-serif;
     font-size: 11px;
     font-weight: 500;
-    color: #e63946;      
-    font-family: 'Montserrat', sans-serif;
+    color: #e63946;
     white-space: nowrap;
-    z-index: 5;
 }
 
 @media (max-width: 1200px) {
     .input-dada {
         flex-direction: column;
-        align-items: center;
         gap: 0;
+        align-items: center;
     }
 
     .first-dada,

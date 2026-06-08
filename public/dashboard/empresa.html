@@ -13,177 +13,165 @@
   </head>
 
   <body>
-    <div class="janela">
-      <aside class="sidebar">
-        <div class="logo">
-          <a href="index.html">
-            <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
-          </a>
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="index.html">
+          <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
+        </a>
+      </div>
+
+      <nav class="menu-lateral">
+        <a class="btn-nav-white" href="index.html">
+          <img src="../assets/IconDashboard.svg" alt="" class="icon-nav" />
+          <span>Dashboard</span>
+        </a>
+
+        <a class="btn-nav-white" href="planos.html">
+          <img src="../assets/iconPlanejamento.svg" alt="" class="icon-nav" />
+          <span>Planos</span>
+        </a>
+
+        <a class="btn-nav-white ativo" href="empresa.html">
+          <img src="../assets/iconEmpresav.png" alt="" class="icon-nav" />
+          <span>Empresa</span>
+        </a>
+
+        <a class="btn-nav-white" href="eventos.html">
+          <img src="../assets/iconEventos.svg" alt="" class="icon-nav" />
+          <span>Eventos</span>
+        </a>
+
+        <a class="btn-nav-white" href="perfil.html">
+          <img src="../assets/iconPerfil.svg" alt="" class="icon-nav" />
+          <span>Perfil</span>
+        </a>
+
+        <a class="btn-nav-white" href="gerenciamento-funcionarios/gerenciamento-funcionarios.html">
+          <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
+          <span>Gerenciar Funcionários</span>
+        </a>
+      </nav>
+
+      <footer class="sidebar-footer">
+        <div class="user-container">
+          <div class="user-text">
+            <span class="user-name" id="sidebar_nome"> </span>
+            <span class="user-email" id="sidebar_email"> </span>
+          </div>
         </div>
 
-        <nav class="menu-lateral">
-          <a class="btn-nav-white" href="index.html">
-            <img src="../assets/IconDashboard.svg" alt="" class="icon-nav" />
-            <span>Dashboard</span>
-          </a>
+        <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
+          <img src="../assets/iconSair.png" alt="Sair" />
+        </button>
+      </footer>
+    </aside>
 
-          <a class="btn-nav-white" href="planos.html">
-            <img src="../assets/iconPlanejamento.svg" alt="" class="icon-nav" />
-            <span>Planos</span>
-          </a>
-
-          <a class="btn-nav-white ativo" href="empresa.html">
-            <img src="../assets/iconEmpresav.png" alt="" class="icon-nav" />
-            <span>Empresa</span>
-          </a>
-
-          <a class="btn-nav-white" href="eventos.html">
-            <img src="../assets/iconEventos.svg" alt="" class="icon-nav" />
-            <span>Eventos</span>
-          </a>
-
-          <a class="btn-nav-white" href="perfil.html">
-            <img src="../assets/iconPerfil.svg" alt="" class="icon-nav" />
-            <span>Perfil</span>
-          </a>
-
-          <a class="btn-nav-white" href="funcionarios.html">
-            <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
-            <span>Gerenciar Funcionários</span>
-          </a>
-        </nav>
-
-        <footer class="sidebar-footer">
-          <div class="user-container">
-            <div class="user-text">
-              <span class="user-name" id="sidebar_nome"> </span>
-              <span class="user-email" id="sidebar_email"> </span>
-            </div>
-          </div>
-
-          <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
-            <img src="../assets/iconSair.png" alt="Sair" />
-          </button>
-        </footer>
-      </aside>
-
-      <main class="conteudo">
-        <div class="model-empresa">
-
-          <div class="header">
-            <h1>Minha empresa</h1>
-            <h3>Consulte e atualize as informações cadastrais da sua empresa.</h3>
-
-<div class="abas-container">
-            <div class="options" id="buttons">
-              <button class="destaque" id="btnEmpresa" onclick="mostrarAba('formEmpresa')">
-                <i class="fi fi-rr-building"></i>
-                Dados da Empresa
-              </button>
-              <button id="btnEndereco" onclick="mostrarAba('formEndereco')">
-                <i class="fi fi-rr-marker"></i>
-                Endereço
-              </button>
-            </div>
-          </div>
-          </div>
-
-          <div class="overview">
-
-            <div class="perfil">
-                <i id="iconeOverview" class="fi fi-rr-building icon-perfil"></i>
-                <div class="edit">
-                  <h1 id="tituloOverview">Dados da empresa</h1>
-                  <p id="subtituloOverview">Mantenha as informações da empresa sempre atualizadas.</p>
-                </div>
-          
-            </div>
-
-            <div id="formEmpresa">
-              <div class="input-dada">
-                <div class="first-dada">
-                  <label>Razão Social:</label>
-                  <div class="entry">
-                    <i class="fi fi-rr-building icon-dada"></i>
-                    <input type="text" id="iptRazaoSocial" readonly>
-                    <span id="erro_razaoSocial" class="erro-msg"></span>
-                  </div>
-                  <label>CNPJ:</label>
-                  <div class="entry">
-                     <i class="fi fi-rr-id-card icon-dada"></i>
-                    <input type="text" id="iptCnpj" readonly>
-                    <span id="erro_cnpj" class="erro-msg"></span>
-                  </div>
-                </div>
-
-                <div class="second-dada">
-                  <label>Nome Fantasia:</label>
-                  <div class="entry">
-                    <i class="fi fi-rr-shop icon-dada"></i>
-                    <input type="text" id="iptNomeFantasia" readonly>
-                    
-                  </div>
-                  <label>E-mail Responsável:</label>
-                  <div class="entry">
-                    <i class="fi fi-rr-envelope icon-dada"></i>
-                    <input type="email" id="iptEmail" readonly>
-                    <span id="erro_email" class="erro-msg"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div id="formEndereco" style="display:none">
-              <div class="input-dada">
-                <div class="first-dada">
-                  <label>CEP:</label>
-                  <div class="entry">
-                    <i class="fi fi-rr-marker icon-dada"></i>
-                    <input type="text" id="iptCep" readonly>
-                    <span id="erro_cep" class="erro-msg"></span>
-                  </div>
-                  <label>Número:</label>
-                  <div class="entry">
-                   <i class="fi fi-rr-map-pin icon-dada"></i>
-                    <input type="text" id="iptNumero" readonly>
-                    <span id="erro_numero" class="erro-msg"></span>
-                  </div>
-                </div>
-
-                <div class="second-dada">
-                  <label>Complemento:</label>
-                  <div class="entry">
-                    <i class="fi fi-rr-home icon-dada"></i>
-                    <input type="text" id="iptComplemento" readonly>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="botao">
-              <div class="botao-acoes">
-                <button id="btn_editar" onclick="habilitarEdicao()">Editar</button>
-                <button id="btn_cancelar" onclick="cancelarEdicao()">Cancelar</button>
-                <button id="btn_salvar" onclick="atualizarDados()">Salvar</button>
-              </div>
-            </div>
-
-          </div>
-
+    <main class="main-content">
+      <div class="header">
+        <div class="header-left">
+          <h1>Minha empresa</h1>
+          <h3>Consulte e atualize as informações cadastrais da sua empresa.</h3>
         </div>
-      </main>
-    </div>
+
+        <div class="abas-container">
+          <div class="options">
+            <button class="destaque" id="btnEmpresa" onclick="mostrarAba('formEmpresa')">
+              <i class="fi fi-rr-building"></i>
+              Dados da Empresa
+            </button>
+            <button id="btnEndereco" onclick="mostrarAba('formEndereco')">
+              <i class="fi fi-rr-marker"></i>
+              Endereço
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="overview">
+        <div class="perfil">
+          <i id="iconeOverview" class="fi fi-rr-building icon-perfil"></i>
+          <div class="edit">
+            <h1 id="tituloOverview">Dados da empresa</h1>
+            <p id="subtituloOverview">Mantenha as informações da empresa sempre atualizadas.</p>
+          </div>
+        </div>
+
+        <div id="formEmpresa">
+          <div class="input-dada">
+            <div class="first-dada">
+              <label>Razão Social:</label>
+              <div class="entry">
+                <i class="fi fi-rr-building icon-dada"></i>
+                <input type="text" id="iptRazaoSocial" readonly />
+                <span id="erro_razaoSocial" class="erro-msg"></span>
+              </div>
+              <label>CNPJ:</label>
+              <div class="entry">
+                <i class="fi fi-rr-id-card icon-dada"></i>
+                <input type="text" id="iptCnpj" readonly />
+                <span id="erro_cnpj" class="erro-msg"></span>
+              </div>
+            </div>
+
+            <div class="second-dada">
+              <label>Nome Fantasia:</label>
+              <div class="entry">
+                <i class="fi fi-rr-shop icon-dada"></i>
+                <input type="text" id="iptNomeFantasia" readonly />
+              </div>
+              <label>E-mail Responsável:</label>
+              <div class="entry">
+                <i class="fi fi-rr-envelope icon-dada"></i>
+                <input type="email" id="iptEmail" readonly />
+                <span id="erro_email" class="erro-msg"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="formEndereco" style="display: none">
+          <div class="input-dada">
+            <div class="first-dada">
+              <label>CEP:</label>
+              <div class="entry">
+                <i class="fi fi-rr-marker icon-dada"></i>
+                <input type="text" id="iptCep" readonly />
+                <span id="erro_cep" class="erro-msg"></span>
+              </div>
+              <label>Número:</label>
+              <div class="entry">
+                <i class="fi fi-rr-map-pin icon-dada"></i>
+                <input type="text" id="iptNumero" readonly />
+                <span id="erro_numero" class="erro-msg"></span>
+              </div>
+            </div>
+
+            <div class="second-dada">
+              <label>Complemento:</label>
+              <div class="entry">
+                <i class="fi fi-rr-home icon-dada"></i>
+                <input type="text" id="iptComplemento" readonly />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="botao">
+          <div class="botao-acoes">
+            <button id="btn_editar" onclick="habilitarEdicao()">Editar</button>
+            <button id="btn_cancelar" onclick="cancelarEdicao()">Cancelar</button>
+            <button id="btn_salvar" onclick="atualizarDados()">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
     <div class="modal-overlay" id="modalMensagem">
-    <div class="modal-content">
+      <div class="modal-content">
         <p id="textoModal"></p>
 
-        <button
-            type="button"
-            class="btn btn-primary"
-            id="fecharModal">
-            Entendi
-        </button>
+        <button type="button" class="btn btn-primary" id="fecharModal">Entendi</button>
+      </div>
     </div>
-</div>
   </body>
 </html>

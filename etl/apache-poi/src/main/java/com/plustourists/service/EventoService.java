@@ -83,7 +83,7 @@ public class EventoService {
 
                     // Select para buscar municipio corretamente.
 
-                    Integer idEstado = 3;
+                    Integer idEstado = 2;
                     conexao.getJdbcTemplate().queryForObject(
                             "SELECT id_estado FROM estado WHERE uf = ?",
                             Integer.class,

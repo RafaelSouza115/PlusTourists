@@ -10,8 +10,8 @@ public class EmailService {
 
     public static void enviarEmail(String destino, String assunto, String mensagem) {
 
-        final String remetente = System.getenv("EMAIL_REMETENTE");
-        final String senha = System.getenv("EMAIL_SENHA");
+        final String remetente = "plustourists@gmail.com";
+        final String senha = "fpaghvisnoslpaoa";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

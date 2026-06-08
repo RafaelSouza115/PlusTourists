@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 public class Slack {
     private static HttpClient client = HttpClient.newHttpClient();
-    private static final String url = System.getenv("SLACK_WEBHOOK_URL");
+    private static final String url = System.getenv("SLACK_ALERTA");
 
     public static void enviarMensagem(JSONObject content) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder(URI.create(url))

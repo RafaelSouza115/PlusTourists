@@ -1,5 +1,6 @@
 package com.plustourists;
 
+import com.plustourists.model.NotificacaoErroService;
 import com.plustourists.model.NotificacaoSucessoService;
 import com.plustourists.repository.ConexaoBancoDeDados;
 import com.plustourists.log.LogsConexaoBancoDeDados;
@@ -133,6 +134,11 @@ public class Main {
                         throw new IOException(e);
                     }
                 } catch (RuntimeException | IOException e) {
+                    NotificacaoErroService erro = new NotificacaoErroService(LocalDateTime.now(),
+                            "ERRO",
+                            "Erro durante o processamento: " + e.getMessage(),
+                            "Nenhuma");
+                    erro.notificar();
                     e.printStackTrace();
                     throw new RuntimeException(
                             "Erro durante processamento: " + e.getMessage(),

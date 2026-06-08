@@ -9,10 +9,10 @@ import java.util.Properties;
 public class EmailService {
 
     public static void enviarEmail(String destino, String assunto, String mensagem) {
-
-        final String remetente = "plustourists@gmail.com";
-        final String senha = "fpaghvisnoslpaoa";
-
+        System.out.println("Variáveis recebidas no emailService: " + destino + " " + assunto + " " + mensagem);
+        final String remetente = System.getenv("EMAIL_REMETENTE");
+        final String senha = System.getenv("EMAIL_SENHA");
+        System.out.println("Variáveis de ambiente: " + remetente + " " + senha);
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");

@@ -1,88 +1,286 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/dashboard/planos.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../style/global/global.css" />
+    <link rel="stylesheet" href="../style/dashboard/planos.css" />
     <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
-    <link rel="icon" href="../assets/logoIcon.png">
-    <script src="../js/dashboard/index.js"> </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+    <script src="../js/dashboard/sidebar.js" defer></script>
+    <link rel="icon" href="../assets/logoIcon.png" />
     <title>Planos</title>
 </head>
+
 <body>
-     <div class="janela">
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="index.html">
+                <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
+            </a>
+        </div>
 
-            <div class="logo">
-                <a href="index.html">
-                    <img id="img-header"
-                        src="../assets/logoSemFundo.png"
-                        alt="Logo do site">
-                </a>
+        <nav class="menu-lateral">
+            <a class="btn-nav-white" href="index.html">
+                <img src="../assets/IconDashboard.svg" alt="" class="icon-nav" />
+
+                <span>Dashboard</span>
+            </a>
+
+            <a class="btn-nav-white ativo" href="planos.html">
+                <img src="../assets/iconPlanev.png" alt="" class="icon-nav" />
+                <span>Planos</span>
+            </a>
+
+            <a class="btn-nav-white" href="empresa.html">
+                <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
+                <span>Empresa</span>
+            </a>
+
+
+            <a class="btn-nav-white" href="eventos.html">
+                <img src="../assets/iconEventos.svg" alt="" class="icon-nav" />
+                <span>Eventos</span>
+            </a>
+            <a class="btn-nav-white" href="perfil.html">
+                <img src="../assets/iconPerfil.svg" alt="" class="icon-nav" />
+                <span>Perfil</span>
+            </a>
+
+
+            <a class="btn-nav-white" href="funcionarios.html">
+                <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
+                <span>Gerenciar Funcionários</span>
+            </a>
+
+        </nav>
+
+        <footer class="sidebar-footer">
+            <div class="user-container">
+                <div class="user-text">
+                    <span class="user-name" id="sidebar_nome"> </span>
+                    <span class="user-email" id="sidebar_email"> </span>
+                </div>
             </div>
 
-            <nav class="menu-lateral">
+            <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
 
-                <a class="btn-nav-white" href="index.html">
-                    <img src="../assets/iconCasa.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Dashboard</span>
-                </a>
+                <img src="../assets/iconSair.png" alt="Sair">
 
-                <a class="btn-nav-white ativo" href="planos.html">
-                    <img src="../assets/iconPlanev.png"
-                        alt=""
-                        class="icon-nav">
-                    <span>Planos</span>
-                </a>
+            </button>
 
-                <a class="btn-nav-white" href="empresa.html">
-                    <img src="../assets/iconEmpresa.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Empresa</span>
-                </a>
+        </footer>
 
-                <a class="btn-nav-white" href="perfil.html">
-                    <img src="../assets/iconPerfil.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Perfil</span>
-                </a>
+    </aside>
 
-            </nav>
 
-            <footer class="sidebar-footer">
+    <div class="main-content">
 
-                <div class="user-container">
+        <div class="header">
 
-                    <div class="user-text">
-                        <span class="user-name">Usuário</span>
-                        <span class="user-email">
-                            usuario@gmail.com
-                        </span>
-                    </div>
+            <div class="header-left">
+                <h1>Planos</h1>
+                <h3>Utilize os dados da plataforma para estruturar os melhores planos para sua empresa</h3>
+            </div>
 
+            <div class="abas-container">
+                <div class="options">
+                    <button class="ativo" onclick="mostrarAba('validados', this), listarPlanos(id_empresa, 2)">
+                        <p>Validados</p>
+                    </button>
+                    <button onclick="mostrarAba('pendentes', this), listarPlanos(id_empresa, 1)">
+                        <p>Pendentes</p>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="overview">
+            <div id="btn-planos">
+                <button class="btn-criar" onclick="abrirModal()">+ Criar Plano</button>
+            </div>
+            <div class="filtros">
+                <select id="slDestinos" onchange="aplicarFiltros()">
+                    <option>Selecione o destino</option>
+                </select>
+                <select id="slDuracao" onchange="aplicarFiltros()">
+                    <option value="">Selecione a duração</option>
+                    <option value="3">Até 3 dias</option>
+                    <option value="7">4 a 7 dias</option>
+                    <option value="15">8 a 15 dias</option>
+                    <option value="999">Mais de 15 dias</option>
+                </select>
+            </div>
+
+            <div id="validados" class="cards-section">
+                <div class="carousel-viewport cards" id="cards-wrapper-validados">
+                </div>
+                <div class="paginacao" id="paginacao2">
+                </div>
+            </div>
+
+            <div id="pendentes" class="cards-section" style="display: none;">
+                <div class="carousel-viewport cards" id="cards-wrapper-pendentes">
+                </div>
+                <div class="paginacao" id="paginacao1">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="modal-plano" class="modal-container" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Crie seu plano personalizado</h2>
+                <button class="btn-fechar" onclick="fecharModal()">
+                    ✖
+                </button>
+            </div>
+
+            <form class="modal-form" onsubmit="event.preventDefault();">
+                <div class="form-group">
+                    <label>Nome do Plano:</label>
+                    <input id="iptNomePlano" type="text" placeholder="Ex: Férias em Salvador" required>
                 </div>
 
-                <button id="btn-logout"
-                    class="icon-logout"
-                    onclick="limparSessao()">
+                <div class="form-group">
+                    <label>Selecione o destino (Estado):</label>
+                    <select id="slEstado" onchange="listarMunicipiosSelect()">
+                        <option value="#" disabled selected>Selecione o estado de destino</option>
+                    </select>
+                </div>
 
-                    <img src="../assets/iconSair.png"
-                        alt="Sair">
+                <div class="form-group">
+                    <label>Selecione o destino (Município):</label>
+                    <select id="slMunicipio" onchange="listarEventosSelect()">
+                        <option value="#" disabled selected>Selecione o município de destino</option>
+                    </select>
+                </div>
 
+                <div class="linha-dupla">
+                    <div class="form-group">
+                        <label>Data inicial:</label>
+                        <input id="iptDataInicial" type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Data final:</label>
+                        <input id="iptDataFinal" type="date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Eventos do local:</label>
+                    <div class="linha-eventos">
+                        <select id="slEventos">
+                            <option value="0" disabled selected>Selecione os eventos</option>
+                        </select>
+                        <button type="button" class="btn-adicionar" onclick="adicionarEvento()">+</button>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-salvar" onclick="criarPlano()">Criar Plano</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-roteiro" class="modal-container" style="display: none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2>Detalhes do Roteiro</h2>
+                <button class="btn-fechar" onclick="fecharModalRoteiro()">
+                    ✖
                 </button>
+            </div>
 
-            </footer>
+            <div class="header-cabecalho">
+                <div class="info-cabecalho">
+                    <div class="texto-cabecalho">
+                        <div class="icon-roteiro"><i class="ti ti-map-pin" style="color: #008000"></i></div>
+                        <div>
+                            <span>Destino</span>
+                            <p id="destino"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-cabecalho">
+                    <div class="texto-cabecalho">
+                        <div class="icon-roteiro"><i class="ti ti-clock-hour-11" style="color: #008000"></i></div>
+                        <div>
+                            <span>Duração</span>
+                            <p id="duracao"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-cabecalho">
+                    <div class="texto-cabecalho">
+                        <div class="icon-roteiro"><i class="ti ti-calendar-event" style="color: #008000"></i></div>
+                        <div>
+                            <span>Período</span>
+                            <p id="periodo"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="linha"></div>
+            <div class="info-grid">
+                <div class="titulo-model">
+                    <div class="icon-roteiro"><i class="ti ti-calendar-check" style="color: #008000"></i></div>
+                    <h3>Informações do Roteiro</h3>
+                </div>
+                <div class="linha-dupla-roteiro">
+                    <div class="info-roteiro">
+                        <div class="icon-roteiro"><i class="ti ti-map-pin" style="color: #008000"></i></div>
+                        <div class="detalhes-roteiro">
+                            <span>Nome do Plano</span>
+                            <p id="nomePlano"></p>
+                        </div>
+                    </div>
+                    <div class="info-roteiro">
+                        <div class="icon-roteiro"><i class="ti ti-map-pins" style="color: #008000"></i></div>
+                        <div class="detalhes-roteiro">
+                            <span>Destino:</span>
+                            <p id="destinoDetalhe"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dupla-roteiro">
+                    <div class="info-roteiro">
+                        <div class="icon-roteiro"><i class="ti ti-calendar-month" style="color: #008000"></i></div>
+                        <div class="detalhes-roteiro">
+                            <span>Data Inicial:</span>
+                            <p id="inicioEvento"></p>
+                        </div>
+                    </div>
+                    <div class="info-roteiro">
+                        <div class="icon-roteiro"><i class="ti ti-calendar-month" style="color: #008000"></i></div>
+                        <div class="detalhes-roteiro">
+                            <span>Data Final:</span>
+                            <p id="fimEvento"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="linha"></div>
+            <div class="eventos-box" id="roteiro">
 
-        </aside>
-</div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-salvar" onclick="fecharModalRoteiro()">Fechar</button>
+            </div>
+        </div>
+    </div>
+    </div>
 
-
-       
 </body>
+<script src="../js/dashboard/planos.js"></script>
+
 </html>

@@ -1,166 +1,177 @@
 <!doctype html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style/global/global.css" />
+    <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
+    <link rel="stylesheet" href="../style/dashboard/empresa.css" />
+    <link rel="icon" href="../assets/logoIcon.png" />
+    <script src="../js/dashboard/empresa.js" defer></script>
+    <script src="../js/dashboard/sidebar.js" defer></script>
+    <title>Empresa</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
-  <link rel="stylesheet" href="../style/dashboard/empresa.css" />
-  <link rel="icon" href="../assets/logoIcon.png" />
-  <script src="../js/dashboard/empresa.js"></script>
-  <title>Empresa</title>
-</head>
-
-<body>
-  <div class="janela">
-<!--
-    <div class="header-left">
-      <div>
-        <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
-      </div>
-
-      <div class="btn-nav-white">
-        <img src="../assets/iconCasa.svg" alt="Dashboard" class="icon-nav" />
+  <body>
+    <aside class="sidebar">
+      <div class="logo">
         <a href="index.html">
-          <h3>Dashboard</h3>
+          <img id="img-header" src="../assets/logoSemFundo.png" alt="Logo do site" />
         </a>
       </div>
 
-      <div class="btn-nav-white">
-        <img src="../assets/iconPlanejamento.svg" alt="Dashboard" class="icon-nav" />
-        <a href="planos.html">
-          <h3>Planos</h3>
+      <nav class="menu-lateral">
+        <a class="btn-nav-white" href="index.html">
+          <img src="../assets/IconDashboard.svg" alt="" class="icon-nav" />
+          <span>Dashboard</span>
         </a>
-      </div>
 
-      <div class="btn-nav-white">
-        <img src="../assets/iconEmpresav.png" alt="Dashboard" class="icon-nav" />
-        <a href="empresa.html">
-          <h3 style="color: #008000">Empresa</h3>
+        <a class="btn-nav-white" href="planos.html">
+          <img src="../assets/iconPlanejamento.svg" alt="" class="icon-nav" />
+          <span>Planos</span>
         </a>
-      </div>
 
-      <div class="btn-nav-white">
-        <img src="../assets/iconPerfil.svg" alt="Dashboard" class="icon-nav" />
-        <a href="perfil.html">
-          <h3>Perfil</h3>
+        <a class="btn-nav-white ativo" href="empresa.html">
+          <img src="../assets/iconEmpresav.png" alt="" class="icon-nav" />
+          <span>Empresa</span>
         </a>
-      </div>
 
-      <div class="sidebar-footer">
+        <a class="btn-nav-white" href="eventos.html">
+          <img src="../assets/iconEventos.svg" alt="" class="icon-nav" />
+          <span>Eventos</span>
+        </a>
+
+        <a class="btn-nav-white" href="perfil.html">
+          <img src="../assets/iconPerfil.svg" alt="" class="icon-nav" />
+          <span>Perfil</span>
+        </a>
+
+        <a class="btn-nav-white" href="gerenciamento-funcionarios/gerenciamento-funcionarios.html">
+          <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
+          <span>Gerenciar Funcionários</span>
+        </a>
+      </nav>
+
+      <footer class="sidebar-footer">
         <div class="user-container">
           <div class="user-text">
-            <span class="user-name">Usuário</span>
-            <span class="user-email">usuario@gmail.com</span>
+            <span class="user-name" id="sidebar_nome"> </span>
+            <span class="user-email" id="sidebar_email"> </span>
           </div>
         </div>
+
         <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
-          <img src="../assets/iconSair.png" alt="Ícone de Sair" />
+          <img src="../assets/iconSair.png" alt="Sair" />
         </button>
+      </footer>
+    </aside>
+
+    <main class="main-content">
+      <div class="header">
+        <div class="header-left">
+          <h1>Minha empresa</h1>
+          <h3>Consulte e atualize as informações cadastrais da sua empresa.</h3>
+        </div>
+
+        <div class="abas-container">
+          <div class="options">
+            <button class="destaque" id="btnEmpresa" onclick="mostrarAba('formEmpresa')">
+              <i class="fi fi-rr-building"></i>
+              Dados da Empresa
+            </button>
+            <button id="btnEndereco" onclick="mostrarAba('formEndereco')">
+              <i class="fi fi-rr-marker"></i>
+              Endereço
+            </button>
+          </div>
+        </div>
       </div>
-    </div>    
--->
 
-   <!-- SIDEBAR -->
-        <aside class="sidebar">
+      <div class="overview">
+        <div class="perfil">
+          <i id="iconeOverview" class="fi fi-rr-building icon-perfil"></i>
+          <div class="edit">
+            <h1 id="tituloOverview">Dados da empresa</h1>
+            <p id="subtituloOverview">Mantenha as informações da empresa sempre atualizadas.</p>
+          </div>
+        </div>
 
-            <div class="logo">
-                <a href="index.html">
-                    <img id="img-header"
-                        src="../assets/logoSemFundo.png"
-                        alt="Logo do site">
-                </a>
+        <div id="formEmpresa">
+          <div class="input-dada">
+            <div class="first-dada">
+              <label>Razão Social:</label>
+              <div class="entry">
+                <i class="fi fi-rr-building icon-dada"></i>
+                <input type="text" id="iptRazaoSocial" readonly />
+                <span id="erro_razaoSocial" class="erro-msg"></span>
+              </div>
+              <label>CNPJ:</label>
+              <div class="entry">
+                <i class="fi fi-rr-id-card icon-dada"></i>
+                <input type="text" id="iptCnpj" readonly />
+                <span id="erro_cnpj" class="erro-msg"></span>
+              </div>
             </div>
 
-            <nav class="menu-lateral">
-
-                <a class="btn-nav-white" href="index.html">
-                    <img src="../assets/iconCasa.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Dashboard</span>
-                </a>
-
-                <a class="btn-nav-white" href="planos.html">
-                    <img src="../assets/iconPlanejamento.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Planos</span>
-                </a>
-
-                <a class="btn-nav-white ativo" href="empresa.html">
-                    <img src="../assets/iconEmpresav.png"
-                        alt=""
-                        class="icon-nav">
-                    <span>Empresa</span>
-                </a>
-
-                <a class="btn-nav-white" href="perfil.html">
-                    <img src="../assets/iconPerfil.svg"
-                        alt=""
-                        class="icon-nav">
-                    <span>Perfil</span>
-                </a>
-
-            </nav>
-
-            <footer class="sidebar-footer">
-
-                <div class="user-container">
-
-                    <div class="user-text">
-                        <span class="user-name">Usuário</span>
-                        <span class="user-email">
-                            usuario@gmail.com
-                        </span>
-                    </div>
-
-                </div>
-
-                <button id="btn-logout"
-                    class="icon-logout"
-                    onclick="limparSessao()">
-
-                    <img src="../assets/iconSair.png"
-                        alt="Sair">
-
-                </button>
-
-            </footer>
-
-        </aside>
-
-        <main class="conteudo">
-    <div class="content">
-      <div class="options" id="buttons">
-        <button class="destaque" id="btnEmpresa" onclick="empresa()"><p>Dados da Empresa</p></button>
-        <button id="btnEndereco" onclick="endereco()"><p>Endereço</p></button>
-      </div>
-      <div class="edit">
-        <h2 id="title">Dados da Empresa</h2>
-        <div class="inp" id="inp">
-          <div class="iptOpt">
-            <p>Razão Social</p>
-            <input type="text" id="iptRazaoSocial" placeholder="Ex: PlusTourists LTDA">
-          </div>
-          <div class="iptOpt">
-            <p>Nome Fantasia</p>
-            <input type="text" id="iptNomeFantasia" placeholder="Ex: PlusTourists">
-          </div>
-          <div class="iptOpt">
-            <p>CNPJ</p>
-            <input type="text" id="iptCnpj" placeholder="00.000.000/0000-000" maxlength="14">
-          </div>
-         <div class="iptOpt">
-            <p>E-mail responsável</p>
-            <input type="text" id="iptEmail" placeholder="contato@empresa.com.br">
+            <div class="second-dada">
+              <label>Nome Fantasia:</label>
+              <div class="entry">
+                <i class="fi fi-rr-shop icon-dada"></i>
+                <input type="text" id="iptNomeFantasia" readonly />
+              </div>
+              <label>E-mail Responsável:</label>
+              <div class="entry">
+                <i class="fi fi-rr-envelope icon-dada"></i>
+                <input type="email" id="iptEmail" readonly />
+                <span id="erro_email" class="erro-msg"></span>
+              </div>
+            </div>
           </div>
         </div>
-        <button>Atualizar</button>
-        <p id="ultimaAtualizacao">Data da última atualização: 01/01/2026 às 14h 30min</p>
+
+        <div id="formEndereco" style="display: none">
+          <div class="input-dada">
+            <div class="first-dada">
+              <label>CEP:</label>
+              <div class="entry">
+                <i class="fi fi-rr-marker icon-dada"></i>
+                <input type="text" id="iptCep" readonly />
+                <span id="erro_cep" class="erro-msg"></span>
+              </div>
+              <label>Número:</label>
+              <div class="entry">
+                <i class="fi fi-rr-map-pin icon-dada"></i>
+                <input type="text" id="iptNumero" readonly />
+                <span id="erro_numero" class="erro-msg"></span>
+              </div>
+            </div>
+
+            <div class="second-dada">
+              <label>Complemento:</label>
+              <div class="entry">
+                <i class="fi fi-rr-home icon-dada"></i>
+                <input type="text" id="iptComplemento" readonly />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="botao">
+          <div class="botao-acoes">
+            <button id="btn_editar" onclick="habilitarEdicao()">Editar</button>
+            <button id="btn_cancelar" onclick="cancelarEdicao()">Cancelar</button>
+            <button id="btn_salvar" onclick="atualizarDados()">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="modal-overlay" id="modalMensagem">
+      <div class="modal-content">
+        <p id="textoModal"></p>
+
+        <button type="button" class="btn btn-primary" id="fecharModal">Entendi</button>
       </div>
     </div>
-  </main>
-  </div>
-</body>
+  </body>
 </html>

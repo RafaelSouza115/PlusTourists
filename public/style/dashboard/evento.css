@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdn-uicons.flaticon.com/4.0.0/uicons-regular-straight/css/uicons-regular-straight.css');
+@import url('https://cdn-uicons.flaticon.com/4.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
+/* RESET */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 40px 60px 95px;
+    color: white;
+    background-color: rgb(3, 141, 67);
+
+    h3 {
+        font-size: 16px;
+        font-weight: 400;
+    }
+}
+
+.main-content {
+   display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    background-color: #f3f4f6;
+}
+
+/* Card branco principal — mesmo padrão do .overview do gerenciamento */
+.overview{
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: min(100%, 1200px);
+    min-height: calc(80vh - 150px);
+    padding: 2rem;
+     margin: 2rem auto;
+    margin: -60px auto 0 auto;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+/* ── Filtros ── */
+.eventos-filtros {
+    display: flex;
+    flex-shrink: 0;
+    gap: 6rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.filtro-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.filtro-wrapper select,
+.filtro-select,
+.filtro-classificacao {
+    min-width: 180px;
+    padding: 0.5rem 1.1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #121212;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.filtro-wrapper select:focus,
+.filtro-select:focus,
+.filtro-classificacao:focus {
+    background-color: #fff;
+    border-color: rgb(3, 141, 67);
+    box-shadow: 0 0 0 3px rgb(3 141 67 / 0.12);
+}
+
+.filtro-classificacao:hover,
+.filtro-select:hover {
+    background-color: #e8e8e8;
+}
+
+/* ── Grid de cards (sem botões de carrossel) ── */
+.eventos-carrossel-section {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+/* botões removidos visualmente — mantidos no HTML para não quebrar JS */
+.carrossel-btn {
+    display: none;
+}
+
+.eventos-cards-wrapper {
+    display: grid;
+    flex: 1;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    min-height: 0;
+}
+
+/* ── Evento Card ── */
+.evento-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    min-height: 0;
+    padding: 1.1rem 1.1rem 0.9rem 1.1rem;
+    overflow: hidden;
+    background-color: #f0faf1;
+    border: 1px solid #c8e6c9;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.evento-card:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.11);
+    transform: translateY(-3px);
+}
+
+/* Linha do topo: nome + município lado a lado */
+.evento-card-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    min-width: 0;
+    margin-bottom: 0.2rem;
+}
+
+.evento-card-titulo {
+    flex-shrink: 0;
+    max-width: 55%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #121212;
+    white-space: nowrap;
+}
+
+.evento-card-municipio {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #2e7d32;
+    white-space: nowrap;
+}
+
+.evento-card-municipio .ti {
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+
+/* Separador visual entre título e município */
+.evento-card-sep {
+    flex-shrink: 0;
+    width: 1px;
+    height: 16px;
+    background-color: #a5d6a7;
+}
+
+/* Linhas de info */
+.card-info-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+}
+
+.card-info-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    color: #2e7d32;
+}
+
+.card-info-icon .ti {
+    font-size: 1.05rem;
+}
+
+.card-info-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.card-info-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #374151;
+    white-space: nowrap;
+}
+
+.card-info-value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #444;
+    white-space: nowrap;
+}
+
+/* Botão Visualizar */
+.btn-visualizar {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.8rem;
+    margin-top: auto;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #2e7d32;
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: 1.5px solid #2e7d32;
+    border-radius: 7px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-visualizar:hover {
+    color: #fff;
+    background-color: #2e7d32;
+}
+
+.btn-visualizar .ti {
+    font-size: 0.95rem;
+}
+
+/* ── Paginação ── */
+.paginacao {
+    display: flex;
+    flex-shrink: 0;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.5rem;
+}
+
+.paginacao-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.paginacao-btn:hover {
+    color: rgb(3, 141, 67);
+    background-color: #e8f5e9;
+    border-color: rgb(3, 141, 67);
+}
+
+.paginacao-btn.ativo {
+    color: #fff;
+    background-color: rgb(3, 141, 67);
+    border-color: rgb(3, 141, 67);
+}
+
+.paginacao-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.paginacao-info {
+    padding: 0 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #9ca3af;
+}
+
+/* ── Responsivo ── */
+@media (max-width: 1024px) {
+    .eventos-cards-wrapper {
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .eventos-filtros {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .eventos-cards-wrapper {
+        grid-template-rows: none;
+        grid-template-columns: 1fr;
+    }
+}

@@ -162,9 +162,40 @@ function cadastrar(req, res) {
     });
 }
 
+function buscarPorId(req, res) {
+    var idEmpresa = req.params.idEmpresa;
+
+    console.log("ID RECEBIDO:", idEmpresa);
+
+    empresaModel.buscarPorId(idEmpresa)
+        .then(function (resultado) {
+            console.log("RESULTADO:", resultado);
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log("ERRO NO BACKEND:", erro);
+            res.status(500).json(erro);
+        });
+}
+
+function atualizar(req, res) {
+    var idEmpresa = req.params.idEmpresa;
+    var dados = req.body;
+
+    empresaModel.atualizar(idEmpresa, dados)
+        .then(function () {
+            res.json({ mensagem: "Dados atualizados com sucesso" });
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json({ mensagem: "Erro ao atualizar" });
+        });
+}
 
 module.exports = {
     listar,
     cadastrar,
-    buscarPorCnpj
+    buscarPorCnpj,
+    buscarPorId, 
+    atualizar
 };

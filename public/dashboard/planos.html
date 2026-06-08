@@ -79,26 +79,24 @@
 
 
         <div class="header-topo">
-
             <div class="topo">
                 <div class="linha-topo">
-                <div class="texto-topo">
-                    <h1>Planos</h1>
-                    <p>Utilize os dados da plataforma para estruturar os melhores planos para sua empresa</p>
-                </div>
-                <div class="acoes">
-                    <div class="tabs">
-                        <button class="ativo" onclick="mostrarAba('validados', this)">
-                            <p>Validados</p>
-                        </button>
-                        <button onclick="mostrarAba('pendentes', this)">
-                            <p>Pendentes</p>
-                        </button>
-                  </div>
+                    <div class="texto-topo">
+                        <h1>Planos</h1>
+                        <p>Utilize os dados da plataforma para estruturar os melhores planos para sua empresa</p>
                     </div>
-            </div>
-
+                    <div class="acoes">
+                        <div class="tabs">
+                            <button class="ativo" onclick="mostrarAba('validados', this), listarPlanos(id_empresa, 2)">
+                                <p>Validados</p>
+                            </button>
+                            <button onclick="mostrarAba('pendentes', this), listarPlanos(id_empresa, 1)">
+                                <p>Pendentes</p>
+                            </button>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
                 
             <div class="header-right">
@@ -106,104 +104,29 @@
                     <button class="btn-criar" onclick="abrirModal()">+ Criar Plano</button>
                 </div>
                 <div class="filtros">
-                    <select>
-                        <option>País de Origem</option>
+                    <select id="slDestinos" onchange="aplicarFiltros()">
+                        <option>Selecione o destino</option>
                     </select>
-                    <select>
-                        <option>Destino</option>
-                    </select>
-                    <select>
-                        <option>Duração</option>
-                    </select>
-                    <select>
-                        <option>Período</option>
+                    <select id="slDuracao" onchange="aplicarFiltros()">
+                        <option value="">Selecione a duração</option>
+                        <option value="3">Até 3 dias</option>
+                        <option value="7">4 a 7 dias</option>
+                        <option value="15">8 a 15 dias</option>
+                        <option value="999">Mais de 15 dias</option>
                     </select>
                 </div>
 
                 <div id="validados" class="cards-section">
-                    <div class="carousel-container">
-                        <button class="seta" onclick="voltarCard('validados')">&#10094;</button>
-
-                        <div class="carousel-viewport">
-                            <div class="cards" id="esteira-validados">
-
-                                <div class="card">
-                                    <h3>Férias em<br>Salvador</h3>
-                                    <div class="info-item">
-                                        <div class="icon-circle"><i class="ti ti-map-pin" style="color: #008000"></i></div>
-                                        <p><strong>Destino:</strong><br>Salvador</p>
-                                    </div>
-                                    <div class="info-item">
-                                        <div class="icon-circle"><i class="ti ti-clock-hour-11" style="color: #008000"></i>
-                                                </div>
-                                        <p><strong>Duração:</strong><br>3 dias</p>
-                                    </div>
-                                    <div class="info-item no-border">
-                                        <div class="icon-circle"><i class="ti ti-calendar-month" style="color: #008000"></i></div>
-                                        <p><strong>Período:</strong><br>Jun - Jul</p>
-                                    </div>
-                                    <div class="roteiro">
-                                        <button class="btn-ampliar" onclick="modelAbrirAmpliar(this)">
-                                            <i class="ti ti-map-2" style="color: #008000"></i> Ampliar
-                                            Roteiro
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <button class="seta" onclick="avancarCard('validados')">&#10095;</button>
+                    <div class="carousel-viewport cards" id="cards-wrapper-validados">
                     </div>
-
-                    <div class="bolinhas" id="bolinhas-validados">
-                        <span class="bola ativa"></span>
-                        <span class="bola"></span>
+                    <div class="paginacao" id="paginacao2">
                     </div>
                 </div>
 
                 <div id="pendentes" class="cards-section" style="display: none;">
-                    <div class="carousel-container">
-                        <button class="seta" onclick="voltarCard('pendentes')">&#10094;</button>
-
-                        <div class="carousel-viewport">
-                            <div class="cards" id="esteira-pendentes">
-
-                                <div class="card">
-                                    <h3>Férias em<br>Salvador</h3>
-                                    <div class="info-item">
-                                        <div class="icon-circle"><i class="ti ti-map-pin" style="color: #008000"></i></div>
-                                        <p><strong>Destino:</strong><br>Salvador</p>
-                                    </div>
-                                    <div class="info-item">
-                                        <div class="icon-circle"><i class="ti ti-clock-hour-11"style="color: #008000"></i></div>
-                                        <p><strong>Duração:</strong><br>3 dias</p>
-                                    </div>
-                                    <div class="info-item no-border">
-                                        <div class="icon-circle"><i class="ti ti-map-pin" style="color: #008000"></i></div>
-                                        <p><strong>Período:</strong><br>Jun - Jul</p>
-                                    </div>
-                                    <div class="roteiro">
-                                        <button class="btn-ampliar">
-                                            <img class="icones-card" src="/public/assets/roteiro.png" alt="pin"> Ampliar
-                                            Roteiro
-                                        </button>
-                                    </div>
-                                    <div class="botoes-validacao">
-                                        <button class="btn-validar" onclick="validar(this)">Validar</button>
-                                        <button class="btn-excluir" onclick="excluir(this)">Excluir</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <button class="seta" onclick="avancarCard('pendentes')">&#10095;</button>
+                    <div class="carousel-viewport cards" id="cards-wrapper-pendentes">
                     </div>
-
-                    <div class="bolinhas" id="bolinhas-pendentes">
-                        <span class="bola ativa"></span>
-                        <span class="bola"></span>
+                    <div class="paginacao" id="paginacao1">
                     </div>
                 </div>
 
@@ -222,38 +145,45 @@
             <form class="modal-form" onsubmit="event.preventDefault();">
                 <div class="form-group">
                     <label>Nome do Plano:</label>
-                    <input type="text" placeholder="Ex: Férias em Salvador" required>
+                    <input id="iptNomePlano" type="text" placeholder="Ex: Férias em Salvador" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Destino:</label>
-                    <input type="text" placeholder="Ex: Salvador" required>
+                    <label>Selecione o destino (Estado):</label>
+                    <select id="slEstado" onchange="listarMunicipiosSelect()">
+                        <option value="#" disabled selected>Selecione o estado de destino</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Selecione o destino (Município):</label>
+                    <select id="slMunicipio" onchange="listarEventosSelect()">
+                        <option value="#" disabled selected>Selecione o município de destino</option>
+                    </select>
                 </div>
 
                 <div class="linha-dupla">
                     <div class="form-group">
                         <label>Data inicial:</label>
-                        <input type="date" required>
+                        <input id="iptDataInicial" type="date" required>
                     </div>
                     <div class="form-group">
                         <label>Data final:</label>
-                        <input type="date" required>
+                        <input id="iptDataFinal" type="date" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Eventos do local:</label>
                     <div class="linha-eventos">
-                        <select>
-                            <option value="" disabled selected>Selecione os eventos</option>
+                        <select id="slEventos">
+                            <option value="0" disabled selected>Selecione os eventos</option>
                         </select>
                         <button type="button" class="btn-adicionar" onclick="adicionarEvento()">+</button>
                     </div>
-
-                    <input type="text" class="input-evento-selecionado" value="Evento Exemplo 1" readonly>
                 </div>
 
-                <button type="button" class="btn-salvar" onclick="salvarPlano()">Criar Plano</button>
+                <button type="button" class="btn-salvar" onclick="criarPlano()">Criar Plano</button>
             </form>
         </div>
     </div>
@@ -274,7 +204,7 @@
                         <div class="icon-roteiro"><i class="ti ti-map-pin" style="color: #008000"></i></div>
                         <div>
                             <span>Destino</span>
-                            <p id="destino">Salvador</p>
+                            <p id="destino"></p>
                         </div>
                     </div>
                 </div>
@@ -283,7 +213,7 @@
                         <div class="icon-roteiro"><i class="ti ti-clock-hour-11" style="color: #008000"></i></div>
                         <div>
                             <span>Duração</span>
-                            <p id="duracao">3 dias</p>
+                            <p id="duracao"></p>
                         </div>
                     </div>
                 </div>
@@ -292,14 +222,12 @@
                         <div class="icon-roteiro"><i class="ti ti-calendar-event" style="color: #008000"></i></div>
                         <div>
                             <span>Período</span>
-                            <p id="periodo">Jun - Jul</p>
+                            <p id="periodo"></p>
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="linha"></div>
-
             <div class="info-grid">
                 <div class="titulo-model">
                     <div class="icon-roteiro"><i class="ti ti-calendar-check" style="color: #008000"></i></div>
@@ -310,192 +238,45 @@
                         <div class="icon-roteiro"><i class="ti ti-map-pin" style="color: #008000"></i></div>
                         <div class="detalhes-roteiro">
                             <span>Nome do Plano</span>
-                            <p id="nomePlano">Férias em Salvador</p>
+                            <p id="nomePlano"></p>
                         </div>
                     </div>
-
                     <div class="info-roteiro">
                         <div class="icon-roteiro"><i class="ti ti-map-pins" style="color: #008000"></i></div>
                         <div class="detalhes-roteiro">
                             <span>Destino:</span>
-                            <p id="criado">Salvador</p>
+                            <p id="destinoDetalhe"></p>
                         </div>
                     </div>
                 </div>
-
                 <div class="linha-dupla-roteiro">
                     <div class="info-roteiro">
                         <div class="icon-roteiro"><i class="ti ti-calendar-month" style="color: #008000"></i></div>
                         <div class="detalhes-roteiro">
                             <span>Data Inicial:</span>
-                            <p id="periodo">01/06/2025</p>
+                            <p id="inicioEvento"></p>
                         </div>
                     </div>
-
                     <div class="info-roteiro">
                         <div class="icon-roteiro"><i class="ti ti-calendar-month" style="color: #008000"></i></div>
                         <div class="detalhes-roteiro">
                             <span>Data Final:</span>
-                            <p id="criado">01/06/2026</p>
+                            <p id="fimEvento"></p>
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <div class="linha"></div>
-            <div class="eventos-box">
-
-                <div class="titulo-model">
-                    <div class="icon-roteiro"><i class="ti ti-calendar-event" style="color: #008000"></i></div>
-                    <h3>Eventos do Roteiro</h3>
-                </div>
-
-                <div class="evento-card">
-                    <div class="evento-header">
-                        <h4>Festa de São João</h4>
-                        <span> Data do Evento:</span>
-                        <p>01/06/2026</p>
-                    </div>
-                    <div class="descricao-roteiro">
-                        <div class="linha-info">
-                            <span>Local:</span>
-                            <p>Salvador</p>
-                        </div>
-                        <div class="linha-info">
-                            <span>Classificação:</span>
-                            <p>Livre</p>
-                        </div>
-
-                    </div>
-
-                </div>
-
+            <div class="eventos-box" id="roteiro">
+        
             </div>
-
-
             <div class="modal-footer">
                 <button class="btn-salvar" onclick="fecharModalRoteiro()">Fechar</button>
             </div>
-
         </div>
     </div>
-    </div>
+</div>
 
 </body>
-
-</html>
-
-<script>
-
-    function mostrarAba(tipo, botao) {
-        const secoes = document.querySelectorAll(".cards-section");
-
-        secoes.forEach(sec => {
-            sec.style.display = "none";
-        });
-
-        document.getElementById(tipo).style.display = "block";
-
-        document.querySelectorAll(".tabs button").forEach(btn => {
-            btn.classList.remove("ativo");
-        });
-
-        botao.classList.add("ativo");
-    }
-
-    let pagValidados = 0;
-    let pagPendentes = 0;
-
-    function avancarCard(aba) {
-        if (aba === 'validados') {
-            if (pagValidados < 1) {
-                pagValidados++;
-                atualizarCarrossel('validados', pagValidados);
-            }
-        } else {
-            if (pagPendentes < 1) {
-                pagPendentes++;
-                atualizarCarrossel('pendentes', pagPendentes);
-            }
-        }
-    }
-
-    function voltarCard(aba) {
-        if (aba === 'validados') {
-            if (pagValidados > 0) {
-                pagValidados--;
-                atualizarCarrossel('validados', pagValidados);
-            }
-        } else {
-            if (pagPendentes > 0) {
-                pagPendentes--;
-                atualizarCarrossel('pendentes', pagPendentes);
-            }
-        }
-    }
-    function atualizarCarrossel(aba, paginaAtual) {
-
-        let deslocamento = paginaAtual * 780;
-
-        document.querySelector("#esteira-" + aba).style.transform = "translateX(-" + deslocamento + "px)";
-
-        let containerBolinhas = document.querySelector("#bolinhas-" + aba);
-        let listaBolas = containerBolinhas.querySelectorAll(".bola");
-
-        listaBolas.forEach(bola => bola.classList.remove("ativa"));
-        listaBolas[paginaAtual].classList.add("ativa");
-    }
-
-
-    function abrirModal() {
-        document.getElementById("modal-plano").style.display = "flex";
-    }
-
-    function fecharModal() {
-        document.getElementById("modal-plano").style.display = "none";
-        document.querySelector(".modal-form").reset();
-
-        const eventosCriados = document.querySelectorAll(".modal-form .input-evento-selecionado");
-        eventosCriados.forEach(input => input.remove());
-    }
-
-    function adicionarEvento() {
-        const container = document.querySelector('.linha-eventos').parentElement;
-
-
-        const select = document.querySelector('.linha-eventos select');
-        const textoEvento = select.options[select.selectedIndex].text;
-
-
-        const novoInput = document.createElement('input');
-        novoInput.type = 'text';
-        novoInput.className = 'input-evento-selecionado';
-        novoInput.value = textoEvento;
-        novoInput.readOnly = true;
-
-        container.appendChild(novoInput);
-    }
-
-    function modelAbrirAmpliar() {
-        document.getElementById("modal-roteiro").style.display = "flex";
-    }
-
-    function fecharModalRoteiro() {
-        document.getElementById("modal-roteiro").style.display = "none";
-        document.querySelector(".modal-form").reset();
-
-        const eventosCriados = document.querySelectorAll(".modal-form .input-evento-selecionado");
-        eventosCriados.forEach(input => input.remove());
-    }
-
-
-    fecharModal();
-
-
-</script>
-
-
-</body>
-
+<script src="../js/dashboard/planos.js"></script>
 </html>

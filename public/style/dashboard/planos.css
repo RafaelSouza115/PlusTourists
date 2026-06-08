@@ -139,15 +139,17 @@ body {
 }
 .cards {
     display: flex;
+    align-items: center;
     justify-content: flex-start; 
     gap: 40px;              
     margin-top: 50px;       
     width: max-content;   
+    min-height: 400px; 
     transition: transform 0.5s ease; 
 }
 
-
 .card {
+    margin-top: 30px;
     background-color: #EBF5EB; 
     display: flex;
     flex-direction: column;
@@ -320,7 +322,7 @@ body {
 
 .modal-content {
     background-color: #ffffff;
-    width: 500px;
+    width: 520px;
     padding: 30px;
     border-radius: 16px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -556,4 +558,67 @@ body {
     font-size: 12px;
     color: #555;
     margin: 0;
+}
+
+.carrossel-btn {
+    display: none;
+}
+
+.eventos-cards-wrapper {
+    display: grid;
+    flex: 1;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    min-height: 0;
+}
+
+.paginacao {
+    display: flex;
+    flex-shrink: 0;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.5rem;
+}
+
+.paginacao-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.paginacao-btn:hover {
+    color: rgb(3, 141, 67);
+    background-color: #e8f5e9;
+    border-color: rgb(3, 141, 67);
+}
+
+.paginacao-btn.ativo {
+    color: #fff;
+    background-color: rgb(3, 141, 67);
+    border-color: rgb(3, 141, 67);
+}
+
+.paginacao-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.paginacao-info {
+    padding: 0 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #9ca3af;
 }

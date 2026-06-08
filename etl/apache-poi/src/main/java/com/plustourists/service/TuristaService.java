@@ -1,11 +1,13 @@
 package com.plustourists.service;
 
 import com.plustourists.model.ListaDeDados;
+import com.plustourists.model.NotificacaoErroService;
 import com.plustourists.repository.ConexaoBancoDeDados;
 import com.plustourists.log.LogsConexaoBancoDeDados;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.sql.Connection;
 import java.util.*;
 
 public class TuristaService {
@@ -20,152 +22,244 @@ public class TuristaService {
     }
 
     public void processar(List<ListaDeDados> turistas) {
+        Connection conn = null;
+        try {
+            conn = conexao.getConexao().getConnection();
 
-        log.inserirLogs(
-                LocalDateTime.now(),
-                "PROCESSANDO",
-                "INFO",
-                "INICIO_CARGA_TURISTAS",
-                "registro_turismo",
-                "Iniciando inserção de turistas"
-        );
+            conn.setAutoCommit(false);
 
-        System.out.println("Inserindo dados de turistas...");
-        System.out.println("-".repeat(120));
+            log.inserirLogs(
+                    LocalDateTime.now(),
+                    "PROCESSANDO",
+                    "INFO",
+                    "INICIO_CARGA_TURISTAS",
+                    "registro_turismo",
+                    "Iniciando inserção de turistas"
+            );
 
-        Map<String, Integer> cacheEstados = new HashMap<>();
-        Map<String, Integer> cachePaises = new HashMap<>();
-        Map<String, Integer> cacheTransportes = new HashMap<>();
+            System.out.println("Inserindo dados de turistas...");
+            System.out.println("-".repeat(120));
 
-        String sql = "INSERT INTO registro_turismo (data_registro, quantidade_turistas, id_pais, id_transporte, id_estado, id_empresa) VALUES (?, ?, ?, ?, ?, ?)";
+            Map<String, Integer> cacheEstados = new HashMap<>();
+            Map<String, Integer> cachePaises = new HashMap<>();
+            Map<String, Integer> cacheTransportes = new HashMap<>();
 
-        List<Object[]> batch = new ArrayList<>();
+            String sql = "INSERT INTO registro_turismo\n" +
+                    "(dt_registro, quantidade_turistas, id_pais, id_via, id_estado)  VALUES (?, ?, ?, ?, ?)";
+            List<Object[]> batch = new ArrayList<>();
 
-        for (int i = 0; i < turistas.size(); i++) {
+            /*Parte de automação*/
 
-            ListaDeDados dado = turistas.get(i);
+            // ------------------- ESTADO --------------------
+
+            List<Map<String, Object>> estados = conexao.getJdbcTemplate().queryForList(
+                    "SELECT id_estado, UF FROM estado"
+            );
+
+            for (Map<String, Object> estado : estados) {
+
+                cacheEstados.put(
+                        (String) estado.get("UF"),
+                        (Integer) estado.get("id_estado")
+                );
+            }
+
+            // ------------------ PAÍS ----------------------
+
+            List<Map<String, Object>> paises = conexao.getJdbcTemplate().queryForList(
+                    "SELECT id_pais, nome FROM pais_origem"
+            );
+
+            for (Map<String, Object> pais : paises) {
+
+                cachePaises.put(
+                        (String) pais.get("nome"),
+                        (Integer) pais.get("id_pais")
+                );
+            }
+
+            // ------------------- TRANSPORTE -------------------
+
+            List<Map<String, Object>> transportes = conexao.getJdbcTemplate().queryForList(
+                    "SELECT id_via, via FROM via_acesso"
+            );
+
+            for (Map<String, Object> transporte : transportes) {
+
+                cacheTransportes.put(
+                        (String) transporte.get("via"),
+                        (Integer) transporte.get("id_via")
+                );
+            }
+
+
+            for (int i = 0; i < turistas.size(); i++) {
+
+                ListaDeDados dado = turistas.get(i);
+
+                try {
+
+                    if (i % 500 == 0 && i != 0) {
+                        System.out.println(
+                                "[" + LocalDateTime.now().format(formatter) + "]" +
+                                        " | PROCESSANDO " + i + "/" + turistas.size()
+                        );
+                    }
+
+                    String nomeEstado = dado.getUF() != null ? dado.getUF().trim() : "Desconhecido";
+                    String siglaUF = converterNomeParaSigla(nomeEstado);
+
+                    String nomePais = dado.getPais() != null ? dado.getPais().trim() : "Desconhecido";
+                    String transporte = dado.getViaAcesso() != null ? dado.getViaAcesso().trim() : "Outros";
+
+                    // ──────────────── ESTADO ────────────────
+                    if (!cacheEstados.containsKey(siglaUF)) {
+
+                        conexao.getJdbcTemplate().update(
+                                "INSERT INTO estado (nome_estado, UF) VALUES (?, ?) " +
+                                        "ON DUPLICATE KEY UPDATE nome_estado = VALUES(nome_estado)",
+                                nomeEstado, siglaUF
+                        );
+
+                        Integer id = conexao.getJdbcTemplate().queryForObject(
+                                "SELECT id_estado FROM estado WHERE UF = ? LIMIT 1",
+                                Integer.class,
+                                siglaUF
+                        );
+
+                        cacheEstados.put(siglaUF, id);
+                    }
+
+                    // ──────────────── PAIS ────────────────
+                    if (!cachePaises.containsKey(nomePais)) {
+
+                        conexao.getJdbcTemplate().update(
+                                "INSERT INTO pais_origem (nome) VALUES (?) " +
+                                        "ON DUPLICATE KEY UPDATE nome = VALUES(nome)",
+                                nomePais
+                        );
+
+                        Integer id = conexao.getJdbcTemplate().queryForObject(
+                                "SELECT id_pais FROM pais_origem WHERE nome = ? LIMIT 1",
+                                Integer.class,
+                                nomePais
+                        );
+
+                        cachePaises.put(nomePais, id);
+                    }
+
+                    // ──────────────── TRANSPORTE ────────────────
+                    if (!cacheTransportes.containsKey(transporte)) {
+
+                        conexao.getJdbcTemplate().update(
+                                "INSERT INTO via_acesso (via) VALUES (?) " +
+                                        "ON DUPLICATE KEY UPDATE via = VALUES(via)",
+                                transporte
+                        );
+
+                        Integer id = conexao.getJdbcTemplate().queryForObject(
+                                "SELECT id_via FROM via_acesso WHERE via = ? LIMIT 1",
+                                Integer.class,
+                                transporte
+                        );
+
+                        cacheTransportes.put(transporte, id);
+                    }
+
+                    // ──────────────── DADOS FINAIS ────────────────
+                    String dataRegistro = dado.getAno() + "-" + converterMesParaNumero(dado.getMes()) + "-01";
+
+                    Integer qtd = parsarInteiro(dado.getChegadas());
+                    int quantidade = (qtd != null) ? qtd : 0;
+
+                    batch.add(new Object[]{
+                            dataRegistro,
+                            quantidade,
+                            cachePaises.get(nomePais),
+                            cacheTransportes.get(transporte),
+                            cacheEstados.get(siglaUF)
+                    });
+
+                    // batch insert
+                    if (batch.size() >= 200) {
+                        conexao.getJdbcTemplate().batchUpdate(sql, batch);
+                        batch.clear();
+                    }
+
+                } catch (Exception e) {
+
+                    conn.rollback(); // <- adiciona isso
+
+                    log.inserirLogs(
+                            LocalDateTime.now(),
+                            "ERRO",
+                            "ERROR",
+                            "ERRO_TURISTA",
+                            "registro_turismo",
+                            "UF: " + dado.getUF() + " | País: " + dado.getPais() + " | " + e.getMessage()
+                    );
+                    NotificacaoErroService erro = new NotificacaoErroService(
+                            LocalDateTime.now(),
+                            "ERRO",
+                            "UF: " + dado.getUF() + " | País: " + dado.getPais() + " | " + e.getMessage(),
+                            "registro_turismo");
+                    erro.notificar();
+
+                    System.err.println(
+                            "[" + LocalDateTime.now().format(formatter) + "] ERRO: " + e.getMessage()
+                    );
+
+                    e.printStackTrace();
+
+                    throw e; // <- importante
+
+                }
+            }
+
+            if (!batch.isEmpty()) {
+                conexao.getJdbcTemplate().batchUpdate(sql, batch);
+            }
+
+            conn.commit();
+
+            log.inserirLogs(
+                    LocalDateTime.now(),
+                    "SUCESSO",
+                    "INFO",
+                    "INSERCAO_FINALIZADA",
+                    "registro_turismo",
+                    "Total inserido: " + turistas.size()
+            );
+
+            System.out.println("\n Turistas inseridos com sucesso!");
+
+        } catch (Exception e) {
 
             try {
 
-                if (i % 500 == 0 && i != 0) {
-                    System.out.println(
-                            "[" + LocalDateTime.now().format(formatter) + "]" +
-                                    " | PROCESSANDO " + i + "/" + turistas.size()
-                    );
+                if (conn != null) {
+                    conn.rollback();
                 }
 
-                String nomeEstado = dado.getUF() != null ? dado.getUF().trim() : "Desconhecido";
-                String siglaUF = converterNomeParaSigla(nomeEstado);
+            } catch (Exception rollbackErro) {
 
-                String nomePais = dado.getPais() != null ? dado.getPais().trim() : "Desconhecido";
-                String transporte = dado.getViaAcesso() != null ? dado.getViaAcesso().trim() : "Outros";
+                System.err.println(rollbackErro.getMessage());
+            }
 
-                // ──────────────── ESTADO ────────────────
-                if (!cacheEstados.containsKey(siglaUF)) {
+            System.err.println(e.getMessage());
+        }finally {
 
-                    conexao.getJdbcTemplate().update(
-                            "INSERT INTO estado (nome_estado, UF) VALUES (?, ?) " +
-                                    "ON DUPLICATE KEY UPDATE nome_estado = VALUES(nome_estado)",
-                            nomeEstado, siglaUF
-                    );
+            try {
 
-                    Integer id = conexao.getJdbcTemplate().queryForObject(
-                            "SELECT id_estado FROM estado WHERE UF = ? LIMIT 1",
-                            Integer.class,
-                            siglaUF
-                    );
-
-                    cacheEstados.put(siglaUF, id);
-                }
-
-                // ──────────────── PAIS ────────────────
-                if (!cachePaises.containsKey(nomePais)) {
-
-                    conexao.getJdbcTemplate().update(
-                            "INSERT INTO pais_origem (nome) VALUES (?) " +
-                                    "ON DUPLICATE KEY UPDATE nome = VALUES(nome)",
-                            nomePais
-                    );
-
-                    Integer id = conexao.getJdbcTemplate().queryForObject(
-                            "SELECT id_pais FROM pais_origem WHERE nome = ? LIMIT 1",
-                            Integer.class,
-                            nomePais
-                    );
-
-                    cachePaises.put(nomePais, id);
-                }
-
-                // ──────────────── TRANSPORTE ────────────────
-                if (!cacheTransportes.containsKey(transporte)) {
-
-                    conexao.getJdbcTemplate().update(
-                            "INSERT INTO tipo_transporte (nome_transporte) VALUES (?) " +
-                                    "ON DUPLICATE KEY UPDATE nome_transporte = VALUES(nome_transporte)",
-                            transporte
-                    );
-
-                    Integer id = conexao.getJdbcTemplate().queryForObject(
-                            "SELECT id_transporte FROM tipo_transporte WHERE nome_transporte = ? LIMIT 1",
-                            Integer.class,
-                            transporte
-                    );
-
-                    cacheTransportes.put(transporte, id);
-                }
-
-                // ──────────────── DADOS FINAIS ────────────────
-                String dataRegistro = dado.getAno() + "-" + converterMesParaNumero(dado.getMes()) + "-01";
-
-                Integer qtd = parsarInteiro(dado.getChegadas());
-                int quantidade = (qtd != null) ? qtd : 0;
-
-                batch.add(new Object[]{
-                        dataRegistro,
-                        quantidade,
-                        cachePaises.get(nomePais),
-                        cacheTransportes.get(transporte),
-                        cacheEstados.get(siglaUF),
-                        1
-                });
-
-                // batch insert
-                if (batch.size() >= 1000) {
-                    conexao.getJdbcTemplate().batchUpdate(sql, batch);
-                    batch.clear();
+                if (conn != null) {
+                    conn.close();
                 }
 
             } catch (Exception e) {
 
-                log.inserirLogs(
-                        LocalDateTime.now(),
-                        "ERRO",
-                        "ERROR",
-                        "ERRO_TURISTA",
-                        "registro_turismo",
-                        "UF: " + dado.getUF() + " | País: " + dado.getPais() + " | " + e.getMessage()
-                );
-
-                System.err.println(
-                        "[" + LocalDateTime.now().format(formatter) + "] ERRO: " + e.getMessage()
-                );
+                System.err.println(e.getMessage());
             }
         }
-
-        if (!batch.isEmpty()) {
-            conexao.getJdbcTemplate().batchUpdate(sql, batch);
-        }
-
-        log.inserirLogs(
-                LocalDateTime.now(),
-                "SUCESSO",
-                "INFO",
-                "INSERCAO_FINALIZADA",
-                "registro_turismo",
-                "Total inserido: " + turistas.size()
-        );
-
-        System.out.println("\n Turistas inseridos com sucesso!");
     }
 
     // =========================

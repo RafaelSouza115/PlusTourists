@@ -69,7 +69,74 @@ function habilitarEdicao() {
     btn_salvar.style.display = "inline-flex";
 }
 
+function mostrarErro(elemento, mensagem) {
+    elemento.style.visibility = "visible";
+    elemento.innerHTML = mensagem;
+}
+
+function limparErros() {
+
+   erro_nome.style.display = "none";
+    erro_nome.innerHTML = "";
+
+    erro_email.style.display = "none";
+    erro_email.innerHTML = "";
+
+    erro_senha.style.display = "none";
+    erro_senha.innerHTML = "";
+}
+
+function validarCampos() {
+
+    limparErros();
+
+    let valido = true;
+
+    let nome = input_nome.value.trim();
+    let email = input_email.value.trim();
+    let senha = input_senha.value;
+
+    if (nome === "") {
+        erro_nome.style.display = "block";
+        erro_nome.innerHTML = "O nome é obrigatório.";
+        valido = false;
+    }
+
+    if (nome !== "" && nome.length < 3) {
+        erro_nome.style.display = "block";
+        erro_nome.innerHTML = "O nome deve ter pelo menos 3 caracteres.";
+        valido = false;
+    }
+
+    if (email === "") {
+        erro_email.style.display = "block";
+        erro_email.innerHTML = "O e-mail é obrigatório.";
+        valido = false;
+    } else if (!email.includes("@") || !email.includes(".")) {
+        erro_email.style.display = "block";
+        erro_email.innerHTML = "Digite um e-mail válido.";
+        valido = false;
+    }
+
+    if (senha !== "") {
+
+        let senhaForte =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+        if (!senhaForte.test(senha)) {
+            erro_senha.style.display = "block";
+            erro_senha.innerHTML =
+                "A senha deve ter 8+ caracteres, 1 maiúscula, 1 minúscula, 1 número e 1 símbolo.";
+            valido = false;
+        }
+    }
+
+    return valido;
+}
+
 function atualizarDados() {
+
+    if (!validarCampos()) return;
 
     var idFuncionario = sessionStorage.ID_FUNCIONARIO;
 
@@ -134,6 +201,8 @@ function atualizarDados() {
 function cancelarEdicao() {
 
     buscarDados();
+
+    limparErros();
 
     input_nome.setAttribute("readonly", true);
     input_email.setAttribute("readonly", true);

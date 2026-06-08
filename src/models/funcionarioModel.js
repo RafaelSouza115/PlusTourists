@@ -7,14 +7,14 @@ function cadastrar(nome, cpf, email, senha, fkEmpresa) {
         VALUES (?, ?, ?, ?, ?, 1);
     `;
     var instrucao2 = `
-        UPDATE empresa SET codigo_ativacao = 0 WHERE id_empresa = ?;
+        UPDATE empresa SET codigo_ativacao = ? WHERE id_empresa = ?;
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.execute(instrucao, [nome, cpf, email, senha, fkEmpresa])
         .then(() => {
             console.log("Executando a instrução SQL: \n" + instrucao2);
-            return database.execute(instrucao2, [fkEmpresa])
+            return database.execute(instrucao2, [null, fkEmpresa])
     });
 }
 

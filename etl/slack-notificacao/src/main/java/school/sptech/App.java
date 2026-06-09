@@ -13,3 +13,4 @@ public class App {
         CadastroService.cadastrarUsuario(razaoSocial, email, codigoAtivacao);
     }
 }
+

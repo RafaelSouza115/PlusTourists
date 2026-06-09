@@ -1,5 +1,6 @@
 package com.plustourists.reader;
 
+import com.plustourists.model.NotificacaoErroService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.plustourists.model.ListaDeDados;
@@ -8,7 +9,6 @@ import com.plustourists.log.LogsConexaoBancoDeDados;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,11 +18,10 @@ public class LeituraExcelTuristas {
     public List<ListaDeDados> extrairRegistroTuristas(InputStream inputStream) {
         List<ListaDeDados> turistasExtraidos = new ArrayList<>();
         DataFormatter df = new DataFormatter();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-
-        ConexaoBancoDeDados conexao = new ConexaoBancoDeDados();
+       ConexaoBancoDeDados conexao = new ConexaoBancoDeDados();
         LogsConexaoBancoDeDados log =
                 new LogsConexaoBancoDeDados(conexao.getJdbcTemplate());
 
@@ -89,7 +88,12 @@ public class LeituraExcelTuristas {
                     turistasExtraidos.add(turistas);
 
                 } catch (Exception e) {
-
+                    NotificacaoErroService erro = new NotificacaoErroService(
+                            LocalDateTime.now(),
+                            "ERRO",
+                            "Erro na linha " + row.getRowNum() + ": " + e.getMessage(),
+                            "registro_turismo");
+                    erro.notificar();
                     log.inserirLogs(
                             LocalDateTime.now(),
                             "ERRO",
@@ -112,7 +116,7 @@ public class LeituraExcelTuristas {
 
 
             System.out.println("\u001B[32mLeitura finalizada!\u001B[0m");
-            System.out.println("-".repeat(180));
+            System.out.println("-".repeat(120));
 
             log.inserirLogs(
                     LocalDateTime.now(),
@@ -125,7 +129,12 @@ public class LeituraExcelTuristas {
 
         } catch (IOException e) {
             System.err.println("Erro ao abrir o arquivo: " + e.getMessage());
-
+            NotificacaoErroService erro = new NotificacaoErroService(
+                    LocalDateTime.now(),
+                    "ERRO",
+                    e.getMessage(),
+                    "registro_turismo");
+            erro.notificar();
             log.inserirLogs(
                     LocalDateTime.now(),
                     "ERRO",
@@ -138,7 +147,12 @@ public class LeituraExcelTuristas {
         } catch (Exception e) {
             System.err.println("Erro inesperado: " + e.getMessage());
             e.printStackTrace();
-
+            NotificacaoErroService erro = new NotificacaoErroService(
+                    LocalDateTime.now(),
+                    "ERRO",
+                    e.getMessage(),
+                    "registro_turismo");
+            erro.notificar();
             log.inserirLogs(
                     LocalDateTime.now(),
                     "ERRO",

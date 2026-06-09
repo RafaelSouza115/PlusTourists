@@ -1,4 +1,4 @@
-var database = require("../database/config");
+var database = require('../database/config');
 
 function nomeMes(colunaData) {
   return `
@@ -30,7 +30,7 @@ function buscarDadosKpiTuristas(ano, idEstado) {
         p.id_pais,
         p.nome AS pais,
         SUM(rt.quantidade_turistas) AS total_pais
-      FROM registro_turista rt
+      FROM registro_turismo rt
       JOIN pais_origem p ON p.id_pais = rt.id_pais
       WHERE YEAR(rt.dt_registro) = ?
         AND rt.id_estado = ?
@@ -40,18 +40,18 @@ function buscarDadosKpiTuristas(ano, idEstado) {
     ) pais_top
     CROSS JOIN (
       SELECT SUM(quantidade_turistas) AS total_turistas
-      FROM registro_turista
+      FROM registro_turismo
       WHERE YEAR(dt_registro) = ?
         AND id_estado = ?
     ) total_estado
     LEFT JOIN (
       SELECT e.nome_estado
-      FROM registro_turista rt
+      FROM registro_turismo rt
       JOIN estado e ON e.id_estado = rt.id_estado
       WHERE YEAR(rt.dt_registro) = ?
         AND rt.id_pais = (
           SELECT rt2.id_pais
-          FROM registro_turista rt2
+          FROM registro_turismo rt2
           WHERE YEAR(rt2.dt_registro) = ?
             AND rt2.id_estado = ?
           GROUP BY rt2.id_pais
@@ -69,8 +69,8 @@ function buscarDadosKpiTuristas(ano, idEstado) {
 
 function buscarMesesMenosTuristas(ano, idEstado) {
   var instrucaoSql = `
-    SELECT ${nomeMes("rt.dt_registro")} AS nome_mes
-    FROM registro_turista rt
+    SELECT ${nomeMes('rt.dt_registro')} AS nome_mes
+    FROM registro_turismo rt
     WHERE YEAR(rt.dt_registro) = ?
       AND rt.id_estado = ?
     GROUP BY MONTH(rt.dt_registro), nome_mes
@@ -99,9 +99,9 @@ function buscarMesTopComEvento(ano, idEstado) {
     FROM (
       SELECT
         MONTH(rt.dt_registro) AS numero_mes,
-        ${nomeMes("rt.dt_registro")} AS nome_mes,
+        ${nomeMes('rt.dt_registro')} AS nome_mes,
         SUM(rt.quantidade_turistas) AS total_turistas
-      FROM registro_turista rt
+      FROM registro_turismo rt
       WHERE YEAR(rt.dt_registro) = ?
         AND rt.id_estado = ?
       GROUP BY MONTH(rt.dt_registro), nome_mes
@@ -119,11 +119,11 @@ function buscarPrincipalViaAcesso(ano, idEstado) {
     SELECT
       v.via AS principal_via_acesso,
       ROUND((SUM(rt.quantidade_turistas) / total_estado.total_turistas) * 100, 1) AS percentual_via_acesso
-    FROM registro_turista rt
+    FROM registro_turismo rt
     JOIN via_acesso v ON v.id_via = rt.id_via
     CROSS JOIN (
       SELECT SUM(quantidade_turistas) AS total_turistas
-      FROM registro_turista
+      FROM registro_turismo
       WHERE YEAR(dt_registro) = ?
         AND id_estado = ?
     ) total_estado
@@ -146,9 +146,9 @@ function buscarEventosTuristasPorMes(ano, idEstado) {
     FROM (
       SELECT
         MONTH(rt.dt_registro) AS numero_mes,
-        ${nomeMes("rt.dt_registro")} AS nome_mes,
+        ${nomeMes('rt.dt_registro')} AS nome_mes,
         SUM(rt.quantidade_turistas) AS total_turistas
-      FROM registro_turista rt
+      FROM registro_turismo rt
       WHERE YEAR(rt.dt_registro) = ?
         AND rt.id_estado = ?
       GROUP BY MONTH(rt.dt_registro), nome_mes
@@ -175,7 +175,7 @@ function buscarTuristasPorViaAcesso(ano, idEstado) {
     SELECT
       v.via,
       SUM(rt.quantidade_turistas) AS total
-    FROM registro_turista rt
+    FROM registro_turismo rt
     JOIN via_acesso v ON v.id_via = rt.id_via
     WHERE YEAR(rt.dt_registro) = ?
       AND rt.id_estado = ?
@@ -191,11 +191,11 @@ function buscarTop5PaisesCompleto(ano, idEstado) {
       p.id_pais,
       p.nome AS pais,
       ROUND((SUM(rt.quantidade_turistas) / total_estado.total_turistas) * 100, 1) AS participacao_percentual
-    FROM registro_turista rt
+    FROM registro_turismo rt
     JOIN pais_origem p ON p.id_pais = rt.id_pais
     CROSS JOIN (
       SELECT SUM(quantidade_turistas) AS total_turistas
-      FROM registro_turista
+      FROM registro_turismo
       WHERE YEAR(dt_registro) = ?
         AND id_estado = ?
     ) total_estado
@@ -212,12 +212,12 @@ function buscarTop5PaisesCompleto(ano, idEstado) {
 function buscarEstadosPorPais(ano, idPais, ordem) {
   var instrucaoSql = `
     SELECT e.nome_estado
-    FROM registro_turista rt
+    FROM registro_turismo rt
     JOIN estado e ON e.id_estado = rt.id_estado
     WHERE YEAR(rt.dt_registro) = ?
       AND rt.id_pais = ?
     GROUP BY e.id_estado, e.nome_estado
-    ORDER BY SUM(rt.quantidade_turistas) ${ordem === "ASC" ? "ASC" : "DESC"}
+    ORDER BY SUM(rt.quantidade_turistas) ${ordem === 'ASC' ? 'ASC' : 'DESC'}
     LIMIT 3;
   `;
 
@@ -226,12 +226,12 @@ function buscarEstadosPorPais(ano, idPais, ordem) {
 
 function buscarMesPorPais(ano, idPais, ordem) {
   var instrucaoSql = `
-    SELECT ${nomeMes("rt.dt_registro")} AS nome_mes
-    FROM registro_turista rt
+    SELECT ${nomeMes('rt.dt_registro')} AS nome_mes
+    FROM registro_turismo rt
     WHERE YEAR(rt.dt_registro) = ?
       AND rt.id_pais = ?
     GROUP BY MONTH(rt.dt_registro), nome_mes
-    ORDER BY SUM(rt.quantidade_turistas) ${ordem === "ASC" ? "ASC" : "DESC"}
+    ORDER BY SUM(rt.quantidade_turistas) ${ordem === 'ASC' ? 'ASC' : 'DESC'}
     LIMIT 1;
   `;
 
@@ -247,5 +247,5 @@ module.exports = {
   buscarTuristasPorViaAcesso,
   buscarTop5PaisesCompleto,
   buscarEstadosPorPais,
-  buscarMesPorPais
+  buscarMesPorPais,
 };

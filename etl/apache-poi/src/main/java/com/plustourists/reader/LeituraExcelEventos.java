@@ -1,5 +1,6 @@
 package com.plustourists.reader;
 
+import com.plustourists.model.NotificacaoErroService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.plustourists.model.ListaDeDados;
@@ -38,9 +39,9 @@ public class LeituraExcelEventos {
                 InputStream is = inputStream;
                 Workbook workbook = new XSSFWorkbook(inputStream)
         ) {
-            System.out.println("-".repeat(180));
+            System.out.println("-".repeat(120));
             System.out.println("Iniciando leitura do arquivo de eventos...");
-            System.out.println("-".repeat(180));
+            System.out.println("-".repeat(120));
 
             System.out.println(
                     "[" + LocalDateTime.now().format(formatter) + "]" +
@@ -70,6 +71,7 @@ public class LeituraExcelEventos {
                         );
                     }
                     // --- Campos de Texto com Tratamento de Célula Vazia e Truncamento ---
+                    String uf = "SP";
                     String municipio = extrairTextoSeguro(row.getCell(1), df, 100);
                     String regiaoTuristica = extrairTextoSeguro(row.getCell(2), df, 100);
                     String nomeDoEvento = extrairTextoSeguro(row.getCell(3), df, 150);
@@ -99,7 +101,7 @@ public class LeituraExcelEventos {
                     String classificacaoEtaria = extrairTextoSeguro(row.getCell(28), df, 100);
 
                     ListaDeDados evento = new ListaDeDados(
-                            municipio, regiaoTuristica, nomeDoEvento, descricaoDoEvento,
+                            uf, municipio, regiaoTuristica, nomeDoEvento, descricaoDoEvento,
                             enderecoDoEvento, mesDeRealizacaoDoEvento, dataInicialDoEvento,
                             dataFinalDoEvento, horarioInicioEvento, horarioFinalevento,
                             tipoDeEvento, tipoDePublico, edicao2025, edicao2024,
@@ -110,7 +112,12 @@ public class LeituraExcelEventos {
                     eventosExtraidos.add(evento);
 
                 } catch (Exception e) {
-
+                    NotificacaoErroService erro = new NotificacaoErroService(
+                            LocalDateTime.now(),
+                            "ERRO",
+                            "Erro na linha " + row.getRowNum() + ": " + e.getMessage(),
+                            "evento");
+                    erro.notificar();
                     log.inserirLogs(
                             LocalDateTime.now(),
                             "ERRO",
@@ -144,7 +151,12 @@ public class LeituraExcelEventos {
             );
         } catch (IOException e) {
             System.err.println("Erro ao abrir o arquivo: " + e.getMessage());
-
+            NotificacaoErroService erro = new NotificacaoErroService(
+                    LocalDateTime.now(),
+                    "ERRO",
+                    e.getMessage(),
+                    "evento");
+            erro.notificar();
             log.inserirLogs(
                     LocalDateTime.now(),
                     "ERRO",
@@ -156,7 +168,12 @@ public class LeituraExcelEventos {
         } catch (Exception e) {
             System.err.println("Erro inesperado: " + e.getMessage());
             e.printStackTrace();
-
+            NotificacaoErroService erro = new NotificacaoErroService(
+                    LocalDateTime.now(),
+                    "ERRO",
+                    e.getMessage(),
+                    "evento");
+            erro.notificar();
             log.inserirLogs(
                     LocalDateTime.now(),
                     "ERRO",
@@ -201,6 +218,12 @@ public class LeituraExcelEventos {
             }
         } catch (Exception e) {
             System.err.println("Erro na data - Coluna: " + cell.getColumnIndex());
+            NotificacaoErroService erro = new NotificacaoErroService(
+                    LocalDateTime.now(),
+                    "ERRO",
+                    "Erro na data - Coluna: " + cell.getColumnIndex(),
+                    "evento");
+            erro.notificar();
         }
         return null;
     }

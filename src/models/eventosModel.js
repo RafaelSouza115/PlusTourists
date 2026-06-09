@@ -33,7 +33,7 @@ function listar() {
       ed.dt_inicio AS dataInicio,
       ed.dt_fim AS dataFinal,
       ed.hr_inicio AS horaInicio,
-      ed.hr_final AS horaFinal
+      ed.hr_fim AS horaFinal
     FROM evento AS e
     JOIN municipio AS m
       ON m.id_municipio = e.id_municipio

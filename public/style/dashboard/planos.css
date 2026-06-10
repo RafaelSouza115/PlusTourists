@@ -188,9 +188,12 @@ body {
 .filtros {
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
-    margin-top: -55px;
+}
+.filtros-selects{
+    display: flex;
+    gap: 1.5rem;
 }
 
 .filtros select {
@@ -228,7 +231,10 @@ body {
     display: grid;
     flex: 1;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: max-content;
     gap: 1rem;
+    align-content: start;
+    align-items: start;
     min-height: 0;
 }
 
@@ -237,6 +243,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    height: auto;
     min-height: 0;
     padding: 1.2rem;
     overflow: hidden;
@@ -402,13 +409,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 24px;
     background-color: rgba(0,0,0,0.45);
     backdrop-filter: blur(2px);
 }
 
 .modal-content {
+    flex: 0 1 520px;
     width: min(100%, 520px);
+    height: auto;
     max-height: 90vh;
+    max-height: calc(100dvh - 48px);
     padding: 2rem;
     overflow-y: auto;
     background-color: #fff;

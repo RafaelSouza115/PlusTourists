@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="../style/dashboard/perfil.css" />
     <link rel="stylesheet" href="../style/dashboard/sidebar.css" />
-    <script src="../js/dashboard/funcionario.js" defer></script>
+    <link rel="stylesheet" href="../style/dashboard/perfil.css" />
     <link rel="icon" href="../assets/logoIcon.png" />
     <title>Perfil</title>
   </head>
@@ -32,11 +31,6 @@
           <span>Planos</span>
         </a>
 
-        <a class="btn-nav-white" href="empresa.html">
-          <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
-          <span>Empresa</span>
-        </a>
-
         <a class="btn-nav-white" href="eventos.html">
           <img src="../assets/iconEventos.svg" alt="" class="icon-nav" />
           <span>Eventos</span>
@@ -47,7 +41,17 @@
           <span>Perfil</span>
         </a>
 
-        <a class="btn-nav-white" href="gerenciamento-funcionarios/gerenciamento-funcionarios.html">
+        <a class="btn-nav-white" href="empresa.html" id="menu_empresa" style="display: none">
+          <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
+          <span>Empresa</span>
+        </a>
+
+        <a
+          class="btn-nav-white"
+          href="gerenciamento-funcionarios/gerenciamento-funcionarios.html"
+          id="menu_funcionarios"
+          style="display: none"
+        >
           <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
           <span>Gerenciar Funcionários</span>
         </a>
@@ -140,3 +144,4 @@
     </div>
   </body>
 </html>
+<script src="../js/dashboard/funcionario.js" defer></script>

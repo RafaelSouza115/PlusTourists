@@ -32,10 +32,6 @@
           <img src="../../assets/iconPlanejamento.svg" alt="" class="icon-nav" />
           <span>Planos</span>
         </a>
-        <a class="btn-nav-white" href="../empresa.html">
-          <img src="../../assets/iconEmpresa.svg" alt="" class="icon-nav" />
-          <span>Empresa</span>
-        </a>
         <a class="btn-nav-white" href="../eventos.html">
           <img src="../../assets/iconEventos.svg" alt="" class="icon-nav" />
           <span>Eventos</span>
@@ -44,7 +40,17 @@
           <img src="../../assets/iconPerfil.svg" alt="" class="icon-nav" />
           <span>Perfil</span>
         </a>
-        <a class="btn-nav-white ativo" href="gerenciamento-funcionarios.html">
+        <a class="btn-nav-white" href="../empresa.html" id="menu_empresa" style="display: none">
+          <img src="../../assets/iconEmpresa.svg" alt="" class="icon-nav" />
+          <span>Empresa</span>
+        </a>
+
+        <a
+          class="btn-nav-white ativo"
+          href="gerenciamento-funcionarios.html"
+          id="menu_funcionarios"
+          style="display: none"
+        >
           <img src="../../assets/IconGerenciarFuncionarioV.svg" alt="" class="icon-nav" />
           <span>Gerenciar Funcionários</span>
         </a>
@@ -56,7 +62,7 @@
             <span class="user-email" id="sidebar_email"></span>
           </div>
         </div>
-        <button id="btn-logout" class="icon-logout" onclick="limparSessao()">
+        <button id="btn-logout" class="icon-logout" onclick="limparSessaoGerenciamento()">
           <img src="../../assets/iconSair.png" alt="Sair" />
         </button>
       </footer>

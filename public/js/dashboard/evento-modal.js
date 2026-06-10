@@ -31,7 +31,7 @@
       }
       const destinos = await res.json();
       const select = document.getElementById('filtro-destino');
-      select.innerHTML = '<option value="">Selecione: Destino</option>';
+      select.innerHTML = '';
 
       destinos.forEach((destino) => {
         const option = document.createElement('option');
@@ -101,12 +101,13 @@
       card.innerHTML = `
                 <div class="evento-card-header">
                     <h2 class="evento-card-titulo">${evento.titulo}</h2>
-                    <span class="evento-card-sep"></span>
+                </div>
+
+                <div class="card-info-row">
                     <span class="evento-card-municipio">
                         <i class="ti ti-map-pin"></i>${evento.municipio}
                     </span>
                 </div>
-
                 <div class="card-info-row">
                     <span class="card-info-icon"><i class="ti ti-users-group"></i></span>
                     <div class="card-info-text">
@@ -348,24 +349,29 @@
   /* ============================================================
        INIT
     ============================================================ */
-  function init() {
-    carregarEventos();
-    carregarDestinos();
-    carregarFaixasEtarias();
+  async function init() {
+    await carregarEventos();
+    await carregarDestinos();
+    await carregarFaixasEtarias();
 
-    // monta o modal no DOM
+    const selectDestino = document.getElementById('filtro-destino');
+
+    if (selectDestino && selectDestino.options.length > 0) {
+      selectDestino.selectedIndex = 0;
+      aplicarFiltros();
+    }
+
     criarModalHTML();
 
-    // eventos do modal
     document.getElementById('modal-btn-fechar').addEventListener('click', fecharModal);
     document.getElementById('modal-evento').addEventListener('click', function (e) {
       if (e.target === this) fecharModal();
     });
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') fecharModal();
     });
 
-    // filtros dos selects
     document.getElementById('filtro-destino')?.addEventListener('change', aplicarFiltros);
     document.getElementById('filtro-classificacao')?.addEventListener('change', aplicarFiltros);
   }

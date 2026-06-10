@@ -23,7 +23,10 @@ function buscarDadosKpiTuristas(ano, idEstado) {
   var instrucaoSql = `
     SELECT
       pais_top.pais AS maiorPaisEmissor,
-      ROUND((pais_top.total_pais / total_estado.total_turistas) * 100, 1) AS percentualMaiorPaisEmissor,
+      ROUND(
+        (pais_top.total_pais / NULLIF(total_estado.total_turistas, 0)) * 100,
+        1
+      ) AS percentualMaiorPaisEmissor,
       destino_menos.nome_estado AS destinoMenosVisitado
     FROM (
       SELECT
@@ -49,6 +52,7 @@ function buscarDadosKpiTuristas(ano, idEstado) {
       FROM registro_turismo rt
       JOIN estado e ON e.id_estado = rt.id_estado
       WHERE YEAR(rt.dt_registro) = ?
+        AND rt.id_estado <> ?
         AND rt.id_pais = (
           SELECT rt2.id_pais
           FROM registro_turismo rt2
@@ -64,7 +68,16 @@ function buscarDadosKpiTuristas(ano, idEstado) {
     ) destino_menos ON TRUE;
   `;
 
-  return database.execute(instrucaoSql, [ano, idEstado, ano, idEstado, ano, ano, idEstado]);
+  return database.execute(instrucaoSql, [
+    ano,
+    idEstado,
+    ano,
+    idEstado,
+    ano,
+    idEstado,
+    ano,
+    idEstado,
+  ]);
 }
 
 function buscarMesesMenosTuristas(ano, idEstado) {
@@ -90,7 +103,7 @@ function buscarMesTopComEvento(ano, idEstado) {
         FROM edicao ed
         JOIN evento ev ON ev.id_evento = ed.id_evento
         JOIN municipio m ON m.id_municipio = ev.id_municipio
-        WHERE ed.ano_realizacao = ?
+        WHERE CAST(ed.ano_realizacao AS UNSIGNED) = ?
           AND m.id_estado = ?
           AND MONTH(ed.dt_inicio) = mes_top.numero_mes
         ORDER BY COALESCE(ed.publico_atingido, ed.publico_esperado, 0) DESC
@@ -118,7 +131,11 @@ function buscarPrincipalViaAcesso(ano, idEstado) {
   var instrucaoSql = `
     SELECT
       v.via AS principal_via_acesso,
-      ROUND((SUM(rt.quantidade_turistas) / total_estado.total_turistas) * 100, 1) AS percentual_via_acesso
+      ROUND(
+        (SUM(rt.quantidade_turistas) /
+        NULLIF(total_estado.total_turistas, 0)) * 100,
+        1
+      ) AS percentual_via_acesso
     FROM registro_turismo rt
     JOIN via_acesso v ON v.id_via = rt.id_via
     CROSS JOIN (
@@ -160,7 +177,7 @@ function buscarEventosTuristasPorMes(ano, idEstado) {
       FROM edicao ed
       JOIN evento ev ON ev.id_evento = ed.id_evento
       JOIN municipio m ON m.id_municipio = ev.id_municipio
-      WHERE ed.ano_realizacao = ?
+      WHERE CAST(ed.ano_realizacao AS UNSIGNED) = ?
         AND m.id_estado = ?
       GROUP BY MONTH(ed.dt_inicio)
     ) eventos ON eventos.numero_mes = turistas.numero_mes
@@ -190,7 +207,11 @@ function buscarTop5PaisesCompleto(ano, idEstado) {
     SELECT
       p.id_pais,
       p.nome AS pais,
-      ROUND((SUM(rt.quantidade_turistas) / total_estado.total_turistas) * 100, 1) AS participacao_percentual
+      ROUND(
+        (SUM(rt.quantidade_turistas) /
+        NULLIF(total_estado.total_turistas, 0)) * 100,
+        1
+      ) AS participacao_percentual
     FROM registro_turismo rt
     JOIN pais_origem p ON p.id_pais = rt.id_pais
     CROSS JOIN (

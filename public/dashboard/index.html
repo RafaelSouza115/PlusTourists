@@ -10,8 +10,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
     />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/dashboard/sidebar.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <title>Dashboard</title>
   </head>
@@ -36,11 +36,6 @@
           <span>Planos</span>
         </a>
 
-        <a class="btn-nav-white" href="empresa.html">
-          <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
-          <span>Empresa</span>
-        </a>
-
         <a class="btn-nav-white" href="eventos.html">
           <img src="../assets/iconEventos.svg" alt="" class="icon-nav" />
           <span>Eventos</span>
@@ -51,7 +46,17 @@
           <span>Perfil</span>
         </a>
 
-        <a class="btn-nav-white" href="gerenciamento-funcionarios/gerenciamento-funcionarios.html">
+        <a class="btn-nav-white" href="empresa.html" id="menu_empresa" style="display: none">
+          <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
+          <span>Empresa</span>
+        </a>
+
+        <a
+          class="btn-nav-white"
+          href="gerenciamento-funcionarios/gerenciamento-funcionarios.html"
+          id="menu_funcionarios"
+          style="display: none"
+        >
           <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
           <span>Gerenciar Funcionários</span>
         </a>
@@ -70,6 +75,7 @@
         </button>
       </footer>
     </aside>
+
     <!-- CONTEÚDO PRINCIPAL -->
     <div class="flex-1 flex flex-col bg-gray-100 overflow-y-auto">
       <!-- HEADER VERDE -->
@@ -90,8 +96,8 @@
                 color: #fff;
               "
             >
-            <option style="color: #222; background: #fff">São Paulo</option>
-            <option style="color: #222; background: #fff">Selecione o estado</option>
+              <option style="color: #222; background: #fff">São Paulo</option>
+              <option style="color: #222; background: #fff">Selecione o estado</option>
             </select>
           </div>
           <div class="flex flex-col">
@@ -105,7 +111,7 @@
                 color: #fff;
               "
             >
-            <option style="color: #222; background: #fff">2025</option>
+              <option style="color: #222; background: #fff">2025</option>
               <option style="color: #222; background: #fff">Selecione o ano</option>
             </select>
           </div>
@@ -138,11 +144,11 @@
           </div>
           <p id="MaiorPaisEmissor" class="text-lg font-bold m-0" style="color: #16a34a"></p>
           <span
-            class=" flex text-xs flex-row font-semibold px-2 py-0.5 rounded-full self-start"
+            class="flex text-xs flex-row font-semibold px-2 py-0.5 rounded-full self-start"
             style="background: #e8f5e9; color: #16a34a"
           >
             <p id="PercentualMaiorPaisEmissor"></p>
-             do total de turistas
+            do total de turistas
           </span>
           <p class="text-sm text-gray-400 mt-2 mb-0">Destino menos visitado</p>
           <p class="text-base font-semibold m-0" id="DestinoMenosVisitado"></p>
@@ -443,4 +449,5 @@
     </div>
   </body>
   <script src="../js/dashboard/dashboard.js" defer></script>
+  <script src="../js/dashboard/sidebar.js" defer></script>
 </html>

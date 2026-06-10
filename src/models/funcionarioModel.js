@@ -1,40 +1,45 @@
-var database = require("../database/config");
+var database = require('../database/config');
 
 function cadastrar(nome, cpf, email, senha, fkEmpresa) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, fkEmpresa);
-    var instrucao = `
+  console.log(
+    "ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",
+    nome,
+    email,
+    senha,
+    fkEmpresa
+  );
+  var instrucao = `
         INSERT INTO funcionario (nome, cpf, email, senha, id_empresa, nivel_acesso)
         VALUES (?, ?, ?, ?, ?, 1);
     `;
-    var instrucao2 = `
+  var instrucao2 = `
         UPDATE empresa SET codigo_ativacao = ? WHERE id_empresa = ?;
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.execute(instrucao, [nome, cpf, email, senha, fkEmpresa])
-        .then(() => {
-            console.log("Executando a instrução SQL: \n" + instrucao2);
-            return database.execute(instrucao2, [null, fkEmpresa])
-    });
+  console.log('Executando a instrução SQL: \n' + instrucao);
+  return database.execute(instrucao, [nome, cpf, email, senha, fkEmpresa]).then(() => {
+    console.log('Executando a instrução SQL: \n' + instrucao2);
+    return database.execute(instrucao2, [null, fkEmpresa]);
+  });
 }
 
 function autenticar(email, senha) {
-    var instrucao = `
+  var instrucao = `
         SELECT id_funcionario,
                nome,
                cpf,
                email,
-               id_empresa AS empresa_ligada
+               id_empresa AS empresa_ligada,
+               nivel_acesso
         FROM funcionario
         WHERE email = ? AND senha = ?;
     `;
 
-    return database.execute(instrucao, [email, senha]);
+  return database.execute(instrucao, [email, senha]);
 }
 
 function buscarPorId(idFuncionario) {
-
-    var instrucao = `
+  var instrucao = `
         SELECT
             id_funcionario,
             nome,
@@ -46,20 +51,18 @@ function buscarPorId(idFuncionario) {
         WHERE id_funcionario = ?;
     `;
 
-    console.log("Executando SQL:");
-    console.log(instrucao);
+  console.log('Executando SQL:');
+  console.log(instrucao);
 
-    return database.execute(instrucao, [idFuncionario]);
+  return database.execute(instrucao, [idFuncionario]);
 }
 
 function atualizar(idFuncionario, nome, email, senha) {
+  var instrucao = '';
+  var parametros = [];
 
-    var instrucao = "";
-    var parametros = [];
-
-    if (senha) {
-
-        instrucao = `
+  if (senha) {
+    instrucao = `
             UPDATE funcionario
             SET
                 nome = ?,
@@ -68,16 +71,9 @@ function atualizar(idFuncionario, nome, email, senha) {
             WHERE id_funcionario = ?;
         `;
 
-        parametros = [
-            nome,
-            email,
-            senha,
-            idFuncionario
-        ];
-
-    } else {
-
-        instrucao = `
+    parametros = [nome, email, senha, idFuncionario];
+  } else {
+    instrucao = `
             UPDATE funcionario
             SET
                 nome = ?,
@@ -85,22 +81,18 @@ function atualizar(idFuncionario, nome, email, senha) {
             WHERE id_funcionario = ?;
         `;
 
-        parametros = [
-            nome,
-            email,
-            idFuncionario
-        ];
-    }
+    parametros = [nome, email, idFuncionario];
+  }
 
-    console.log("Executando SQL:");
-    console.log(instrucao);
+  console.log('Executando SQL:');
+  console.log(instrucao);
 
-    return database.execute(instrucao, parametros);
+  return database.execute(instrucao, parametros);
 }
 
 module.exports = {
-    cadastrar,
-    autenticar,
-    buscarPorId,
-    atualizar
+  cadastrar,
+  autenticar,
+  buscarPorId,
+  atualizar,
 };

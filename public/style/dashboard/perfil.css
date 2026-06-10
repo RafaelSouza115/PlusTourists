@@ -27,7 +27,6 @@ body {
     background-color: #f3f4f6;
 }
 
-
 .header {
     display: flex;
     flex-direction: column;
@@ -35,21 +34,15 @@ body {
     padding: 40px 60px 95px;
     color: white;
     background-color: rgb(3, 141, 67);
-
-    h3 {
-        font-size: 16px;
-        font-weight: 400;
-    }
 }
 
-p {
+.header h3 {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.main-content p {
     margin-bottom: 30px;
-}
-
-p span {
-    font-weight: 600;
-    color: #b6ffb6;
-    text-decoration: underline;
 }
 
 .edit p {
@@ -73,13 +66,10 @@ p span {
     width: min(100%, 1200px);
     min-height: calc(80vh - 150px);
     padding: 2rem;
-    margin: 2rem auto;
     margin: -60px auto 0 auto;
     background-color: #ffffff;
     border-radius: 0.75rem;
-    box-shadow:
-        0 1px 2px 0 rgb(0 0 0 / 0.05);
-
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
 .icon-perfil {
@@ -93,13 +83,14 @@ p span {
     color: rgb(54, 141, 20);
     background-color: #e7ebe5;
     border-radius: 50%;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .function {
     margin-left: 14%;
 }
-
 
 .icon-dada {
     position: relative;
@@ -115,7 +106,7 @@ p span {
     margin-top: 35px;
 }
 
-input {
+.main-content input {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -126,11 +117,11 @@ input {
     border: none;
 }
 
-input[readonly] {
+.main-content input[readonly] {
     color: #6b6b6b;
 }
 
-input::placeholder {
+.main-content input::placeholder {
     font-size: 16px;
     color: #555;
     letter-spacing: 2px;
@@ -140,14 +131,12 @@ input::placeholder {
     padding-top: 8px;
 }
 
-label {
+.main-content label {
     display: block;
     margin-bottom: 8px;
-    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     font-weight: 500;
     color: #000;
-
 }
 
 .entry-function {
@@ -195,7 +184,8 @@ label {
     background: linear-gradient(120deg, #d62828, #8b0000);
 }
 
-button {
+.main-content button,
+.modal-content button {
     display: inline-flex;
     gap: 8px;
     align-items: center;
@@ -217,7 +207,8 @@ button {
         opacity 0.3s ease;
 }
 
-button:hover {
+.main-content button:hover,
+.modal-content button:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     opacity: 0.95;
     transform: translateY(-2px);
@@ -279,15 +270,11 @@ button:hover {
 .erro-msg {
     position: absolute;
     bottom: -22px;
-    /* Fixa a mensagem flutuando logo abaixo da borda inferior */
     left: 10px;
     z-index: 5;
     display: none;
-    font-family: 'Montserrat', sans-serif;
     font-size: 11px;
     font-weight: 500;
     color: #e63946;
-    /* Um tom de vermelho bem visível e limpo */
     white-space: nowrap;
-    /* Evita que o texto quebre em várias linhas */
 }

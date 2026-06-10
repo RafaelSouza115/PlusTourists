@@ -1,60 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/siteInstitucional/login.css">
-    <link rel="icon" href="assets/logoIcon.png">
-    <script src="js/site-institucional/login.js"> </script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/siteInstitucional/login.css" />
+    <link rel="icon" href="assets/logoIcon.png" />
+    <script src="js/site-institucional/login.js"></script>
     <title>Login | +Tourists</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <main class="page-wrapper">
-        <section class="card-container">
-            <div class="card-left">
-                <p class="card-subtitle">Bem-vindo à plataforma</p>
-                <h1 class="card-title"><span class="plus">+</span>Tourists</h1>
-                <p class="card-description">
-                    Nossa plataforma transforma dados do turismo em insights
-                    estratégicos para ajudar sua agência a identificar oportunidades,
-                    planejar campanhas e atrair mais clientes.
-                </p>
+      <section class="card-container">
+        <div class="card-left">
+          <p class="card-subtitle">Bem-vindo à plataforma</p>
+          <h1 class="card-title"><span class="plus">+</span>Tourists</h1>
+          <p class="card-description">
+            Nossa plataforma transforma dados do turismo em insights estratégicos para ajudar sua
+            agência a identificar oportunidades, planejar campanhas e atrair mais clientes.
+          </p>
+        </div>
+
+        <div class="card-right">
+          <h2 class="form-title">Faça seu Login</h2>
+
+          <form class="empresa-form" id="formCadastroEmpresa">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="seuemail@exemplo.com.br" />
             </div>
 
-            <div class="card-right">
-                <h2 class="form-title">Faça seu Login</h2>
-
-                <form class="empresa-form" id="formCadastroEmpresa">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input id="email" name="email" type="email" placeholder="seuemail@exemplo.com.br" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="senha">Senha</label>
-                        <input id="senha" name="senha" type="password" placeholder="Digite sua senha" />
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-secondary">Cancelar</button>
-                        <button type="button" onclick="autenticar()" class="btn btn-primary">Entrar</button>
-                    </div>
-
-                    <p class="form-footer-text">
-                        <span>Não tem conta?</span>
-                        <a href="cadastroFuncionario.html" class="link-funcionario">Cadastre-se</a>
-                    </p>
-                </form>
+            <div class="form-group">
+              <label for="senha">Senha</label>
+              <input id="senha" name="senha" type="password" placeholder="Digite sua senha" />
             </div>
-        </section>
+
+            <div class="form-actions">
+              <a href="index.html">
+                <button type="button" class="btn btn-secondary">Cancelar</button>
+              </a>
+              <button type="button" onclick="autenticar()" class="btn btn-primary">Entrar</button>
+            </div>
+
+            <p class="form-footer-text">
+              <span>Não tem conta?</span>
+              <a href="cadastroFuncionario.html" class="link-funcionario">Cadastre-se</a>
+            </p>
+          </form>
+        </div>
+      </section>
     </main>
     <div class="modal-overlay" id="modalEmpresa">
-        <div class="modal-content">
-            <p class="codigo-empresa" id="codigoEmpresa"></p>
-            <button type="button" class="btn btn-primary" id="fecharModalEmpresa">Entendi</button>
-        </div>
+      <div class="modal-content">
+        <p class="codigo-empresa" id="codigoEmpresa"></p>
+        <button type="button" class="btn btn-primary" id="fecharModalEmpresa">Entendi</button>
+      </div>
     </div>
-</body>
+  </body>
 </html>

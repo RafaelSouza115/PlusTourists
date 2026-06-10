@@ -32,10 +32,6 @@
           <img src="../assets/iconPlanev.png" alt="" class="icon-nav" />
           <span>Planos</span>
         </a>
-        <a class="btn-nav-white" href="empresa.html">
-          <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
-          <span>Empresa</span>
-        </a>
         <a class="btn-nav-white" href="eventos.html">
           <img src="../assets/iconEventos.svg" alt="" class="icon-nav" />
           <span>Eventos</span>
@@ -44,7 +40,17 @@
           <img src="../assets/iconPerfil.svg" alt="" class="icon-nav" />
           <span>Perfil</span>
         </a>
-        <a class="btn-nav-white" href="funcionarios.html">
+        <a class="btn-nav-white" href="empresa.html" id="menu_empresa" style="display: none">
+          <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
+          <span>Empresa</span>
+        </a>
+
+        <a
+          class="btn-nav-white"
+          href="gerenciamento-funcionarios/gerenciamento-funcionarios.html"
+          id="menu_funcionarios"
+          style="display: none"
+        >
           <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
           <span>Gerenciar Funcionários</span>
         </a>
@@ -98,23 +104,25 @@
       <!-- CARD BRANCO -->
       <div class="overview">
         <!-- Botão criar + filtros -->
-        <div id="btn-planos">
-          <button class="btn-criar" onclick="abrirModal()">
-            <i class="ti ti-plus"></i> Criar Plano
-          </button>
-        </div>
 
         <div class="filtros">
-          <select id="slDestinos" onchange="aplicarFiltros()">
-            <option value="">Selecione o destino</option>
-          </select>
-          <select id="slDuracao" onchange="aplicarFiltros()">
-            <option value="">Selecione a duração</option>
-            <option value="3">Até 3 dias</option>
-            <option value="7">4 a 7 dias</option>
-            <option value="15">8 a 15 dias</option>
-            <option value="999">Mais de 15 dias</option>
-          </select>
+          <div class="filtros-selects">
+            <select id="slDestinos" onchange="aplicarFiltros()">
+              <option value="">Selecione o destino</option>
+            </select>
+            <select id="slDuracao" onchange="aplicarFiltros()">
+              <option value="">Selecione a duração</option>
+              <option value="3">Até 3 dias</option>
+              <option value="7">4 a 7 dias</option>
+              <option value="15">8 a 15 dias</option>
+              <option value="999">Mais de 15 dias</option>
+            </select>
+          </div>
+          <div id="btn-planos">
+            <button class="btn-criar" onclick="abrirModal()">
+              <i class="ti ti-plus"></i> Criar Plano
+            </button>
+          </div>
         </div>
 
         <!-- Aba: Validados -->

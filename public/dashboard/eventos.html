@@ -33,10 +33,6 @@
           <img src="../assets/iconPlanejamento.svg" alt="" class="icon-nav" />
           <span>Planos</span>
         </a>
-        <a class="btn-nav-white" href="empresa.html">
-          <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
-          <span>Empresa</span>
-        </a>
         <a class="btn-nav-white ativo" href="eventos.html">
           <img src="../assets/IconEventosV.svg" alt="" class="icon-nav" />
           <span>Eventos</span>
@@ -45,7 +41,17 @@
           <img src="../assets/iconPerfil.svg" alt="" class="icon-nav" />
           <span>Perfil</span>
         </a>
-        <a class="btn-nav-white" href="gerenciamento-funcionarios/gerenciamento-funcionarios.html">
+        <a class="btn-nav-white" href="empresa.html" id="menu_empresa" style="display: none">
+          <img src="../assets/iconEmpresa.svg" alt="" class="icon-nav" />
+          <span>Empresa</span>
+        </a>
+
+        <a
+          class="btn-nav-white"
+          href="gerenciamento-funcionarios/gerenciamento-funcionarios.html"
+          id="menu_funcionarios"
+          style="display: none"
+        >
           <img src="../assets/iconGerenciarFuncionario.svg" alt="" class="icon-nav" />
           <span>Gerenciar Funcionários</span>
         </a>
@@ -74,9 +80,7 @@
         <!-- Filtros -->
         <div class="eventos-filtros">
           <div class="filtro-wrapper">
-            <select id="filtro-destino" class="filtro-select">
-              <option value="">Selecione: Destino</option>
-            </select>
+            <select id="filtro-destino" class="filtro-select"></select>
           </div>
           <select id="filtro-classificacao" class="filtro-classificacao">
             <option value="">Selecione: Classificação etária</option>
